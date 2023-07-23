@@ -14,6 +14,10 @@ extends CharacterBody2D
 @export var maxHealth: int = 100
 @export var invincibilityTime: float = 2.0
 
+# TODO varaibles and logic
+@export var damage: int = 5
+@export var range: float = 400
+
 var customVelocity: Vector2 = Vector2.ZERO
 var canShoot: bool = true
 var currentHealth: int = maxHealth
