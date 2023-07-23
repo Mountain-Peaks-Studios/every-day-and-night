@@ -1,13 +1,93 @@
 [gd_scene load_steps=4 format=3 uid="uid://vkxykqtkeua7"]
 
-[ext_resource type="Script" path="res://scenes/game/PlayerControl.gd" id="1_xnspe"]
 [ext_resource type="Texture2D" uid="uid://cr86x32kpqgg6" path="res://sprites/player/player.bmp" id="2_knepb"]
+
+[sub_resource type="GDScript" id="GDScript_qkwxj"]
+script/source = "#TODO shoot InputMap action must be finished at project settings 
+
+extends CharacterBody2D
+
+@export var speed: float = 200
+@export var bulletScene: PackedScene
+@export var bulletsLayer: int = 1
+@export var shootCooldown: float = 0.2
+@export var maxHealth: int = 100
+@export var invincibilityTime: float = 2.0
+
+var customVelocity: Vector2 = Vector2.ZERO
+var canShoot: bool = true
+var currentHealth: int = maxHealth
+var invincible: bool = false
+var invincibilityTimer: float = 0.0
+
+func _ready():
+	set_physics_process(true)
+	currentHealth = maxHealth
+
+func _physics_process(delta: float) -> void:
+	handleInput()
+	handleShooting(delta)
+	handleInvincibility(delta)
+	move_and_slide()
+
+func handleInput() -> void:
+	velocity = Vector2.ZERO
+
+	if Input.is_action_pressed(\"ui_right\"):
+		velocity.x += 1
+	if Input.is_action_pressed(\"ui_left\"):
+		velocity.x -= 1
+	if Input.is_action_pressed(\"ui_down\"):
+		velocity.y += 1
+	if Input.is_action_pressed(\"ui_up\"):
+		velocity.y -= 1
+
+	velocity = velocity.normalized() * speed
+
+func handleShooting(delta: float) -> void:
+	if canShoot and Input.is_action_pressed(\"shoot\"):
+		shoot()
+		canShoot = false
+		$shoot_timer.start(shootCooldown)
+
+func _on_shoot_timer_timeout() -> void:
+	canShoot = true
+
+func shoot() -> void:
+	if bulletScene:
+		var bulletInstance = bulletScene.instance()
+		bulletInstance.position = position
+		bulletInstance.rotation = rotation
+		bulletInstance.set(\"owner\", self)
+		get_parent().add_child(bulletInstance)
+
+func takeDamage(damage: int) -> void:
+	if invincible:
+		return
+
+	currentHealth -= damage
+	if currentHealth <= 0:
+		die()
+
+	invincible = true
+	invincibilityTimer = invincibilityTime
+
+func handleInvincibility(delta: float) -> void:
+	if invincible:
+		invincibilityTimer -= delta
+		if invincibilityTimer <= 0:
+			invincible = false
+
+func die() -> void:
+	# end game logic goes here
+	pass
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
 size = Vector2(256, 256)
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_xnspe")
+script = SubResource("GDScript_qkwxj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 1)
