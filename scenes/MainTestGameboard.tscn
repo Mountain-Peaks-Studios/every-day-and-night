@@ -6,3 +6,8 @@
 
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
 position = Vector2(414, 275)
+speed = 200.0
+bulletsLayer = 1
+shootCooldown = 0.2
+maxHealth = 100
+invincibilityTime = 2.0
