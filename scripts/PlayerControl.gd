@@ -3,7 +3,7 @@
 # Extends the CharacterBody2D class.
 extends CharacterBody2D
 
-# Public variables that can be edited in the editor.
+## Public variables that can be edited in the editor.
 # TODO: The InputMap action for shooting must be set up in the project settings.
 @export var speed: float = 200
 @export var bulletScene: PackedScene
@@ -12,12 +12,23 @@ extends CharacterBody2D
 @export var maxHealth: int = 100
 @export var invincibilityTime: float = 2.0
 
-# Private variables to handle movement, shooting, health, and invincibility.
+# dash-related public variables
+@export var dashSpeed: float = 500  # Speed of the dash movement
+@export var dashDuration: float = 1.0  # Duration of the dash in seconds
+@export var dashCooldown: float = 1.0  # Cooldown between dashes in second; must be set up in dash_timer anyways!
+
+## Private variables to handle movement, shooting, health, and invincibility.
 var customVelocity: Vector2 = Vector2.ZERO
 var canShoot: bool = true
 var currentHealth: int = maxHealth
 var invincible: bool = false
 var invincibilityTimer: float = 0.0
+
+# dash-related private variables
+var canDash: bool = true
+var isDashing: bool = false
+var dashTimer: float = 0.0
+var dashDirection: Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree.
 func _ready():
@@ -26,11 +37,11 @@ func _ready():
 	# Initialize the character's health to its maximum value.
 	currentHealth = maxHealth
 
-# Physics process, called every frame with a fixed delta time.
 func _physics_process(delta: float) -> void:
-	# Handle player input, shooting, and invincibility.
+	# Handle player input, shooting, dashing, and invincibility.
 	handleInput()
 	handleShooting(delta)
+	handleDash(delta)
 	handleInvincibility(delta)
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
@@ -52,6 +63,48 @@ func handleInput() -> void:
 
 	# Normalize the velocity and multiply it by the speed to control movement speed.
 	velocity = velocity.normalized() * speed
+
+# Handles dashing mechanic, restricting the dash rate with cooldown.
+func handleDash(delta: float) -> void:
+	# Check if dashing is allowed and the "dash" action is pressed.
+	if canDash and Input.is_action_pressed("dash") and not isDashing:
+		# Get the dash direction based on player input.
+		dashDirection = Vector2.ZERO
+		if Input.is_action_pressed("ui_right"):
+			dashDirection.x += 1
+		if Input.is_action_pressed("ui_left"):
+			dashDirection.x -= 1
+		if Input.is_action_pressed("ui_down"):
+			dashDirection.y += 1
+		if Input.is_action_pressed("ui_up"):
+			dashDirection.y -= 1
+
+		# Normalize the dash direction and multiply it by the dash speed to control dash movement speed.
+		if dashDirection != Vector2.ZERO:
+			dashDirection = dashDirection.normalized() * dashSpeed
+
+		# Start dashing if the dash direction is valid.
+		if dashDirection != Vector2.ZERO:
+			isDashing = true
+			canDash = false
+			dashTimer = dashDuration
+
+	# Handle ongoing dash movement.
+	if isDashing:
+		# Reduce the dash timer.
+		dashTimer -= delta
+
+		if dashTimer <= 0:
+			# End the dash after the dash duration has passed.
+			isDashing = false
+			velocity = Vector2.ZERO  # Reset velocity to stop the dash.
+
+			# Start the dash cooldown.
+			$dash_timer.start(dashCooldown)
+
+# Timer callback to reset the canDash variable after the cooldown has passed.
+func _on_dash_timer_timeout() -> void:
+	canDash = true
 
 # Handles shooting mechanic, restricting the shooting rate with cooldown.
 func handleShooting(delta: float) -> void:

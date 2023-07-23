@@ -10,7 +10,3 @@ position = Vector2(414, 275)
 
 [node name="BasicDayMob" parent="." instance=ExtResource("2_arm36")]
 position = Vector2(988, 300)
-speed = 100.0
-damage = 20
-attackCooldown = 2.0
-detectionRadius = 300.0
