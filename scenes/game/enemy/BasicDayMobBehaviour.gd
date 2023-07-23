@@ -13,7 +13,8 @@ var attackTimer: float = 0.0
 # Initialising the Mob
 func _ready():
 	pass
-	
+
+# Update behaviour every frame
 func _physics_process(delta: float) -> void:
 	update_target()
 	move_towards_target()
@@ -23,7 +24,7 @@ func _physics_process(delta: float) -> void:
 func update_target() -> void:
 	target = get_parent().get_node("Player")
 
-# move to target
+# Move to the chosen target
 func move_towards_target() -> void:
 	if target:
 		# Calculate the direction of target
