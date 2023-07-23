@@ -15,6 +15,13 @@ run/main_scene="res://scenes/MainTestGameboard.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[input]
+
+shoot={
+"deadzone": 0.5,
+"events": []
+}
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
