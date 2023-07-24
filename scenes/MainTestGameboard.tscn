@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfpix5alqg44d"]
+[gd_scene load_steps=5 format=3 uid="uid://cfpix5alqg44d"]
 
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0pa0k"]
 [ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/Player.tscn" id="1_3kmbf"]
 [ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/BasicDayMob.tscn" id="2_arm36"]
+[ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/hud.tscn" id="4_vorx7"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_0pa0k")
 
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
 position = Vector2(414, 275)
 
 [node name="BasicDayMob" parent="." instance=ExtResource("2_arm36")]
 position = Vector2(988, 300)
+
+[node name="HUD" parent="." instance=ExtResource("4_vorx7")]
