@@ -15,8 +15,8 @@ extends CharacterBody2D
 @export var invincibilityTime: float = 2.0
 
 # TODO varaibles and logic
-@export var damagePlayer: int = 5
-@export var rangePlayer: float = 400
+@export var damage: int = 5
+@export var range: float = 400
 
 var customVelocity: Vector2 = Vector2.ZERO
 var canShoot: bool = true
@@ -85,10 +85,6 @@ func handleInvincibility(delta: float) -> void:
 func die() -> void:
 	# end game logic goes here
 	pass
-
-
-func _on_dash_timer_timeout():
-	pass # Replace with function body.
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
@@ -104,7 +100,3 @@ texture = ExtResource("2_knepb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_rs3du")
-
-[node name="dash_timer" type="Timer" parent="."]
-
-[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
