@@ -19,7 +19,7 @@ func _process(delta):
 
 # Move time forward by one tick
 func time_tick():
-	current_tick = (current_tick + 1) % TICKS_IN_CYCLE
+	current_tick = (current_tick + 1) % (TICKS_IN_CYCLE + 1)
 	ticks_total += 1
 	
 	is_day = current_tick < HALF_CYCLE
