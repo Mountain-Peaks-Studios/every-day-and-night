@@ -1,30 +1,28 @@
 extends Node2D
 
-#children
+# Constants
+const TICKS_IN_CYCLE = 60
+const HALF_CYCLE = TICKS_IN_CYCLE / 2
+
+# Children
 @onready var player = $Player
 @onready var hud = $HUD
 
-#day/night cycle
-var ticks_in_cycle = 60 # no. of ticks in a cycle
-var current_tick = 0 # tick of the cycle
-var ticks_total = 0 # total no. of ticks since the run started
+# Day/Night cycle
+var current_tick = 0
+var ticks_total = 0
 var is_day = true
 
 func _process(delta):
 	if Input.is_action_just_pressed("temporary_action"):
 		time_tick()
 
-# move time forward by one tick
+# Move time forward by one tick
 func time_tick():
-	current_tick += 1
+	current_tick = (current_tick + 1) % TICKS_IN_CYCLE
 	ticks_total += 1
-	if current_tick > ticks_in_cycle: # reset the clock once the night ends
-		current_tick = 0
-		ticks_total -= 1
-	if current_tick >= 0 and current_tick < (ticks_in_cycle/2): # day bool
-		is_day = true
-	elif current_tick >= 30 and current_tick <= ticks_in_cycle: # night bool
-		is_day = false
 	
-	# modify UI
-	hud.on_clock_tick(current_tick, ticks_in_cycle, ticks_total, is_day)
+	is_day = current_tick < HALF_CYCLE
+
+	# Modify UI
+	hud.on_clock_tick(current_tick, TICKS_IN_CYCLE, ticks_total, is_day)
