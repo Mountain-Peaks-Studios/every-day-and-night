@@ -43,6 +43,7 @@ func _physics_process(delta: float) -> void:
 	handleShooting(delta)
 	handleDash(delta)
 	handleInvincibility(delta)
+	update_health()
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
 
@@ -153,6 +154,12 @@ func handleInvincibility(delta: float) -> void:
 		# Disable invincibility if the timer reaches or goes below zero.
 		if invincibilityTimer <= 0:
 			invincible = false
+
+func update_health():
+	var healthbar = $healthbar
+	healthbar.value = currentHealth
+	
+	
 
 # Handles the character's death logic.
 func die() -> void:
