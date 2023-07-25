@@ -14,3 +14,9 @@ position = Vector2(414, 275)
 [node name="BasicDayMob" parent="." instance=ExtResource("2_arm36")]
 
 [node name="HUD" parent="." instance=ExtResource("4_vorx7")]
+
+[node name="BaseMob" parent="." instance=ExtResource("2_arm36")]
+position = Vector2(1111, 371)
+
+[node name="BaseMob2" parent="." instance=ExtResource("2_arm36")]
+position = Vector2(834, -213)
