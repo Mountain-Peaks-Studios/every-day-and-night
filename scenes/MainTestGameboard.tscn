@@ -1109,8 +1109,8 @@ sources/1 = SubResource("TileSetAtlasSource_cixep")
 script = ExtResource("1_0pa0k")
 
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
-visible = false
-position = Vector2(414, 275)
+z_index = 1
+position = Vector2(2106, 2109)
 
 [node name="HUD" parent="." instance=ExtResource("4_vorx7")]
 visible = false
