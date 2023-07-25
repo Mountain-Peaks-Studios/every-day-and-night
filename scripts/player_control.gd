@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
+# Onready
+@onready var hurtbox = $Hurtbox
+
 # Public variable related to movement, shooting, health, and invincibility
 # TODO: The InputMap action for shooting must be set up in the project settings.
-@export var speed: float = 200
+@export var speed: float = 500
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
@@ -174,8 +177,14 @@ func die():
 	# TODO: Implement the end game logic here.
 	pass
 
-
+# Method for receiving damage
 func _on_hurtbox_area_entered(hitbox):
-	var base_damage = hitbox.damage
-	self.current_health -= base_damage
-	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(base_damage))
+	receive_damage(hitbox.damage)
+	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
+
+
+# Method for additional damage calculations
+func receive_damage(base_damage: int):
+	var actual_damage = base_damage
+	
+	current_health -= actual_damage

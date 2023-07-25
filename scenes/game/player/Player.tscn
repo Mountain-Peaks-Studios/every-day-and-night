@@ -1,40 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://vkxykqtkeua7"]
+[gd_scene load_steps=10 format=3 uid="uid://vkxykqtkeua7"]
 
-[ext_resource type="Script" path="res://scripts/player_control.gd" id="1_3kg6j"]
-[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="2_epsgm"]
-[ext_resource type="Texture2D" uid="uid://cr86x32kpqgg6" path="res://sprites/player/player.bmp" id="2_knepb"]
-[ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="4_1q17m"]
-[ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="5_dhwp2"]
+[ext_resource type="Script" path="res://scripts/player_control.gd" id="1_fhwog"]
+[ext_resource type="Texture2D" uid="uid://cr86x32kpqgg6" path="res://sprites/player/player.bmp" id="2_sky0g"]
+[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="3_udxog"]
+[ext_resource type="PackedScene" uid="uid://dtuxjo5c17mqt" path="res://scenes/game/util/health_bar.tscn" id="3_xhi6r"]
+[ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="4_aaxr7"]
+[ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="5_unqqh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
-size = Vector2(256, 256)
+size = Vector2(188, 197)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyo7j"]
 size = Vector2(256, 256)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_blgv7"]
-radius = 324.557
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmky4"]
+radius = 344.331
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 2
 visibility_layer = 5
-script = ExtResource("1_3kg6j")
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_fhwog")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(3, 4.5)
 shape = SubResource("RectangleShape2D_rs3du")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 1)
-texture = ExtResource("2_knepb")
+texture = ExtResource("2_sky0g")
 
 [node name="DashTimer" type="Timer" parent="."]
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -128.0
-offset_top = -187.0
-offset_right = 130.0
-offset_bottom = -150.0
+[node name="HealthBar" parent="." instance=ExtResource("3_xhi6r")]
+show_percentage = false
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -42,22 +42,22 @@ position_smoothing_speed = 6.01
 rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-script = ExtResource("2_epsgm")
+script = ExtResource("3_udxog")
 
-[node name="Hurtbox" parent="." instance=ExtResource("4_1q17m")]
-light_mask = 2
-visibility_layer = 4
+[node name="Hurtbox" parent="." instance=ExtResource("4_aaxr7")]
+collision_layer = 2
+collision_mask = 12
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_yyo7j")
 
-[node name="Hitbox" parent="." instance=ExtResource("5_dhwp2")]
-light_mask = 4
-visibility_layer = 2
+[node name="Hitbox" parent="." instance=ExtResource("5_unqqh")]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource("CircleShape2D_blgv7")
+shape = SubResource("CircleShape2D_jmky4")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
