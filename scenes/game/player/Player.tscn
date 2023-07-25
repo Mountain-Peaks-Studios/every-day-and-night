@@ -161,7 +161,7 @@ func handleInvincibility(delta: float) -> void:
 			invincible = false
 
 func update_health():
-	var healthbar = $healthbar
+	var healthbar = $Healthbar
 	healthbar.value = currentHealth
 	
 	
@@ -188,10 +188,17 @@ shape = SubResource("RectangleShape2D_rs3du")
 
 [node name="dash_timer" type="Timer" parent="."]
 
-[node name="healthbar" type="ProgressBar" parent="."]
+[node name="Healthbar" type="ProgressBar" parent="."]
 offset_left = -128.0
 offset_top = -187.0
 offset_right = 130.0
 offset_bottom = -150.0
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.01
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
