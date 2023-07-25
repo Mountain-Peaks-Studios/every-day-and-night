@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwids1vi7ockq"]
+[gd_scene load_steps=8 format=3 uid="uid://bwids1vi7ockq"]
 
 [ext_resource type="Script" path="res://scripts/day_mob_behaviour.gd" id="1_m12f0"]
 [ext_resource type="Texture2D" uid="uid://cctdrqqcy0rne" path="res://sprites/enemy/enemy.bmp" id="2_aiv5c"]
+[ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="3_qn8xm"]
+[ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="4_2k7jf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nl5nn"]
 size = Vector2(256, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewfkg"]
+size = Vector2(256, 258)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mogpp"]
+radius = 274.41
 
 [node name="BasicDayMob" type="CharacterBody2D"]
 script = ExtResource("1_m12f0")
@@ -16,3 +24,20 @@ shape = SubResource("RectangleShape2D_nl5nn")
 texture = ExtResource("2_aiv5c")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_qn8xm")]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("RectangleShape2D_ewfkg")
+
+[node name="Hitbox" parent="." instance=ExtResource("4_2k7jf")]
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+light_mask = 4
+visibility_layer = 2
+shape = SubResource("CircleShape2D_mogpp")
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]
