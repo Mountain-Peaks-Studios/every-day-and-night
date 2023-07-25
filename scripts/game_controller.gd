@@ -9,6 +9,10 @@ var current_tick = 0
 var ticks_total = 0
 var is_day = true
 
+# Private variables related to levelling up
+var ticks_to_level: int = 50 # PLACEHOLDER VALUE
+var level: int = 0
+
 # Children
 @onready var player = $Player
 @onready var hud = $HUD
@@ -16,11 +20,16 @@ var is_day = true
 
 # Called when the node enters the scene tree.
 func _ready():
-	pass
+	level = 1
 
 
 # Update every frame
 func _process(delta):
+	# Level up once current_tick (EXP) exceeds tick_to_level (EXP needed to level up)
+	if ticks_total >= ticks_to_level:
+		handle_level_up()
+	
+	# PLACEHOLDER: time_tick on 't'
 	if Input.is_action_just_pressed("temporary_action"):
 		time_tick()
 
@@ -35,3 +44,9 @@ func time_tick():
 	# Modify UI
 	hud.on_clock_tick(current_tick, TICKS_IN_CYCLE, ticks_total, is_day)
 
+
+# Handles levelling up
+func handle_level_up():
+	level += 1
+	ticks_to_level += 50
+	hud.on_level_up(level, ticks_to_level)
