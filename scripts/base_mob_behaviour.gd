@@ -50,14 +50,17 @@ func update_health():
 	healthbar.value = current_health
 
 
+# Method for receiving damage
 func _on_hurtbox_area_entered(hitbox):
-	var base_damage = hitbox.damage
-	current_health -= base_damage
+	receive_damage(hitbox.damage)
 	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
 
 
-
-
+# Method for additional damage calculations
+func receive_damage(base_damage: int):
+	var actual_damage = base_damage
+	
+	current_health -= actual_damage
 
 
 #func handle_attack(delta):
