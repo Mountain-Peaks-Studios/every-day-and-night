@@ -1,18 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://vkxykqtkeua7"]
-
-[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="2_epsgm"]
+[gd_scene load_steps=9 format=3 uid="uid://vkxykqtkeua7"]
 
 [ext_resource type="Script" path="res://scripts/player_control.gd" id="1_3kg6j"]
-
+[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="2_epsgm"]
 [ext_resource type="Texture2D" uid="uid://cr86x32kpqgg6" path="res://sprites/player/player.bmp" id="2_knepb"]
+[ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="4_1q17m"]
+[ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="5_dhwp2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
 size = Vector2(256, 256)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyo7j"]
+size = Vector2(256, 256)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_blgv7"]
+radius = 324.557
+
 [node name="Player" type="CharacterBody2D"]
+light_mask = 2
+visibility_layer = 5
 script = ExtResource("1_3kg6j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_rs3du")
 
@@ -36,4 +44,23 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 script = ExtResource("2_epsgm")
 
+[node name="Hurtbox" parent="." instance=ExtResource("4_1q17m")]
+light_mask = 2
+visibility_layer = 4
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_yyo7j")
+
+[node name="Hitbox" parent="." instance=ExtResource("5_dhwp2")]
+light_mask = 4
+visibility_layer = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_blgv7")
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]
