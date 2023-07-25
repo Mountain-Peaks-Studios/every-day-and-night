@@ -1,54 +1,55 @@
-# This script represents a character body with shooting and health mechanics.
-
-# Extends the CharacterBody2D class.
 extends CharacterBody2D
 
-## Public variables that can be edited in the editor.
+# Public variable related to movement, shooting, health, and invincibility
 # TODO: The InputMap action for shooting must be set up in the project settings.
 @export var speed: float = 200
-@export var bulletScene: PackedScene
-@export var bulletsLayer: int = 1
-@export var shootCooldown: float = 0.2
-@export var maxHealth: int = 100
-@export var invincibilityTime: float = 2.0
+@export var bullet_scene: PackedScene
+@export var bullet_layer: int = 1 # Not used
+@export var shoot_cooldown: float = 0.2
+@export var max_health: int = 100
+@export var invincibility_time: float = 2.0
 
-# dash-related public variables
-@export var dashSpeed: float = 500  # Speed of the dash movement
-@export var dashDuration: float = 1.0  # Duration of the dash in seconds
-@export var dashCooldown: float = 1.0  # Cooldown between dashes in second; must be set up in dash_timer anyways!
-
-## Private variables to handle movement, shooting, health, and invincibility.
-var customVelocity: Vector2 = Vector2.ZERO
-var canShoot: bool = true
-var currentHealth: int = maxHealth
+# Private variable related to movement, shooting, health, and invincibility.
+var custom_velocity: Vector2 = Vector2.ZERO # Not used
+var can_shoot: bool = true
+var current_health: int = max_health
 var invincible: bool = false
-var invincibilityTimer: float = 0.0
+var invincibility_timer: float = 0.0
 
-# dash-related private variables
-var canDash: bool = true
-var isDashing: bool = false
-var dashTimer: float = 0.0
-var dashDirection: Vector2 = Vector2.ZERO
+# Public variables related to dash action
+@export var dash_speed: float = 500  # Speed of the dash movement
+@export var dash_duration: float = 1.0  # Duration of the dash in seconds
+@export var dash_cooldown: float = 1.0  # Cooldown between dashes in second; must be set up in dash_timer anyways!
+
+# Private variables related to dash action
+var can_dash: bool = true
+var is_dashing: bool = false
+var dash_timer: float = 0.0
+var dash_direction: Vector2 = Vector2.ZERO
+
 
 # Called when the node enters the scene tree.
 func _ready():
 	# Enable physics processing.
 	set_physics_process(true)
 	# Initialize the character's health to its maximum value.
-	currentHealth = maxHealth
+	current_health = max_health
 
-func _physics_process(delta: float) -> void:
+
+# Update every frame
+func _physics_process(delta):
 	# Handle player input, shooting, dashing, and invincibility.
-	handleInput()
-	handleShooting(delta)
-	handleDash(delta)
-	handleInvincibility(delta)
+	handle_input()
+	handle_dash(delta)
+	handle_shooting(delta)
+	handle_invincibility(delta)
 	update_health()
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
 
+
 # Handles player input to set the character's velocity.
-func handleInput() -> void:
+func handle_input():
 	# Reset the velocity to zero.
 	velocity = Vector2.ZERO
 
@@ -65,103 +66,111 @@ func handleInput() -> void:
 	# Normalize the velocity and multiply it by the speed to control movement speed.
 	velocity = velocity.normalized() * speed
 
+
 # Handles dashing mechanic, restricting the dash rate with cooldown.
-func handleDash(delta: float) -> void:
+func handle_dash(delta):
 	# Check if dashing is allowed and the "dash" action is pressed.
-	if canDash and Input.is_action_pressed("dash") and not isDashing:
+	if can_dash and Input.is_action_pressed("dash") and not is_dashing:
 		# Get the dash direction based on player input.
-		dashDirection = Vector2.ZERO
+		dash_direction = Vector2.ZERO
 		if Input.is_action_pressed("ui_right"):
-			dashDirection.x += 1
+			dash_direction.x += 1
 		if Input.is_action_pressed("ui_left"):
-			dashDirection.x -= 1
+			dash_direction.x -= 1
 		if Input.is_action_pressed("ui_down"):
-			dashDirection.y += 1
+			dash_direction.y += 1
 		if Input.is_action_pressed("ui_up"):
-			dashDirection.y -= 1
+			dash_direction.y -= 1
 
 		# Normalize the dash direction and multiply it by the dash speed to control dash movement speed.
-		if dashDirection != Vector2.ZERO:
-			dashDirection = dashDirection.normalized() * dashSpeed
+		if dash_direction != Vector2.ZERO:
+			dash_direction = dash_direction.normalized() * dash_speed
 
 		# Start dashing if the dash direction is valid.
-		if dashDirection != Vector2.ZERO:
-			isDashing = true
-			canDash = false
-			dashTimer = dashDuration
+		if dash_direction != Vector2.ZERO:
+			is_dashing = true
+			can_dash = false
+			dash_timer = dash_duration
 
 	# Handle ongoing dash movement.
-	if isDashing:
+	if is_dashing:
 		# Reduce the dash timer.
-		dashTimer -= delta
+		dash_timer -= delta
 
-		if dashTimer <= 0:
+		if dash_timer <= 0:
 			# End the dash after the dash duration has passed.
-			isDashing = false
+			is_dashing = false
 			velocity = Vector2.ZERO  # Reset velocity to stop the dash.
 
 			# Start the dash cooldown.
-			$dash_timer.start(dashCooldown)
+			$DashTimer.start(dash_cooldown)
 
-# Timer callback to reset the canDash variable after the cooldown has passed.
-func _on_dash_timer_timeout() -> void:
-	canDash = true
+
+# Timer callback to reset the can_dash variable after the cooldown has passed.
+func _on_dash_timer_timeout():
+	can_dash = true
+
 
 # Handles shooting mechanic, restricting the shooting rate with cooldown.
-func handleShooting(delta: float) -> void:
+func handle_shooting(delta):
 	# Check if shooting is allowed and the "shoot" action is pressed.
-	if canShoot and Input.is_action_pressed("shoot"):
+	if can_shoot and Input.is_action_pressed("shoot"):
 		# Call the shoot function and start the shooting cooldown.
 		shoot()
-		canShoot = false
-		$shoot_timer.start(shootCooldown)
+		can_shoot = false
+		$ShootTimer.start(shoot_cooldown)
+
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
-func _on_shoot_timer_timeout() -> void:
-	canShoot = true
+func _on_shoot_timer_timeout():
+	can_shoot = true
+
 
 # Shoots a bullet instance from the character.
-func shoot() -> void:
-	if bulletScene:
-		var bulletInstance = bulletScene.instance()
+func shoot():
+	if bullet_scene:
+		var bulletInstance = bullet_scene.instance()
 		bulletInstance.position = position
 		bulletInstance.rotation = rotation
 		bulletInstance.set("owner", self)
 		get_parent().add_child(bulletInstance)
 
+
 # Reduces the character's health when taking damage.
-func takeDamage(damage: int) -> void:
+func take_damage(damage):
 	# Check if the character is invincible and return if it is.
 	if invincible:
 		return
 
 	# Reduce the current health by the damage amount.
-	currentHealth -= damage
+	current_health -= damage
 
 	# Check if the character's health has dropped to or below zero, call the die function if true.
-	if currentHealth <= 0:
+	if current_health <= 0:
 		die()
 
 	# Activate invincibility and set the invincibility timer.
 	invincible = true
-	invincibilityTimer = invincibilityTime
+	invincibility_timer = invincibility_time
+
 
 # Handles the invincibility mechanic, disabling it after a certain time.
-func handleInvincibility(delta: float) -> void:
+func handle_invincibility(delta):
 	if invincible:
 		# Reduce the invincibility timer.
-		invincibilityTimer -= delta
+		invincibility_timer -= delta
 		# Disable invincibility if the timer reaches or goes below zero.
-		if invincibilityTimer <= 0:
+		if invincibility_timer <= 0:
 			invincible = false
 
+
 func update_health():
-	var healthbar = $healthbar
-	healthbar.value = currentHealth
-	
-	
+	var healthbar = $HealthBar
+	healthbar.value = current_health
+
 
 # Handles the character's death logic.
-func die() -> void:
+func die():
 	# TODO: Implement the end game logic here.
 	pass
+

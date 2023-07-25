@@ -1,21 +1,29 @@
 extends Node2D
 
-# Constants
+# Constants related to day/night cyckle
 const TICKS_IN_CYCLE = 60
 const HALF_CYCLE = TICKS_IN_CYCLE / 2
+
+# Private variables related to day/night cycle
+var current_tick = 0
+var ticks_total = 0
+var is_day = true
 
 # Children
 @onready var player = $Player
 @onready var hud = $HUD
 
-# Day/Night cycle
-var current_tick = 0
-var ticks_total = 0
-var is_day = true
 
+# Called when the node enters the scene tree.
+func _ready():
+	pass
+
+
+# Update every frame
 func _process(delta):
 	if Input.is_action_just_pressed("temporary_action"):
 		time_tick()
+
 
 # Move time forward by one tick
 func time_tick():
@@ -26,3 +34,4 @@ func time_tick():
 
 	# Modify UI
 	hud.on_clock_tick(current_tick, TICKS_IN_CYCLE, ticks_total, is_day)
+
