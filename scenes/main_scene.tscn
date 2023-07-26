@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cfpix5alqg44d"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0pa0k"]
-[ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player.tscn" id="1_3kmbf"]
+[ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/Player.tscn" id="1_3kmbf"]
 [ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="4_anuqr"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/hud.tscn" id="4_vorx7"]
 [ext_resource type="PackedScene" uid="uid://oivi0cxn4mbi" path="res://scenes/game/projectile/base_projectile.tscn" id="5_0ntak"]
@@ -11,7 +11,7 @@ process_mode = 3
 script = ExtResource("1_0pa0k")
 
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
-position = Vector2(414, 275)
+position = Vector2(397, 271)
 
 [node name="HUD" parent="." instance=ExtResource("4_vorx7")]
 
