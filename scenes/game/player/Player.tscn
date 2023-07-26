@@ -1,9 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://vkxykqtkeua7"]
 
-[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="2_epsgm"]
-
 [ext_resource type="Script" path="res://scripts/player_control.gd" id="1_3kg6j"]
-
+[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="2_epsgm"]
 [ext_resource type="Texture2D" uid="uid://cr86x32kpqgg6" path="res://sprites/player/player.bmp" id="2_knepb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
