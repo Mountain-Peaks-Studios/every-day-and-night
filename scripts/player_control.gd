@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 # Public variable related to movement, shooting, health, and invincibility
 # TODO: The InputMap action for shooting must be set up in the project settings.
-@export var speed: float = 200
+@export var speed: float = 45
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
@@ -20,7 +20,7 @@ var invincible: bool = false
 var invincibility_timer: float = 0.0
 
 # Public variables related to dash action
-@export var dash_speed: float = 500  # Speed of the dash movement
+@export var dash_speed: float = 75  # Speed of the dash movement
 @export var dash_duration: float = 1.0  # Duration of the dash in seconds
 @export var dash_cooldown: float = 1.0  # Cooldown between dashes in second; must be set up in dash_timer anyways!
 
