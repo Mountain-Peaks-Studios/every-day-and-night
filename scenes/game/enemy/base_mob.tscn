@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bwids1vi7ockq"]
 
 [ext_resource type="Script" path="res://scripts/base_mob_behaviour.gd" id="1_misbq"]
-[ext_resource type="Texture2D" uid="uid://cctdrqqcy0rne" path="res://sprites/enemy/enemy.bmp" id="2_aiv5c"]
+[ext_resource type="Texture2D" uid="uid://dvutupadmq3sd" path="res://sprites/enemy/Margaret_Enemy.png" id="2_8jixs"]
 [ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="3_qn8xm"]
 [ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="4_2k7jf"]
 [ext_resource type="PackedScene" uid="uid://dtuxjo5c17mqt" path="res://scenes/game/util/health_bar.tscn" id="5_ds2a4"]
@@ -26,7 +26,9 @@ shape = SubResource("RectangleShape2D_nl5nn")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_aiv5c")
+position = Vector2(0, 3)
+scale = Vector2(13.52, 13.52)
+texture = ExtResource("2_8jixs")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
