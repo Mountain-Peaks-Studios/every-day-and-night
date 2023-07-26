@@ -33,7 +33,7 @@ var dash_direction: Vector2 = Vector2.ZERO
 
 
 # Variables for bullet spawning
-@export var PROJECTILE: PackedScene = preload("res://scenes/game/projectile/base_projectile.tscn")
+@export var PROJECTILE: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
 @onready var shoot_timer = $ShootTimer
 
 # Called when the node enters the scene tree.
