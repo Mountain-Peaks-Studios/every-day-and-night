@@ -1,7 +1,7 @@
 extends TileMap
 
-var width := 256
-var height := 256
+var width := 512
+var height := 512
 var iterator = 0
 
 
@@ -22,6 +22,11 @@ func rectangle(locX: int, locY: int, sizeX: int, sizeY: int):
 	for x in sizeX:
 		for y in sizeY:
 			set_cell(0,Vector2(locX+x,locY+y),0,Vector2(8,5))
+
+func specialRectangle(locX: int, locY: int, sizeX: int, sizeY: int,atlasReference :Vector2i):
+	for x in sizeX:
+		for y in sizeY:
+			set_cell(0,Vector2(locX+x,locY+y),0,atlasReference)
 
 func positiveCorridor(locX1: int, locY1: int, locX2: int, locY2: int):
 	
@@ -52,15 +57,75 @@ func negativeCorridor(locX1: int, locY1: int, locX2: int, locY2: int):
 				set_cell(0,Vector2(locX1 - 4 - w,locY1 + y + 20),0,Vector2(11,15))
 
 func map():
+	#set spawn room
+	spawnX = 128
+	spawnY = 128
+	
+	
 	#starting room
 	rectangle(spawnX, spawnY, 10, 10)
 	
 	#going right on x axis c times
-	drawRight(5)
-	drawDown(5)
-	drawLeft(5)
-	drawUp(5)
 	
+	##BASIC LEVEL GENERATION EXAMPLE
+	
+	
+	##Below are randomized structures
+	
+	#Trident
+	if randi_range(1,2) == 1:
+		drawRight(randi_range(1,2))
+		drawUp(1)
+		drawRight(1)
+		drawRight(1)
+		drawDown(1)
+		drawDown(1)
+		drawLeft(1)
+		drawLeft(1)
+		drawUp(1)
+		moveRight()
+		moveRight()
+	
+	#Wibbly Wobbly
+	if randi_range(1,2) == 1:
+		drawRight(1)
+		drawDown(1)
+		drawRight(1)
+		drawUp(1)
+		drawRight(1)
+	
+	
+	#Conglomeration
+	var conglomerationWidth = randi_range(2,3)
+	var conglomerationHeight = randi_range(2,4)
+	
+	for x in conglomerationHeight:
+		drawDown(1)
+		
+		for y in conglomerationWidth:
+			drawRight(y)
+			
+			if randi_range(1,3) == 1:
+				drawDown(1)
+				drawUp(1)
+			
+			drawLeft(y)
+	
+	#basic end segment
+	
+	drawLeft(randi_range(1,2))
+	
+	drawHere(Vector2i(12,23))
+	
+	
+func moveRight():
+	spawnX += 20
+func moveLeft():
+	spawnX -= 20
+func moveUp():
+	spawnY += 20
+func moveDown():
+	spawnY -= 20
 
 func drawRight(numberOfRooms: int):
 	for c in numberOfRooms:
@@ -90,8 +155,11 @@ func drawUp(numberOfRooms: int):
 		
 		rectangle(spawnX, spawnY, 10, 10)
 
+func drawHere(atlasReference: Vector2i):
+	specialRectangle(spawnX,spawnY,10,10, atlasReference)
+
 func _input(event: InputEvent):
 	if event.is_action_pressed("scene_reload"):
-	#	get_tree().reload_current_scene()
-		set_cell(1, Vector2(0,iterator),0, Vector2(8,5))
-		iterator += 1
+		get_tree().reload_current_scene()
+		#set_cell(1, Vector2(0,iterator),0, Vector2(8,5))
+		#iterator += 1
