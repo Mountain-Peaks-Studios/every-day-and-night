@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
+# Onready
+@onready var hurtbox = $Hurtbox
+
 # Public variable related to movement, shooting, health, and invincibility
 # TODO: The InputMap action for shooting must be set up in the project settings.
-@export var speed: float = 200
+@export var speed: float = 500
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
@@ -32,9 +35,9 @@ var dash_direction: Vector2 = Vector2.ZERO
 func _ready():
 	# Enable physics processing.
 	set_physics_process(true)
+	
 	# Initialize the character's health to its maximum value.
 	current_health = max_health
-
 
 # Update every frame
 func _physics_process(delta):
@@ -137,8 +140,8 @@ func shoot():
 		get_parent().add_child(bulletInstance)
 
 
-# Reduces the character's health when taking damage.
-func take_damage(damage):
+# Function to handle enemy attacks (triggered by the "take_damage" signal).
+func _on_enemy_attack(damage):
 	# Check if the character is invincible and return if it is.
 	if invincible:
 		return
@@ -175,3 +178,14 @@ func die():
 	# TODO: Implement the end game logic here.
 	pass
 
+# Method for receiving damage
+func _on_hurtbox_area_entered(hitbox):
+	receive_damage(hitbox.damage)
+	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
+
+
+# Method for additional damage calculations
+func receive_damage(base_damage: int):
+	var actual_damage = base_damage
+	
+	current_health -= actual_damage

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://6p8wrb8x8t2m"]
+
+[ext_resource type="Script" path="res://scripts/hurtbox.gd" id="1_orylx"]
+
+[node name="Hurtbox" type="Area2D"]
+modulate = Color(0.709804, 1, 0.745098, 1)
+monitorable = false
+script = ExtResource("1_orylx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
