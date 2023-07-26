@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal dead
+
 # Public variable related to movement, shooting, health, and invincibility
 # TODO: The InputMap action for shooting must be set up in the project settings.
 @export var speed: float = 200
@@ -71,6 +73,7 @@ func handle_input():
 func handle_dash(delta):
 	# Check if dashing is allowed and the "dash" action is pressed.
 	if can_dash and Input.is_action_pressed("dash") and not is_dashing:
+		die() # TEMPORARY!!!!
 		# Get the dash direction based on player input.
 		dash_direction = Vector2.ZERO
 		if Input.is_action_pressed("ui_right"):
@@ -171,6 +174,4 @@ func update_health():
 
 # Handles the character's death logic.
 func die():
-	# TODO: Implement the end game logic here.
-	pass
-
+	dead.emit()
