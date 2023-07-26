@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0pa0k"]
 [ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/Player.tscn" id="1_3kmbf"]
+[ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/day_mob.tscn" id="2_arm36"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/hud.tscn" id="4_vorx7"]
 [ext_resource type="Texture2D" uid="uid://0oovlm3nda2h" path="res://sprites/test.png" id="5_68gun"]
 [ext_resource type="Script" path="res://scripts/TileMapGenerator.gd" id="6_1nqhg"]
@@ -1105,7 +1106,8 @@ texture = ExtResource("6_l8icy")
 sources/0 = SubResource("TileSetAtlasSource_ntwge")
 sources/1 = SubResource("TileSetAtlasSource_cixep")
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_0pa0k")
 
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
@@ -1134,3 +1136,14 @@ layer_2/y_sort_origin = 0
 layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array()
 script = ExtResource("6_1nqhg")
+position = Vector2(414, 275)
+
+[node name="BasicDayMob" parent="." instance=ExtResource("2_arm36")]
+
+[node name="HUD" parent="." instance=ExtResource("4_vorx7")]
+
+[node name="BaseMob" parent="." instance=ExtResource("2_arm36")]
+position = Vector2(1111, 371)
+
+[node name="BaseMob2" parent="." instance=ExtResource("2_arm36")]
+position = Vector2(834, -213)

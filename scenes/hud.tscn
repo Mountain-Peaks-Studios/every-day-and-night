@@ -53,3 +53,33 @@ offset_top = 150.0
 offset_right = 798.0
 offset_bottom = 186.0
 text = "day"
+
+[node name="Level" type="Label" parent="."]
+offset_left = 347.0
+offset_top = 59.0
+offset_right = 417.0
+offset_bottom = 95.0
+text = "1"
+
+[node name="TicksNeeded" type="Label" parent="."]
+offset_left = 346.0
+offset_top = 97.0
+offset_right = 416.0
+offset_bottom = 133.0
+text = "60"
+
+[node name="LevelUpPanel" type="Panel" parent="."]
+offset_left = 294.0
+offset_top = 18.0
+offset_right = 841.0
+offset_bottom = 530.0
+
+[node name="Button" type="Button" parent="LevelUpPanel"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 255.0
+offset_right = 278.0
+offset_bottom = 328.0
+text = "EXIT :)"
+
+[connection signal="pressed" from="LevelUpPanel/Button" to="." method="_on_button_pressed"]
