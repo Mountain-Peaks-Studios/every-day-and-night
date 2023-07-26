@@ -59,7 +59,6 @@ animations = [{
 }]
 
 [node name="Projectile" type="CharacterBody2D"]
-scale = Vector2(10, 10.0262)
 script = ExtResource("1_4ge0l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
