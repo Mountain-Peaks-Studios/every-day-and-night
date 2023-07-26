@@ -1,12 +1,10 @@
 extends CharacterBody2D
 
-
 # Public variables visible in the editor
 @export var speed: float = 30
 @export var max_health: int = 30
 @export var attack_cooldown: float = 2.0
 @export var detection_radius: float = 50
-
 
 # Private variables
 var target: Node2D = null
