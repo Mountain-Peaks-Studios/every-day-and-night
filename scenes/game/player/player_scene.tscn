@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://vkxykqtkeua7"]
 
-[ext_resource type="Script" path="res://scripts/player_control.gd" id="1_fhwog"]
-[ext_resource type="Texture2D" uid="uid://cr0rljr03iis0" path="res://sprites/player/Margaret_Player.png" id="2_d7rof"]
-[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="3_udxog"]
-[ext_resource type="PackedScene" uid="uid://dtuxjo5c17mqt" path="res://scenes/game/util/health_bar.tscn" id="3_xhi6r"]
-[ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="4_aaxr7"]
-[ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="5_unqqh"]
+[ext_resource type="Script" path="res://scripts/player_control.gd" id="1_xwpq4"]
+[ext_resource type="Texture2D" uid="uid://cr0rljr03iis0" path="res://sprites/player/Margaret_Player.png" id="2_ipbmd"]
+[ext_resource type="PackedScene" uid="uid://dtuxjo5c17mqt" path="res://scenes/game/util/health_bar.tscn" id="3_s2r63"]
+[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="4_orgc8"]
+[ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="5_rubkf"]
+[ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="6_hoflt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
 size = Vector2(20.5037, 19.6378)
@@ -22,7 +22,7 @@ light_mask = 2
 visibility_layer = 5
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("1_fhwog")
+script = ExtResource("1_xwpq4")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -30,12 +30,12 @@ scale = Vector2(0.585259, 0.611065)
 shape = SubResource("RectangleShape2D_rs3du")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_d7rof")
+texture = ExtResource("2_ipbmd")
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 5.0
 
-[node name="HealthBar" parent="." instance=ExtResource("3_xhi6r")]
+[node name="HealthBar" parent="." instance=ExtResource("3_s2r63")]
 offset_left = -10.0
 offset_top = -12.0
 offset_right = 10.0
@@ -48,9 +48,9 @@ position_smoothing_speed = 6.01
 rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-script = ExtResource("3_udxog")
+script = ExtResource("4_orgc8")
 
-[node name="Hurtbox" parent="." instance=ExtResource("4_aaxr7")]
+[node name="Hurtbox" parent="." instance=ExtResource("5_rubkf")]
 scale = Vector2(1, -0.12)
 collision_layer = 2
 collision_mask = 12
@@ -60,7 +60,7 @@ position = Vector2(0, -8.33333)
 scale = Vector2(0.0800015, 1)
 shape = SubResource("RectangleShape2D_yyo7j")
 
-[node name="Hitbox" parent="." instance=ExtResource("5_unqqh")]
+[node name="Hitbox" parent="." instance=ExtResource("6_hoflt")]
 collision_layer = 2
 collision_mask = 4
 
