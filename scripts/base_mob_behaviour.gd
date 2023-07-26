@@ -61,4 +61,10 @@ func receive_damage(base_damage: int):
 	var actual_damage = base_damage
 	
 	current_health -= actual_damage
+	
+	if current_health <= 0:
+		death()
 
+
+func death():
+	queue_free()
