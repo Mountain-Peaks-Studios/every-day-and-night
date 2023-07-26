@@ -8,13 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="5_unqqh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
-size = Vector2(175, 176)
+size = Vector2(20.5037, 19.6378)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyo7j"]
-size = Vector2(190, 190)
+size = Vector2(174.997, 116.667)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jmky4"]
-radius = 272.002
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayywa"]
+radius = 14.0
 
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
@@ -25,12 +25,11 @@ collision_mask = 5
 script = ExtResource("1_fhwog")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, 10)
+position = Vector2(0, 1)
+scale = Vector2(0.585259, 0.611065)
 shape = SubResource("RectangleShape2D_rs3du")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(3.5, -4)
-scale = Vector2(13.5625, 13.5625)
 texture = ExtResource("2_d7rof")
 
 [node name="DashTimer" type="Timer" parent="."]
@@ -48,11 +47,13 @@ drag_vertical_enabled = true
 script = ExtResource("3_udxog")
 
 [node name="Hurtbox" parent="." instance=ExtResource("4_aaxr7")]
+scale = Vector2(1, -0.12)
 collision_layer = 2
 collision_mask = 12
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(3, 10)
+position = Vector2(0, -8.33333)
+scale = Vector2(0.0800015, 1)
 shape = SubResource("RectangleShape2D_yyo7j")
 
 [node name="Hitbox" parent="." instance=ExtResource("5_unqqh")]
@@ -60,7 +61,8 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource("CircleShape2D_jmky4")
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_ayywa")
 debug_color = Color(0.996078, 0, 0.156863, 0.152941)
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
