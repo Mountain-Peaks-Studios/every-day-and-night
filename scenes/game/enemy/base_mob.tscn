@@ -57,6 +57,11 @@ shape = SubResource("CircleShape2D_mogpp")
 debug_color = Color(0.780392, 0.388235, 0.541176, 0.419608)
 
 [node name="HealthBar" parent="." instance=ExtResource("5_ds2a4")]
+offset_left = -6.0
+offset_top = -9.0
+offset_right = 252.0
+offset_bottom = 28.0
+scale = Vector2(0.0414868, 0.0642226)
 max_value = 30.0
 show_percentage = false
 
