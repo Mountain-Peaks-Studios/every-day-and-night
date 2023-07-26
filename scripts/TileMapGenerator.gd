@@ -4,6 +4,10 @@ var width := 256
 var height := 256
 var iterator = 0
 
+
+var spawnX = 10
+var spawnY = 10
+	
 func _ready():
 	make_back_black()
 	
@@ -38,33 +42,34 @@ func corridor(locX1: int, locY1: int, locX2: int, locY2: int):
 	
 	
 func map():
-	
-	var spawnX = 10
-	var spawnY = 10
-	
-	var counterX = 5
-	
 	#starting room
 	rectangle(10,10,spawnX,spawnY)
 	
 	#going right on x axis c times
-	for c in counterX:
+	drawRight(5)
+	
+	#going down on y axis c times
+	drawDown(5)
+	
+	drawDown(5)
+	
+	
+
+func drawRight(numberOfRooms: int):
+	for c in numberOfRooms:
 		corridor(spawnX*c + 10,spawnY + 10,30*c,10)
 		
 		rectangle(10,10,spawnX+20*(c+1),spawnY)
 	
-	spawnX = spawnX * ((counterX * 2) + 1)   
-	
-	var counterY = 5
-	
-	#going down on y axis c times
-	
-	for c2 in counterY:
-		corridor(spawnX + 10, spawnY*c2 + 10, 10, 30*c2 )
+	spawnX = spawnX * ((numberOfRooms * 2) + 1)   
+
+func drawDown(numberOfRooms: int):
+	for c in numberOfRooms:
+		corridor(spawnX + 10, spawnY*c + 10, 10, 30*c )
 		
-		rectangle(10,10,spawnX,spawnY+20*(c2+1))
-	spawnY = spawnY * ((counterY * 2) + 1) 
-	
+		rectangle(10,10,spawnX,spawnY+20*(c+1))
+	spawnY = spawnY * ((numberOfRooms * 2) + 1) 
+
 func make_a_random_box():
 	var margin := 10
 	var xOffest := randi_range(margin, width-margin)
