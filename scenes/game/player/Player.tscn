@@ -8,13 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="5_unqqh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
-size = Vector2(188, 197)
+size = Vector2(175, 176)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyo7j"]
-size = Vector2(256, 256)
+size = Vector2(190, 190)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmky4"]
-radius = 344.331
+radius = 272.002
 
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
@@ -25,7 +25,7 @@ collision_mask = 5
 script = ExtResource("1_fhwog")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2(3, 4.5)
+position = Vector2(2.5, 10)
 shape = SubResource("RectangleShape2D_rs3du")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -52,7 +52,7 @@ collision_layer = 2
 collision_mask = 12
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(0, 1)
+position = Vector2(3, 10)
 shape = SubResource("RectangleShape2D_yyo7j")
 
 [node name="Hitbox" parent="." instance=ExtResource("5_unqqh")]
@@ -61,6 +61,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("CircleShape2D_jmky4")
+debug_color = Color(0.996078, 0, 0.156863, 0.152941)
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
