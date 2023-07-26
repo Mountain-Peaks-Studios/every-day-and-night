@@ -62,26 +62,3 @@ func receive_damage(base_damage: int):
 	
 	current_health -= actual_damage
 
-
-#func handle_attack(delta):
-#	if target:
-#		# Calculate distance to the target to check if in-range
-#		var distance_to_target = global_position.distance_to(target.global_position)
-#
-#		# Check if target is within detectionRadius
-#		if distance_to_target < detection_radius:
-#			# Reduce attack cooldown timer
-#			attack_timer =- delta
-#
-#			# If the attack cooldown is over, perform the attack, reset the timer
-#			if attack_timer <= 0.0:
-#					handle_attack_helper()
-#					attack_timer = attack_cooldown
-#
-#
-#func handle_attack_helper():
-#	# Send a damage signal to the target if chosen. 
-#	# Replace "damage" with the signal name for taking damage in player script
-#	if target:
-#		target.emit_signal("deal_damage", damage)
-
