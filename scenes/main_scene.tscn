@@ -11,18 +11,21 @@ process_mode = 3
 script = ExtResource("1_0pa0k")
 
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
-position = Vector2(414, 275)
+position = Vector2(304, 274)
 
 [node name="HUD" parent="." instance=ExtResource("4_vorx7")]
 
 [node name="BaseMob" parent="." instance=ExtResource("4_anuqr")]
-position = Vector2(-171, -52)
+position = Vector2(229, 217)
 
 [node name="BaseMob2" parent="." instance=ExtResource("4_anuqr")]
-position = Vector2(1282, 496)
+position = Vector2(261, 342)
 
 [node name="BaseMob3" parent="." instance=ExtResource("4_anuqr")]
-position = Vector2(766, -223)
+position = Vector2(377, 207)
 
 [node name="Projectile" parent="." instance=ExtResource("5_0ntak")]
-position = Vector2(94, 471)
+position = Vector2(295, 320)
+
+[node name="Projectile2" parent="." instance=ExtResource("5_0ntak")]
+position = Vector2(331, 231)
