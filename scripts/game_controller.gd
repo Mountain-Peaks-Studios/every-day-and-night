@@ -36,9 +36,13 @@ func _process(delta):
 
 # Move time forward by one tick
 func time_tick():
+	# Increase ticks_total (only if current_tick isn't 60)
+	if current_tick < 60:
+		ticks_total += 1
+	# Calculate current_tick
 	current_tick = (current_tick + 1) % (TICKS_IN_CYCLE + 1)
-	ticks_total += 1
 	
+	# Check whether it's day or night
 	is_day = current_tick < HALF_CYCLE
 	
 	# Modify UI
