@@ -73,7 +73,7 @@ func handle_input():
 # Handles dashing mechanic, restricting the dash rate with cooldown.
 func handle_dash(delta):
 	# Check if dashing is allowed and the "dash" action is pressed.
-	if can_dash and Input.is_action_pressed("dash") and not is_dashing:
+	if can_dash and Input.is_action_just_pressed("dash") and not is_dashing:
 		# Get the dash direction based on player input.
 		dash_direction = Vector2.ZERO
 		if Input.is_action_pressed("ui_right"):
@@ -97,16 +97,17 @@ func handle_dash(delta):
 
 	# Handle ongoing dash movement.
 	if is_dashing:
+		velocity = dash_direction
 		# Reduce the dash timer.
 		dash_timer -= delta
-
+		
+		# Start the dash cooldown.
+		$DashTimer.start(dash_cooldown)
+		
 		if dash_timer <= 0:
 			# End the dash after the dash duration has passed.
 			is_dashing = false
 			velocity = Vector2.ZERO  # Reset velocity to stop the dash.
-
-			# Start the dash cooldown.
-			$DashTimer.start(dash_cooldown)
 
 
 # Timer callback to reset the can_dash variable after the cooldown has passed.

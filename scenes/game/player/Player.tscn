@@ -17,6 +17,7 @@ size = Vector2(256, 256)
 radius = 344.331
 
 [node name="Player" type="CharacterBody2D"]
+process_mode = 1
 light_mask = 2
 visibility_layer = 5
 collision_layer = 2
@@ -32,6 +33,7 @@ position = Vector2(0, 1)
 texture = ExtResource("2_sky0g")
 
 [node name="DashTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [node name="HealthBar" parent="." instance=ExtResource("3_xhi6r")]
 show_percentage = false
