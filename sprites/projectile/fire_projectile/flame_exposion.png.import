@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmj648mcnnw4m"
-path="res://.godot/imported/flame_horizontal.png-59287d80522834809fde01fffe76c39b.ctex"
+uid="uid://dx836jnng8rca"
+path="res://.godot/imported/flame_exposion.png-850ab507222fbd1cd34b250d0c40e606.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/projectile/flame_horizontal.png"
-dest_files=["res://.godot/imported/flame_horizontal.png-59287d80522834809fde01fffe76c39b.ctex"]
+source_file="res://sprites/projectile/fire_projectile/flame_exposion.png"
+dest_files=["res://.godot/imported/flame_exposion.png-850ab507222fbd1cd34b250d0c40e606.ctex"]
 
 [params]
 

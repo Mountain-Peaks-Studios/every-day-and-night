@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuu24cdwou5wy"
-path="res://.godot/imported/Flame_diagonal_up-Sheet.png-29defc44816cc85eebccd7aff8763a21.ctex"
+uid="uid://ck6raohj2srdu"
+path="res://.godot/imported/flame_up.png-28d4d8aa2aee44bd4f77d89bdc792856.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/projectile/Flame_diagonal_up-Sheet.png"
-dest_files=["res://.godot/imported/Flame_diagonal_up-Sheet.png-29defc44816cc85eebccd7aff8763a21.ctex"]
+source_file="res://sprites/projectile/fire_projectile/flame_up.png"
+dest_files=["res://.godot/imported/flame_up.png-28d4d8aa2aee44bd4f77d89bdc792856.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpj01hudme6fl"
-path="res://.godot/imported/Flame_diagonal_fall-Sheet.png-cef7b5493a47a47d3632c4ed32c679bc.ctex"
+uid="uid://bmj648mcnnw4m"
+path="res://.godot/imported/flame_horizontal.png-60aa2e724f5b48d72a6d521e7de737fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/projectile/Flame_diagonal_fall-Sheet.png"
-dest_files=["res://.godot/imported/Flame_diagonal_fall-Sheet.png-cef7b5493a47a47d3632c4ed32c679bc.ctex"]
+source_file="res://sprites/projectile/fire_projectile/flame_horizontal.png"
+dest_files=["res://.godot/imported/flame_horizontal.png-60aa2e724f5b48d72a6d521e7de737fc.ctex"]
 
 [params]
 

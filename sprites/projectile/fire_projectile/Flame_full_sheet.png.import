@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpaeefrskfm1g"
-path="res://.godot/imported/Flame_full_sheet.png-b0f62603a7f3745153b6f84e52367fa8.ctex"
+path="res://.godot/imported/Flame_full_sheet.png-a683c82ce1c01fc2a447961a8c4849b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/projectile/Flame_full_sheet.png"
-dest_files=["res://.godot/imported/Flame_full_sheet.png-b0f62603a7f3745153b6f84e52367fa8.ctex"]
+source_file="res://sprites/projectile/fire_projectile/Flame_full_sheet.png"
+dest_files=["res://.godot/imported/Flame_full_sheet.png-a683c82ce1c01fc2a447961a8c4849b3.ctex"]
 
 [params]
 
