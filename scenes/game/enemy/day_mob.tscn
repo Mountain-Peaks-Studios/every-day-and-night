@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwids1vi7ockq"]
+[gd_scene load_steps=4 format=3 uid="uid://eu80nfhc178b"]
 
 [ext_resource type="Script" path="res://scripts/base_mob_behaviour.gd" id="1_m12f0"]
 [ext_resource type="Texture2D" uid="uid://cctdrqqcy0rne" path="res://sprites/enemy/enemy.bmp" id="2_aiv5c"]
