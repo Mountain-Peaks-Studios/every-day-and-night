@@ -20,6 +20,7 @@ position = Vector2(0, 1)
 texture = ExtResource("2_knepb")
 
 [node name="DashTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -128.0
