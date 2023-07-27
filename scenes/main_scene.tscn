@@ -1117,7 +1117,7 @@ scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_u7o5p")
 
 [node name="TileMap" type="TileMap" parent="."]
-scale = Vector2(4, 4)
+scale = Vector2(5, 5)
 tile_set = SubResource("TileSet_se5ug")
 format = 2
 layer_0/name = "Floor"
