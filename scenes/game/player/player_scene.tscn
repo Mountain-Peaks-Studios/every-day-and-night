@@ -50,6 +50,7 @@ shape = SubResource("CircleShape2D_ayywa")
 debug_color = Color(0.996078, 0, 0.156863, 0.152941)
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(0.1, 0.1)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.01
 rotation_smoothing_enabled = true
