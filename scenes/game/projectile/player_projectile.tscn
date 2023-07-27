@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy15am5ag7yei"]
+
+[ext_resource type="PackedScene" uid="uid://dxx06iovc8md3" path="res://scenes/game/projectile/base_projectile.tscn" id="1_jgdjd"]
+[ext_resource type="Script" path="res://scenes/game/projectile/player_projectile.gd" id="2_2rvmo"]
+
+[node name="player_projectile" instance=ExtResource("1_jgdjd")]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("2_2rvmo")
+SPEED = 400
+
+[node name="CollisionShape2D" parent="." index="0"]
+scale = Vector2(5, 5)
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+scale = Vector2(5, 5)

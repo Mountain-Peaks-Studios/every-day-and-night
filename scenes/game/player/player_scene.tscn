@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://vkxykqtkeua7"]
+
+[ext_resource type="Script" path="res://scripts/player_control.gd" id="1_xwpq4"]
+[ext_resource type="Texture2D" uid="uid://cr0rljr03iis0" path="res://sprites/player/Margaret_Player.png" id="2_ipbmd"]
+[ext_resource type="PackedScene" uid="uid://dtuxjo5c17mqt" path="res://scenes/game/util/health_bar.tscn" id="3_s2r63"]
+[ext_resource type="Script" path="res://scenes/game/player/player_camera_controller.gd" id="4_orgc8"]
+[ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="5_rubkf"]
+[ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="6_hoflt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rs3du"]
+size = Vector2(70, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3mm2"]
+size = Vector2(65, 66)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayywa"]
+radius = 58.0345
+
+[node name="Player" type="CharacterBody2D"]
+process_mode = 1
+light_mask = 2
+visibility_layer = 5
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_xwpq4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("2_ipbmd")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_rs3du")
+
+[node name="Hurtbox" parent="." instance=ExtResource("5_rubkf")]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(-0.5, 5)
+shape = SubResource("RectangleShape2D_a3mm2")
+
+[node name="Hitbox" parent="." instance=ExtResource("6_hoflt")]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_ayywa")
+debug_color = Color(0.996078, 0, 0.156863, 0.152941)
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(0.1, 0.1)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.01
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("4_orgc8")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_s2r63")]
+offset_left = -28.0
+offset_top = -42.0
+offset_right = 24.0
+offset_bottom = -32.0
+show_percentage = false
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

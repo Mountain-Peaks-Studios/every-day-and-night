@@ -1,26 +1,28 @@
 extends CharacterBody2D
 
+signal dead
 # Onready
 @onready var hurtbox = $Hurtbox
 
 # Public variable related to movement, shooting, health, and invincibility
 # TODO: The InputMap action for shooting must be set up in the project settings.
-@export var speed: float = 200
+#@export var speed: float = 200 # Moved to the autoload
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
-@export var max_health: int = 100
+#@export var max_health: int = 100 # Moved to the autoload
 @export var invincibility_time: float = 2.0
+@export var base_projectile : PackedScene
 
 # Private variable related to movement, shooting, health, and invincibility.
 var custom_velocity: Vector2 = Vector2.ZERO # Not used
 var can_shoot: bool = true
-var current_health: int = max_health
+var current_health: int = VariablesToKeep.player_max_health
 var invincible: bool = false
 var invincibility_timer: float = 0.0
 
 # Public variables related to dash action
-@export var dash_speed: float = 500  # Speed of the dash movement
+@export var dash_speed: float = 350  # Speed of the dash movement
 @export var dash_duration: float = 1.0  # Duration of the dash in seconds
 @export var dash_cooldown: float = 1.0  # Cooldown between dashes in second; must be set up in dash_timer anyways!
 
@@ -31,16 +33,24 @@ var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 
 
+# Variables for bullet spawning
+@export var PROJECTILE: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
+@onready var shoot_timer = $ShootTimer
+
 # Called when the node enters the scene tree.
 func _ready():
 	# Enable physics processing.
 	set_physics_process(true)
 	
 	# Initialize the character's health to its maximum value.
-	current_health = max_health
+	current_health = VariablesToKeep.player_max_health
 
 # Update every frame
 func _physics_process(delta):
+	# Temporary death
+	if Input.is_action_pressed("temp_die_button"): #on "M"
+		die()
+	
 	# Handle player input, shooting, dashing, and invincibility.
 	handle_input()
 	handle_dash(delta)
@@ -67,7 +77,7 @@ func handle_input():
 		velocity.y -= 1
 
 	# Normalize the velocity and multiply it by the speed to control movement speed.
-	velocity = velocity.normalized() * speed
+	velocity = velocity.normalized() * VariablesToKeep.player_speed
 
 
 # Handles dashing mechanic, restricting the dash rate with cooldown.
@@ -122,7 +132,7 @@ func handle_shooting(delta):
 		# Call the shoot function and start the shooting cooldown.
 		shoot()
 		can_shoot = false
-		$ShootTimer.start(shoot_cooldown)
+		shoot_timer.start(shoot_cooldown)
 
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
@@ -132,12 +142,15 @@ func _on_shoot_timer_timeout():
 
 # Shoots a bullet instance from the character.
 func shoot():
-	if bullet_scene:
-		var bulletInstance = bullet_scene.instance()
-		bulletInstance.position = position
-		bulletInstance.rotation = rotation
-		bulletInstance.set("owner", self)
-		get_parent().add_child(bulletInstance)
+	
+	if PROJECTILE:
+		var projectile = PROJECTILE.instantiate()
+		self.get_parent().add_child(projectile)
+		projectile.global_position = self.global_position
+		
+		# This must be changed to rotation of the player
+		var projectile_rotation = self.global_position.direction_to(get_global_mouse_position()).angle()
+		projectile.rotation = projectile_rotation
 
 
 # Function to handle enemy attacks (triggered by the "take_damage" signal).
@@ -175,8 +188,7 @@ func update_health():
 
 # Handles the character's death logic.
 func die():
-	# TODO: Implement the end game logic here.
-	pass
+	dead.emit()
 
 # Method for receiving damage
 func _on_hurtbox_area_entered(hitbox):

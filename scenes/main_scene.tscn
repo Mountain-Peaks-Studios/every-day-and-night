@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://cfpix5alqg44d"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0pa0k"]
-[ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/Player.tscn" id="1_3kmbf"]
-[ext_resource type="PackedScene" path="res://scenes/game/enemy/base_mob.tscn" id="2_arm36"]
 [ext_resource type="Texture2D" uid="uid://dbiivq34r677c" path="res://sprites/doors.png" id="2_u7o5p"]
+[ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
+[ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="4_anuqr"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/hud.tscn" id="4_vorx7"]
 [ext_resource type="Texture2D" uid="uid://0oovlm3nda2h" path="res://sprites/test.png" id="5_68gun"]
 [ext_resource type="Script" path="res://scripts/TileMapGenerator.gd" id="6_1nqhg"]
@@ -1116,13 +1116,6 @@ position = Vector2(1554, 1930.5)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_u7o5p")
 
-[node name="Player" parent="." instance=ExtResource("1_3kmbf")]
-z_index = 1
-position = Vector2(2106, 2109)
-
-[node name="HUD" parent="." instance=ExtResource("4_vorx7")]
-visible = false
-
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_se5ug")
@@ -1144,7 +1137,28 @@ layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array()
 script = ExtResource("6_1nqhg")
 
-[node name="HUD2" parent="." instance=ExtResource("4_vorx7")]
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(304, 274)
 
-[node name="BaseMob" parent="." instance=ExtResource("2_arm36")]
-position = Vector2(396, 273)
+[node name="Player" parent="." instance=ExtResource("1_3kmbf")]
+position = Vector2(304, 274)
+
+[node name="HUD" parent="." instance=ExtResource("4_vorx7")]
+offset = Vector2(176.89, 0)
+scale = Vector2(0.65, 0.65)
+transform = Transform2D(0.65, 0, 0, 0.65, 176.89, 0)
+
+[node name="BaseMob" parent="." instance=ExtResource("4_anuqr")]
+position = Vector2(229, 217)
+
+[node name="BaseMob2" parent="." instance=ExtResource("4_anuqr")]
+position = Vector2(261, 342)
+
+[node name="BaseMob3" parent="." instance=ExtResource("4_anuqr")]
+position = Vector2(377, 207)
+
+[node name="BaseMob4" parent="." instance=ExtResource("4_anuqr")]
+position = Vector2(32, 435)
+
+[connection signal="dead" from="Player" to="." method="_on_player_dead"]
+
