@@ -22,7 +22,7 @@ var invincible: bool = false
 var invincibility_timer: float = 0.0
 
 # Public variables related to dash action
-@export var dash_speed: float = 75  # Speed of the dash movement
+@export var dash_speed: float = 350  # Speed of the dash movement
 @export var dash_duration: float = 1.0  # Duration of the dash in seconds
 @export var dash_cooldown: float = 1.0  # Cooldown between dashes in second; must be set up in dash_timer anyways!
 

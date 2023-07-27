@@ -68,7 +68,7 @@ show_percentage = false
 wait_time = 5.0
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.6
 one_shot = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

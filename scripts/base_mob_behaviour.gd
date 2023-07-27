@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Public variables visible in the editor
-@export var speed: float = 30
+@export var speed: float = 100
 @export var max_health: int = 30
 @export var attack_cooldown: float = 2.0
 @export var detection_radius: float = 50

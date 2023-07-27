@@ -1,6 +1,6 @@
 extends "res://scripts/hitbox.gd"
 
-@export var SPEED: int = 100
+@export var SPEED: int = 400
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
