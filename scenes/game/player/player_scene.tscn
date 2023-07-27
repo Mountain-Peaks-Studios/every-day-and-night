@@ -24,31 +24,13 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_xwpq4")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ipbmd")
+
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 scale = Vector2(0.585259, 0.611065)
 shape = SubResource("RectangleShape2D_rs3du")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ipbmd")
-
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 5.0
-
-[node name="HealthBar" parent="." instance=ExtResource("3_s2r63")]
-offset_left = -10.0
-offset_top = -12.0
-offset_right = 10.0
-offset_bottom = -7.0
-show_percentage = false
-
-[node name="PlayerCamera" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-position_smoothing_speed = 6.01
-rotation_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-script = ExtResource("4_orgc8")
 
 [node name="Hurtbox" parent="." instance=ExtResource("5_rubkf")]
 scale = Vector2(1, -0.12)
@@ -62,15 +44,38 @@ shape = SubResource("RectangleShape2D_yyo7j")
 
 [node name="Hitbox" parent="." instance=ExtResource("6_hoflt")]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 12
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ayywa")
 debug_color = Color(0.996078, 0, 0.156863, 0.152941)
 
-[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.01
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("4_orgc8")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_s2r63")]
+offset_left = -10.0
+offset_top = -12.0
+offset_right = 10.0
+offset_bottom = -7.0
+show_percentage = false
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

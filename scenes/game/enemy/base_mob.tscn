@@ -37,7 +37,7 @@ visible = false
 [node name="Hurtbox" parent="." instance=ExtResource("3_qn8xm")]
 scale = Vector2(0.0799994, 0.079999)
 collision_layer = 4
-collision_mask = 10
+collision_mask = 18
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(0, 37.5004)

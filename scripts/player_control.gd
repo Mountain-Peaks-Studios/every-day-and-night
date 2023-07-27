@@ -12,6 +12,7 @@ signal dead
 @export var shoot_cooldown: float = 0.2
 #@export var max_health: int = 100 # Moved to the autoload
 @export var invincibility_time: float = 2.0
+@export var base_projectile : PackedScene
 
 # Private variable related to movement, shooting, health, and invincibility.
 var custom_velocity: Vector2 = Vector2.ZERO # Not used
@@ -31,6 +32,10 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 
+
+# Variables for bullet spawning
+@export var PROJECTILE: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
+@onready var shoot_timer = $ShootTimer
 
 # Called when the node enters the scene tree.
 func _ready():
@@ -127,7 +132,7 @@ func handle_shooting(delta):
 		# Call the shoot function and start the shooting cooldown.
 		shoot()
 		can_shoot = false
-		$ShootTimer.start(shoot_cooldown)
+		shoot_timer.start(shoot_cooldown)
 
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
@@ -137,12 +142,15 @@ func _on_shoot_timer_timeout():
 
 # Shoots a bullet instance from the character.
 func shoot():
-	if bullet_scene:
-		var bulletInstance = bullet_scene.instance()
-		bulletInstance.position = position
-		bulletInstance.rotation = rotation
-		bulletInstance.set("owner", self)
-		get_parent().add_child(bulletInstance)
+	
+	if PROJECTILE:
+		var projectile = PROJECTILE.instantiate()
+		self.get_parent().add_child(projectile)
+		projectile.global_position = self.global_position
+		
+		# This must be changed to rotation of the player
+		var projectile_rotation = self.global_position.direction_to(get_global_mouse_position()).angle()
+		projectile.rotation = projectile_rotation
 
 
 # Function to handle enemy attacks (triggered by the "take_damage" signal).
