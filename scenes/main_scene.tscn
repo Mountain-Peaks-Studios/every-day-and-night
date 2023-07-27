@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://cfpix5alqg44d"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0pa0k"]
-[ext_resource type="Texture2D" uid="uid://dbiivq34r677c" path="res://sprites/doors.png" id="2_u7o5p"]
 [ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
+[ext_resource type="Texture2D" uid="uid://dbiivq34r677c" path="res://sprites/doors.png" id="2_u7o5p"]
 [ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="4_anuqr"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/hud.tscn" id="4_vorx7"]
 [ext_resource type="Texture2D" uid="uid://0oovlm3nda2h" path="res://sprites/test.png" id="5_68gun"]
@@ -1143,6 +1143,9 @@ position = Vector2(304, 274)
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
 position = Vector2(304, 274)
 
+[node name="PlayerCamera" parent="Player" index="4"]
+zoom = Vector2(1, 1)
+
 [node name="HUD" parent="." instance=ExtResource("4_vorx7")]
 offset = Vector2(176.89, 0)
 scale = Vector2(0.65, 0.65)
@@ -1162,3 +1165,6 @@ position = Vector2(32, 435)
 
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 
+[editable path="Player"]
+[editable path="Player/Hurtbox"]
+[editable path="Player/Hitbox"]
