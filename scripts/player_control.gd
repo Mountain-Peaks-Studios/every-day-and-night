@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
 signal dead
+# Onready
+@onready var hurtbox = $Hurtbox
 
 # Public variable related to movement, shooting, health, and invincibility
 # TODO: The InputMap action for shooting must be set up in the project settings.
-@export var speed: float = 200
+@export var speed: float = 45
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
@@ -19,7 +21,7 @@ var invincible: bool = false
 var invincibility_timer: float = 0.0
 
 # Public variables related to dash action
-@export var dash_speed: float = 500  # Speed of the dash movement
+@export var dash_speed: float = 75  # Speed of the dash movement
 @export var dash_duration: float = 1.0  # Duration of the dash in seconds
 @export var dash_cooldown: float = 1.0  # Cooldown between dashes in second; must be set up in dash_timer anyways!
 
@@ -34,9 +36,9 @@ var dash_direction: Vector2 = Vector2.ZERO
 func _ready():
 	# Enable physics processing.
 	set_physics_process(true)
+	
 	# Initialize the character's health to its maximum value.
 	current_health = max_health
-
 
 # Update every frame
 func _physics_process(delta):
@@ -72,9 +74,9 @@ func handle_input():
 # Handles dashing mechanic, restricting the dash rate with cooldown.
 func handle_dash(delta):
 	# Check if dashing is allowed and the "dash" action is pressed.
-	if can_dash and Input.is_action_pressed("dash") and not is_dashing:
-		die() # TEMPORARY!!!!
+	if can_dash and Input.is_action_just_pressed("dash") and not is_dashing:
 		# Get the dash direction based on player input.
+		die() # TEMPORARY!!!!
 		dash_direction = Vector2.ZERO
 		if Input.is_action_pressed("ui_right"):
 			dash_direction.x += 1
@@ -97,16 +99,17 @@ func handle_dash(delta):
 
 	# Handle ongoing dash movement.
 	if is_dashing:
+		velocity = dash_direction
 		# Reduce the dash timer.
 		dash_timer -= delta
-
+		
+		# Start the dash cooldown.
+		$DashTimer.start(dash_cooldown)
+		
 		if dash_timer <= 0:
 			# End the dash after the dash duration has passed.
 			is_dashing = false
 			velocity = Vector2.ZERO  # Reset velocity to stop the dash.
-
-			# Start the dash cooldown.
-			$DashTimer.start(dash_cooldown)
 
 
 # Timer callback to reset the can_dash variable after the cooldown has passed.
@@ -139,8 +142,8 @@ func shoot():
 		get_parent().add_child(bulletInstance)
 
 
-# Reduces the character's health when taking damage.
-func take_damage(damage):
+# Function to handle enemy attacks (triggered by the "take_damage" signal).
+func _on_enemy_attack(damage):
 	# Check if the character is invincible and return if it is.
 	if invincible:
 		return
@@ -175,3 +178,17 @@ func update_health():
 # Handles the character's death logic.
 func die():
 	dead.emit()
+	# TODO: Implement the end game logic here.
+	pass
+
+# Method for receiving damage
+func _on_hurtbox_area_entered(hitbox):
+	receive_damage(hitbox.damage)
+	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
+
+
+# Method for additional damage calculations
+func receive_damage(base_damage: int):
+	var actual_damage = base_damage
+	
+	current_health -= actual_damage

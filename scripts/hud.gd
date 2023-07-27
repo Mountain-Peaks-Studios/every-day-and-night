@@ -6,6 +6,10 @@ extends CanvasLayer
 @onready var total_tick_label = $TotalTick
 @onready var day_night_label = $DayNight
 @onready var death_panel = $DeathPanel
+@onready var level_label = $Level
+@onready var ticks_needed_label = $TicksNeeded
+@onready var level_up_panel = $LevelUpPanel
+
 
 # Called when the node enters the scene tree.
 func _ready():
@@ -15,6 +19,8 @@ func _ready():
 	day_night_label.text = "day"
 	
 	death_panel.hide()
+	# Hide the level up popup
+	level_up_panel.hide()
 
 
 # Update HUD when the clock ticks; triggered from the main script.
@@ -34,3 +40,14 @@ func on_clock_tick_UI(tick, cycle_ticks, total_tick, is_day):
 
 func on_death_UI():
 	death_panel.show()
+
+func on_level_up(level, ticks_needed):
+	# Update labels
+	level_label.text = str(level)
+	ticks_needed_label.text = str(ticks_needed)
+	level_up_panel.show()
+
+
+func _on_button_pressed():
+	level_up_panel.hide()
+	get_tree().paused = false
