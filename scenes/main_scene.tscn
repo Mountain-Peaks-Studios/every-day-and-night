@@ -9,6 +9,9 @@
 process_mode = 3
 script = ExtResource("1_0pa0k")
 
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(304, 274)
+
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
 position = Vector2(304, 274)
 
@@ -26,14 +29,4 @@ position = Vector2(377, 207)
 [node name="BaseMob4" parent="." instance=ExtResource("4_anuqr")]
 position = Vector2(32, 435)
 
-[node name="BaseMob5" parent="." instance=ExtResource("4_anuqr")]
-position = Vector2(78, 244)
-
-[node name="BaseMob6" parent="." instance=ExtResource("4_anuqr")]
-position = Vector2(109, 354)
-
-[node name="BaseMob7" parent="." instance=ExtResource("4_anuqr")]
-position = Vector2(62, 172)
-
-[node name="BaseMob8" parent="." instance=ExtResource("4_anuqr")]
-position = Vector2(148, 197)
+[connection signal="dead" from="Player" to="." method="_on_player_dead"]

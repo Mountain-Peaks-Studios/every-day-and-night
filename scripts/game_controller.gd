@@ -16,6 +16,7 @@ var level: int = 0
 # Children
 @onready var player = $Player
 @onready var hud = $HUD
+@onready var player_spawn: Vector2 = $PlayerSpawn.position
 
 
 # Called when the node enters the scene tree.
@@ -46,8 +47,13 @@ func time_tick():
 	is_day = current_tick < HALF_CYCLE
 	
 	# Modify UI
-	hud.on_clock_tick(current_tick, TICKS_IN_CYCLE, ticks_total, is_day)
+	hud.on_clock_tick_UI(current_tick, TICKS_IN_CYCLE, ticks_total, is_day)
 
+
+# Performed after player dies and emits the signal
+func _on_player_dead():
+	get_tree().paused = true
+	hud.on_death_UI()
 
 # Handles levelling up
 func handle_level_up():

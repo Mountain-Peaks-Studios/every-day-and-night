@@ -5,9 +5,11 @@ extends CanvasLayer
 @onready var tick_label = $Tick
 @onready var total_tick_label = $TotalTick
 @onready var day_night_label = $DayNight
+@onready var death_panel = $DeathPanel
 @onready var level_label = $Level
 @onready var ticks_needed_label = $TicksNeeded
 @onready var level_up_panel = $LevelUpPanel
+@onready var run_label = $Run
 
 
 # Called when the node enters the scene tree.
@@ -16,13 +18,15 @@ func _ready():
 	tick_label.text = "0"
 	total_tick_label.text = "0"
 	day_night_label.text = "day"
+	run_label.text = str(VariablesToKeep.run_number)
 	
+	death_panel.hide()
 	# Hide the level up popup
 	level_up_panel.hide()
 
 
 # Update HUD when the clock ticks; triggered from the main script.
-func on_clock_tick(tick, cycle_ticks, total_tick, is_day):
+func on_clock_tick_UI(tick, cycle_ticks, total_tick, is_day):
 	# Rotate the clock hand based on the current tick
 	clock_hand.rotation = (-PI/2) + (tick * PI / cycle_ticks)
 	
@@ -36,6 +40,9 @@ func on_clock_tick(tick, cycle_ticks, total_tick, is_day):
 	else:
 		day_night_label.text = "night"
 
+# Show gameover/death UI after player's death
+func on_death_UI():
+	death_panel.show()
 
 func on_level_up(level, ticks_needed):
 	# Update labels
