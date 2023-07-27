@@ -10,6 +10,9 @@
 process_mode = 3
 script = ExtResource("1_0pa0k")
 
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(304, 274)
+
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
 position = Vector2(304, 274)
 
@@ -29,3 +32,5 @@ position = Vector2(295, 320)
 
 [node name="Projectile2" parent="." instance=ExtResource("5_0ntak")]
 position = Vector2(331, 231)
+
+[connection signal="dead" from="Player" to="." method="_on_player_dead"]

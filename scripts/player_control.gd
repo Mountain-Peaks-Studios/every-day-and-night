@@ -6,17 +6,17 @@ signal dead
 
 # Public variable related to movement, shooting, health, and invincibility
 # TODO: The InputMap action for shooting must be set up in the project settings.
-@export var speed: float = 45
+#@export var speed: float = 200 # Moved to the autoload
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
-@export var max_health: int = 100
+#@export var max_health: int = 100 # Moved to the autoload
 @export var invincibility_time: float = 2.0
 
 # Private variable related to movement, shooting, health, and invincibility.
 var custom_velocity: Vector2 = Vector2.ZERO # Not used
 var can_shoot: bool = true
-var current_health: int = max_health
+var current_health: int = VariablesToKeep.player_max_health
 var invincible: bool = false
 var invincibility_timer: float = 0.0
 
@@ -38,10 +38,14 @@ func _ready():
 	set_physics_process(true)
 	
 	# Initialize the character's health to its maximum value.
-	current_health = max_health
+	current_health = VariablesToKeep.player_max_health
 
 # Update every frame
 func _physics_process(delta):
+	# Temporary death
+	if Input.is_action_pressed("temp_die_button"): #on "M"
+		die()
+	
 	# Handle player input, shooting, dashing, and invincibility.
 	handle_input()
 	handle_dash(delta)
@@ -68,7 +72,7 @@ func handle_input():
 		velocity.y -= 1
 
 	# Normalize the velocity and multiply it by the speed to control movement speed.
-	velocity = velocity.normalized() * speed
+	velocity = velocity.normalized() * VariablesToKeep.player_speed
 
 
 # Handles dashing mechanic, restricting the dash rate with cooldown.
@@ -76,7 +80,6 @@ func handle_dash(delta):
 	# Check if dashing is allowed and the "dash" action is pressed.
 	if can_dash and Input.is_action_just_pressed("dash") and not is_dashing:
 		# Get the dash direction based on player input.
-		die() # TEMPORARY!!!!
 		dash_direction = Vector2.ZERO
 		if Input.is_action_pressed("ui_right"):
 			dash_direction.x += 1
@@ -178,8 +181,6 @@ func update_health():
 # Handles the character's death logic.
 func die():
 	dead.emit()
-	# TODO: Implement the end game logic here.
-	pass
 
 # Method for receiving damage
 func _on_hurtbox_area_entered(hitbox):

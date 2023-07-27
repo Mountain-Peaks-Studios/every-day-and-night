@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_twkdk"]
 [ext_resource type="Texture2D" uid="uid://bbj8evi2o2p7h" path="res://sprites/UI/clock.png" id="2_nlf6r"]
 [ext_resource type="Texture2D" uid="uid://qq0ucbsrdobn" path="res://sprites/UI/hand.png" id="3_fdy4e"]
-[ext_resource type="Script" path="res://scenes/death_panel.gd" id="4_utftl"]
+[ext_resource type="Script" path="res://scripts/death_panel.gd" id="4_3ufxm"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_twkdk")
@@ -55,12 +55,20 @@ offset_right = 798.0
 offset_bottom = 186.0
 text = "day"
 
+[node name="Run" type="Label" parent="."]
+offset_left = 344.0
+offset_top = 137.0
+offset_right = 394.0
+offset_bottom = 167.0
+text = "0
+"
+
 [node name="DeathPanel" type="Panel" parent="."]
 offset_left = 62.0
 offset_top = 37.0
 offset_right = 355.0
 offset_bottom = 330.0
-script = ExtResource("4_utftl")
+script = ExtResource("4_3ufxm")
 
 [node name="DeathPanelText" type="TextEdit" parent="DeathPanel"]
 layout_mode = 0
@@ -78,7 +86,6 @@ offset_right = 267.0
 offset_bottom = 240.0
 text = "reset button here"
 
-[connection signal="pressed" from="DeathPanel/NextRunButton" to="DeathPanel" method="_on_next_run_button_pressed"]
 [node name="Level" type="Label" parent="."]
 offset_left = 347.0
 offset_top = 59.0
@@ -107,4 +114,5 @@ offset_right = 278.0
 offset_bottom = 328.0
 text = "EXIT :)"
 
+[connection signal="pressed" from="DeathPanel/NextRunButton" to="DeathPanel" method="_on_next_run_button_pressed"]
 [connection signal="pressed" from="LevelUpPanel/Button" to="." method="_on_button_pressed"]
