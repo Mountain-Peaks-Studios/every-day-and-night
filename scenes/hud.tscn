@@ -64,10 +64,10 @@ text = "0
 "
 
 [node name="DeathPanel" type="Panel" parent="."]
-offset_left = 62.0
-offset_top = 37.0
-offset_right = 355.0
-offset_bottom = 330.0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 303.0
+offset_bottom = 300.0
 script = ExtResource("4_3ufxm")
 
 [node name="DeathPanelText" type="TextEdit" parent="DeathPanel"]
@@ -101,10 +101,10 @@ offset_bottom = 133.0
 text = "60"
 
 [node name="LevelUpPanel" type="Panel" parent="."]
-offset_left = 294.0
-offset_top = 18.0
-offset_right = 841.0
-offset_bottom = 530.0
+offset_left = 595.0
+offset_top = 8.0
+offset_right = 1142.0
+offset_bottom = 520.0
 
 [node name="Button" type="Button" parent="LevelUpPanel"]
 layout_mode = 0
