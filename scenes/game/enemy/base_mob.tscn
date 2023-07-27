@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://dtuxjo5c17mqt" path="res://scenes/game/util/health_bar.tscn" id="5_ds2a4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nl5nn"]
-size = Vector2(149.997, 174.997)
+size = Vector2(874.984, 999.981)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ewfkg"]
-size = Vector2(190, 233.953)
+size = Vector2(893.147, 1111.28)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mogpp"]
-radius = 11.0
+radius = 54.0
 
 [node name="BaseMob" type="CharacterBody2D"]
 process_mode = 1
@@ -21,15 +21,15 @@ collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_misbq")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("2_8jixs")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.98023e-07, 3)
+position = Vector2(-9.53674e-07, 0)
 scale = Vector2(0.0800015, 0.0800015)
 shape = SubResource("RectangleShape2D_nl5nn")
 disabled = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 3)
-texture = ExtResource("2_8jixs")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
@@ -40,7 +40,7 @@ collision_layer = 4
 collision_mask = 18
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(0, 37.5004)
+position = Vector2(-3.79367e-05, 1.82541e-05)
 scale = Vector2(0.923707, 0.854884)
 shape = SubResource("RectangleShape2D_ewfkg")
 
@@ -53,15 +53,14 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 light_mask = 4
 visibility_layer = 2
-position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_mogpp")
 debug_color = Color(0.780392, 0.388235, 0.541176, 0.419608)
 
 [node name="HealthBar" parent="." instance=ExtResource("5_ds2a4")]
-offset_left = -6.0
-offset_top = -9.0
-offset_right = 252.0
-offset_bottom = 28.0
+offset_left = -28.0
+offset_top = -49.0
+offset_right = 1201.0
+offset_bottom = 60.0
 scale = Vector2(0.0414868, 0.0642226)
 max_value = 30.0
 show_percentage = false

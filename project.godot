@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 VariablesToKeep="*res://scripts/singletons/variables_to_keep.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 shoot={
