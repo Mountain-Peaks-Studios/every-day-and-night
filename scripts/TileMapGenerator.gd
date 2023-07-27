@@ -6,8 +6,8 @@ var iterator = 0
 
 
 var spawnX = 10
-var spawnY = 10
-	
+var spawnY = 10 
+
 func _ready():
 	#make_back_black()
 	map()
