@@ -9,7 +9,7 @@ var spawnX = 10
 var spawnY = 10
 	
 func _ready():
-	make_back_black()
+	#make_back_black()
 	map()
 
 func make_back_black():
@@ -21,7 +21,10 @@ func make_back_black():
 func rectangle(locX: int, locY: int, sizeX: int, sizeY: int):
 	for x in sizeX:
 		for y in sizeY:
-			set_cell(0,Vector2(locX+x,locY+y),0,Vector2(8,5))
+			if x == 0 or x == 9 or y == 0 or y == 9:
+				set_cell(1,Vector2(locX+x,locY+y),0,Vector2(15,6))
+			else:
+				set_cell(0,Vector2(locX+x,locY+y),0,Vector2(2,2))
 
 func specialRectangle(locX: int, locY: int, sizeX: int, sizeY: int,atlasReference :Vector2i):
 	for x in sizeX:
@@ -33,33 +36,40 @@ func positiveCorridor(locX1: int, locY1: int, locX2: int, locY2: int):
 	var width = 4
 	# Horizontal
 	if locX2 - locX1 > locY2 - locY1:
-		for x in locX2 - locX1:
+		for x in locX2 - locX1 + 2:
 			for w in width:
-				set_cell(0,Vector2(locX1 + x,locY1 - 4 - w),0,Vector2(11,15))
+				if x == locX2 - locX1 + 1 or x == 0:  #door condition
+					set_cell(2,Vector2(locX1 + x - 1,locY1 - 4 - w),1,Vector2(3,5))
+				else:
+					set_cell(2,Vector2(locX1 + x - 1,locY1 - 4 - w),0,Vector2(11,15))
 	# Vertical
 	else:
-		for y in locY2 - locY1:
+		for y in locY2 - locY1 + 2:
 			for w in width:
-				set_cell(0,Vector2(locX1 - 4 - w,locY1 + y),0,Vector2(11,15))
+				if y == locY2 - locY1 + 1 or y == 0:
+					set_cell(2,Vector2(locX1 - 4 - w,locY1 + y - 1),1,Vector2(3,5))
+				else:
+					set_cell(2,Vector2(locX1 - 4 - w,locY1 + y - 1),0,Vector2(11,15))
+				
 	
 func negativeCorridor(locX1: int, locY1: int, locX2: int, locY2: int):
 	
 	var width = 4
 	# Horizontal
 	if locX2 - locX1 > locY2 - locY1:
-		for x in locX2 - locX1:
+		for x in locX2 - locX1 + 2:
 			for w in width:
-				set_cell(0,Vector2(locX1 + x + 20,locY1 - 4 - w),0,Vector2(11,15))
+				set_cell(2,Vector2(locX1 + x + 20 - 1,locY1 - 4 - w),0,Vector2(11,15))
 	# Vertical
 	else:
-		for y in locY2 - locY1:
+		for y in locY2 - locY1 + 2:
 			for w in width:
-				set_cell(0,Vector2(locX1 - 4 - w,locY1 + y + 20),0,Vector2(11,15))
+				set_cell(2,Vector2(locX1 - 4 - w,locY1 + y + 20 -1),0,Vector2(11,15))
 
 func map():
 	#set spawn room
-	spawnX = 128
-	spawnY = 128
+	spawnX = 10
+	spawnY = 10
 	
 	
 	#starting room
@@ -67,7 +77,7 @@ func map():
 	
 	#going right on x axis c times
 	
-	##BASIC LEVEL GENERATION EXAMPLE
+	###BASIC LEVEL GENERATION EXAMPLE
 	
 	
 	##Below are randomized structures
@@ -79,13 +89,14 @@ func map():
 		drawRight(1)
 		drawRight(1)
 		drawDown(1)
+		moveLeft(1)
+		moveLeft(1)
 		drawDown(1)
-		drawLeft(1)
-		drawLeft(1)
+		drawRight(1)
+		drawRight(1)
 		drawUp(1)
-		moveRight()
-		moveRight()
-	
+
+
 	#Wibbly Wobbly
 	if randi_range(1,2) == 1:
 		drawRight(1)
@@ -109,7 +120,7 @@ func map():
 				drawDown(1)
 				drawUp(1)
 			
-			drawLeft(y)
+			moveLeft(y)
 	
 	#basic end segment
 	
@@ -118,14 +129,14 @@ func map():
 	drawHere(Vector2i(12,23))
 	
 	
-func moveRight():
-	spawnX += 20
-func moveLeft():
-	spawnX -= 20
-func moveUp():
-	spawnY += 20
-func moveDown():
-	spawnY -= 20
+func moveRight(rooms: int):
+	spawnX += 20 * rooms
+func moveLeft(rooms: int):
+	spawnX -= 20 * rooms
+func moveUp(rooms: int):
+	spawnY += 20 * rooms
+func moveDown(rooms: int):
+	spawnY -= 20 * rooms
 
 func drawRight(numberOfRooms: int):
 	for c in numberOfRooms:
@@ -161,5 +172,3 @@ func drawHere(atlasReference: Vector2i):
 func _input(event: InputEvent):
 	if event.is_action_pressed("scene_reload"):
 		get_tree().reload_current_scene()
-		#set_cell(1, Vector2(0,iterator),0, Vector2(8,5))
-		#iterator += 1
