@@ -52,7 +52,9 @@ func update_health():
 func _on_hurtbox_area_entered(hitbox):
 	receive_damage(hitbox.damage)
 	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
-
+	
+	if hitbox.is_in_group("player_projectile"):
+		hitbox.destroy()
 
 # Method for additional damage calculations
 func receive_damage(base_damage: int):

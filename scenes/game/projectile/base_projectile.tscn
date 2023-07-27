@@ -1,94 +1,65 @@
-[gd_scene load_steps=15 format=3 uid="uid://oivi0cxn4mbi"]
+[gd_scene load_steps=10 format=3 uid="uid://dxx06iovc8md3"]
 
-[ext_resource type="Script" path="res://scripts/base_projectile_behaviour.gd" id="1_4ge0l"]
 [ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="1_vfaj0"]
-[ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="2_3lmge"]
+[ext_resource type="Script" path="res://scripts/base_projectile.gd" id="2_jykuv"]
 [ext_resource type="Texture2D" uid="uid://bmj648mcnnw4m" path="res://sprites/projectile/fire_projectile/flame_horizontal.png" id="3_vpb0u"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nakj"]
-size = Vector2(6, 4)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3m30s"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqtmn"]
 size = Vector2(8, 6)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q31b"]
-size = Vector2(6, 4)
-
-[sub_resource type="Animation" id="Animation_y12f8"]
-resource_name = "default"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_06rtf"]
-_data = {
-"default": SubResource("Animation_y12f8")
-}
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fe6hu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_csuui"]
 atlas = ExtResource("3_vpb0u")
 region = Rect2(0, 0, 12, 12)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lox58"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_eld7b"]
 atlas = ExtResource("3_vpb0u")
 region = Rect2(12, 0, 12, 12)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_14od1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu4tg"]
 atlas = ExtResource("3_vpb0u")
 region = Rect2(24, 0, 12, 12)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sskh8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqhkg"]
 atlas = ExtResource("3_vpb0u")
 region = Rect2(36, 0, 12, 12)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_dvtom"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_1v6wm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fe6hu")
+"texture": SubResource("AtlasTexture_csuui")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lox58")
+"texture": SubResource("AtlasTexture_eld7b")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_14od1")
+"texture": SubResource("AtlasTexture_lu4tg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sskh8")
+"texture": SubResource("AtlasTexture_rqhkg")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[node name="Projectile" type="CharacterBody2D"]
-script = ExtResource("1_4ge0l")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_1nakj")
-disabled = true
-
-[node name="Hitbox" parent="." instance=ExtResource("1_vfaj0")]
-collision_layer = 8
-collision_mask = 6
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource("RectangleShape2D_3m30s")
-
-[node name="Hurtbox" parent="." instance=ExtResource("2_3lmge")]
+[node name="base_projectile_2" groups=["player_projectile"] instance=ExtResource("1_vfaj0")]
 collision_layer = 8
 collision_mask = 7
+script = ExtResource("2_jykuv")
+SPEED = 100
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("RectangleShape2D_1q31b")
+[node name="CollisionShape2D" parent="." index="0"]
+light_mask = 0
+visibility_layer = 15
+shape = SubResource("RectangleShape2D_kqtmn")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_06rtf")
-}
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_1v6wm")
+frame_progress = 0.810994
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_dvtom")
-frame_progress = 0.301941
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="2"]
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-
-[editable path="Hitbox"]
-[editable path="Hurtbox"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
