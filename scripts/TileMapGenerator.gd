@@ -2,11 +2,11 @@ extends TileMap
 
 var width := 512
 var height := 512
-var iterator = 0
 
 
 var spawnX = 10
 var spawnY = 10 
+
 
 func _ready():
 	#make_back_black()
@@ -18,17 +18,18 @@ func make_back_black():
 			set_cell(0,Vector2(x,y),0 , Vector2(0,0))
 			
 
-func rectangle(locX: int, locY: int, sizeX: int, sizeY: int):
+func rectangle(locX: int, locY: int, sizeX: int, sizeY: int):  #every regular room
 	for x in sizeX:
 		for y in sizeY:
-			if x == 0 or x == 9 or y == 0 or y == 9:
+			if x == 0 or x == 9 or y == 0 or y == 9:   #add colliders, only on rooms and NO
 				set_cell(1,Vector2(locX+x,locY+y),0,Vector2(15,6))
+				
 			else:
 				set_cell(0,Vector2(locX+x,locY+y),0,Vector2(2,2))
 
-func specialRectangle(locX: int, locY: int, sizeX: int, sizeY: int,atlasReference :Vector2i):
+func specialRectangle(locX: int, locY: int, sizeX: int, sizeY: int,atlasReference :Vector2i):  #used only for end room rn, uses custom atlas reference, has no walls atm, you can do this
 	for x in sizeX:
-		for y in sizeY:
+		for y in sizeY:    
 			set_cell(0,Vector2(locX+x,locY+y),0,atlasReference)
 
 func positiveCorridor(locX1: int, locY1: int, locX2: int, locY2: int):
