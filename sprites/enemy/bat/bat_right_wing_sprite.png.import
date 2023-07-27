@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byyki3vvksltr"
-path="res://.godot/imported/bat_wing_left_sprite.png-7ba8093c5b34acbf931430de73d8cbe6.ctex"
+uid="uid://b4rme7nrknrv3"
+path="res://.godot/imported/bat_right_wing_sprite.png-3fcdf941c4fc08dce38bddb5ca554798.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemy/bat/bat_wing_left_sprite.png"
-dest_files=["res://.godot/imported/bat_wing_left_sprite.png-7ba8093c5b34acbf931430de73d8cbe6.ctex"]
+source_file="res://sprites/enemy/bat/bat_right_wing_sprite.png"
+dest_files=["res://.godot/imported/bat_right_wing_sprite.png-3fcdf941c4fc08dce38bddb5ca554798.ctex"]
 
 [params]
 
