@@ -33,8 +33,7 @@ func _spawn_rooms() -> void:
 				
 			var previous_room_tilemap: TileMap = previous_room.get_node("TileMap")
 			var previous_room_door: StaticBody2D = previous_room.get_node("Doors/Door")
-			var exit_tile_pos: Vector2 = (previous_room_tilemap.local_to_map(previous_room_door.position)
-			+ Vector2i.UP) * 0.2
+			var exit_tile_pos: Vector2 = (previous_room_tilemap.local_to_map(previous_room_door.position) + Vector2i.UP) * 0.2 
 			
 			var corridor_height: int = randi() % 5 + 2
 			for y in corridor_height:
@@ -44,11 +43,11 @@ func _spawn_rooms() -> void:
 				previous_room_tilemap.set_cell(0, exit_tile_pos + Vector2(1, -y), 0, RIGHT_WALL_TILE_ATLAS)
 			
 			var room_tilemap: TileMap = room.get_node("TileMap")
-			print(Vector2.LEFT * room_tilemap.local_to_map(room.get_node("Entrance/RightTile").position).x * TILE_SIZE)
+			print(Vector2.LEFT * room_tilemap.local_to_map(room.get_node("Entrance/LeftTile").position).x * TILE_SIZE)
 			room.position = (previous_room_door.global_position 
 			+ Vector2.UP * room_tilemap.get_used_rect().size.y * TILE_SIZE
 			+ Vector2.UP * (5 + corridor_height) * TILE_SIZE * 5
-			+ Vector2.LEFT * room_tilemap.local_to_map(room.get_node("Entrance/RightTile").position).x * TILE_SIZE)
+			+ Vector2.LEFT * room_tilemap.local_to_map(room.get_node("Entrance/LeftTile").position).x * TILE_SIZE)
 			
 		add_child(room)
 		previous_room = room

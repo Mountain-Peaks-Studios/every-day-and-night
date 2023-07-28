@@ -20,7 +20,7 @@ position = Vector2(272, 592)
 position = Vector2(352, 592)
 
 [node name="Door" parent="Doors" index="0" instance=ExtResource("2_sr2rc")]
-position = Vector2(800, 0)
+position = Vector2(800, -5.96046e-08)
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2(797.5, 116)
