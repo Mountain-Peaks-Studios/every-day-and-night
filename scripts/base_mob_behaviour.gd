@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var max_health: int = 30
 @export var attack_cooldown: float = 2.0
 @export var detection_radius: float = 50
+@export var isNight: bool = 0 # Day mob 0, night mob 1
 
 # Private variables
 var target: Node2D = null
@@ -21,8 +22,6 @@ func _ready():
 # Update every frame
 func _physics_process(delta):
 	update_target()
-	move_towards_target()
-	#handle_attack(delta)
 	update_health()
 
 
