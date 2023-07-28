@@ -18,7 +18,7 @@ var can_spawn: bool = true
 
 # The outer and inner radius for enemy spawning in the ring
 var outer_radius: float = 1000
-var inner_radius: float = 850
+var inner_radius: float = 1000
 
 # Signal emitted when it's time to spawn a new enemy, can be used for on-screen-warnings
 signal spawn
