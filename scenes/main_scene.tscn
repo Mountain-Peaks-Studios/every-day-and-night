@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cfpix5alqg44d"]
+[gd_scene load_steps=13 format=3 uid="uid://cfpix5alqg44d"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0pa0k"]
 [ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
+[ext_resource type="Script" path="res://rooms.gd" id="2_3l2o2"]
 [ext_resource type="Texture2D" uid="uid://dbiivq34r677c" path="res://sprites/doors.png" id="2_u7o5p"]
 [ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="4_anuqr"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/hud.tscn" id="4_vorx7"]
 [ext_resource type="Texture2D" uid="uid://0oovlm3nda2h" path="res://sprites/test.png" id="5_68gun"]
-[ext_resource type="Script" path="res://scripts/TileMapGenerator.gd" id="6_1nqhg"]
 [ext_resource type="Texture2D" uid="uid://b7feea3plmlnp" path="res://icon.svg" id="6_l8icy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ntwge"]
@@ -1107,9 +1107,189 @@ texture = ExtResource("6_l8icy")
 sources/0 = SubResource("TileSetAtlasSource_ntwge")
 sources/1 = SubResource("TileSetAtlasSource_cixep")
 
+[sub_resource type="GDScript" id="GDScript_62s5q"]
+script/source = "extends TileMap
+
+var width := 512
+var height := 512
+var iterator = 0
+
+
+var spawnX = 10
+var spawnY = 10
+	
+func _ready():
+	#make_back_black()
+	map()
+
+func make_back_black():
+	for x in width:
+		for y in height:
+			set_cell(0,Vector2(x,y),0 , Vector2(0,0))
+			
+
+func rectangle(locX: int, locY: int, sizeX: int, sizeY: int):
+	for x in sizeX:
+		for y in sizeY:
+			if x == 0 or x == 9 or y == 0 or y == 9:
+				set_cell(1,Vector2(locX+x,locY+y),0,Vector2(15,6))
+			else:
+				set_cell(0,Vector2(locX+x,locY+y),0,Vector2(2,2))
+
+func specialRectangle(locX: int, locY: int, sizeX: int, sizeY: int,atlasReference :Vector2i):
+	for x in sizeX:
+		for y in sizeY:
+			set_cell(0,Vector2(locX+x,locY+y),0,atlasReference)
+
+func positiveCorridor(locX1: int, locY1: int, locX2: int, locY2: int):
+	
+	var width = 4
+	# Horizontal
+	if locX2 - locX1 > locY2 - locY1:
+		for x in locX2 - locX1 + 2:
+			for w in width:
+				if x == locX2 - locX1 + 1 or x == 0:  #door condition
+					set_cell(2,Vector2(locX1 + x - 1,locY1 - 4 - w),1,Vector2(3,5))
+				else:
+					set_cell(2,Vector2(locX1 + x - 1,locY1 - 4 - w),0,Vector2(11,15))
+	# Vertical
+	else:
+		for y in locY2 - locY1 + 2:
+			for w in width:
+				if y == locY2 - locY1 + 1 or y == 0:
+					set_cell(2,Vector2(locX1 - 4 - w,locY1 + y - 1),1,Vector2(3,5))
+				else:
+					set_cell(2,Vector2(locX1 - 4 - w,locY1 + y - 1),0,Vector2(11,15))
+				
+	
+func negativeCorridor(locX1: int, locY1: int, locX2: int, locY2: int):
+	
+	var width = 4
+	# Horizontal
+	if locX2 - locX1 > locY2 - locY1:
+		for x in locX2 - locX1 + 2:
+			for w in width:
+				set_cell(2,Vector2(locX1 + x + 20 - 1,locY1 - 4 - w),0,Vector2(11,15))
+	# Vertical
+	else:
+		for y in locY2 - locY1 + 2:
+			for w in width:
+				set_cell(2,Vector2(locX1 - 4 - w,locY1 + y + 20 -1),0,Vector2(11,15))
+
+func map():
+	#set spawn room
+	spawnX = 10
+	spawnY = 10
+	
+	
+	#starting room
+	rectangle(spawnX, spawnY, 10, 10)
+	
+	#going right on x axis c times
+	
+	###BASIC LEVEL GENERATION EXAMPLE
+	
+	
+	##Below are randomized structures
+	
+	#Trident
+	if randi_range(1,2) == 1:
+		drawRight(randi_range(1,2))
+		drawUp(1)
+		drawRight(1)
+		drawRight(1)
+		drawDown(1)
+		moveLeft(1)
+		moveLeft(1)
+		drawDown(1)
+		drawRight(1)
+		drawRight(1)
+		drawUp(1)
+
+
+	#Wibbly Wobbly
+	if randi_range(1,2) == 1:
+		drawRight(1)
+		drawDown(1)
+		drawRight(1)
+		drawUp(1)
+		drawRight(1)
+	
+	
+	#Conglomeration
+	var conglomerationWidth = randi_range(2,3)
+	var conglomerationHeight = randi_range(2,4)
+	
+	for x in conglomerationHeight:
+		drawDown(1)
+		
+		for y in conglomerationWidth:
+			drawRight(y)
+			
+			if randi_range(1,3) == 1:
+				drawDown(1)
+				drawUp(1)
+			
+			moveLeft(y)
+	
+	#basic end segment
+	
+	drawLeft(randi_range(1,2))
+	
+	drawHere(Vector2i(12,23))
+	
+	
+func moveRight(rooms: int):
+	spawnX += 20 * rooms
+func moveLeft(rooms: int):
+	spawnX -= 20 * rooms
+func moveUp(rooms: int):
+	spawnY += 20 * rooms
+func moveDown(rooms: int):
+	spawnY -= 20 * rooms
+
+func drawRight(numberOfRooms: int):
+	for c in numberOfRooms:
+		spawnX += 20
+		positiveCorridor(spawnX - 10, spawnY + 10, spawnX, spawnY + 10)
+		
+		rectangle(spawnX, spawnY, 10, 10)
+
+func drawDown(numberOfRooms: int):
+	for c in numberOfRooms:
+		spawnY += 20
+		positiveCorridor(spawnX + 10, spawnY - 10, spawnX + 10, spawnY)
+		
+		rectangle(spawnX, spawnY, 10, 10)
+
+func drawLeft(numberOfRooms: int):
+	for c in numberOfRooms:
+		spawnX -= 20
+		negativeCorridor(spawnX - 10, spawnY + 10, spawnX, spawnY + 10)
+		
+		rectangle(spawnX, spawnY, 10, 10)
+
+func drawUp(numberOfRooms: int):
+	for c in numberOfRooms:
+		spawnY -= 20
+		negativeCorridor(spawnX + 10, spawnY - 10, spawnX + 10, spawnY)
+		
+		rectangle(spawnX, spawnY, 10, 10)
+
+func drawHere(atlasReference: Vector2i):
+	specialRectangle(spawnX,spawnY,10,10, atlasReference)
+
+func _input(event: InputEvent):
+	if event.is_action_pressed(\"scene_reload\"):
+		get_tree().reload_current_scene()
+"
+
 [node name="Main" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_0pa0k")
+
+[node name="Rooms" type="Node2D" parent="."]
+script = ExtResource("2_3l2o2")
 
 [node name="Doors" type="Sprite2D" parent="."]
 position = Vector2(1554, 1930.5)
@@ -1135,7 +1315,7 @@ layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array()
-script = ExtResource("6_1nqhg")
+script = SubResource("GDScript_62s5q")
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(304, 274)

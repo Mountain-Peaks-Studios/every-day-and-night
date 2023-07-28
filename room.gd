@@ -48,8 +48,12 @@ func _close_entrance() -> void:
 #			enemy.global_position = enemy_position.global_position
 #			call_deferred("add_child", enemy)
 
-func _on_player_detector_body_entered(body: PhysicsBody2D) -> void:
-	print("dupa")
-	player_detector.queue_free()
-	#_close_entrance()
-#	_spawn_enemies()
+func _on_player_detector_body_entered(body: Object) -> void:
+	if body is CharacterBody2D:
+		player_detector.queue_free()
+		if num_enemies > 0:
+			_close_entrance()
+			#_spawn_enemies()
+		else:
+			_open_doors()
+

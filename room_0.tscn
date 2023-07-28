@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccsbvedsj1bfk"]
+[gd_scene load_steps=4 format=3 uid="uid://ccsbvedsj1bfk"]
 
 [ext_resource type="PackedScene" uid="uid://dtlj53lkw4dei" path="res://room.tscn" id="1_ot507"]
+[ext_resource type="PackedScene" uid="uid://dd1yk8n5s4n22" path="res://door.tscn" id="2_ferco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_puvnt"]
 size = Vector2(160, 80)
@@ -23,14 +24,22 @@ layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 1
-layer_2/tile_data = PackedInt32Array(393217, 131072, 7, 393218, 131072, 7, 393219, 131072, 7, 393220, 131072, 7, 393221, 131072, 7, 393222, 131072, 7, 393223, 131072, 7, 393224, 131072, 7, 393225, 131072, 7, 393226, 131072, 7, 393227, 131072, 7, 393228, 131072, 7)
+layer_2/tile_data = PackedInt32Array(393217, 131072, 7, 393218, 131072, 7, 393219, 131072, 7, 393220, 131072, 7, 393221, 131072, 7, 393222, 131072, 7, 393228, 131072, 7, 393227, 65536, 6, 393223, 131072, 7, 393224, 327680, 6)
+
+[node name="LeftTile" parent="Entrance" index="0"]
+position = Vector2(840, 520)
+
+[node name="RightTile" parent="Entrance" index="1"]
+position = Vector2(760, 520)
 
 [node name="Doors" parent="." index="2"]
-position = Vector2(600, 120)
+scale = Vector2(5, 5)
 
-[node name="PlayerDetector" parent="." index="3"]
-position = Vector2(520, 120)
+[node name="Door" parent="Doors" index="0" instance=ExtResource("2_ferco")]
+position = Vector2(112, 0)
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
-position = Vector2(40, 0)
+position = Vector2(800, 520)
 shape = SubResource("RectangleShape2D_puvnt")
+
+[editable path="Doors/Door"]
