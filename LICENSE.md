@@ -1,4 +1,4 @@
-Copyright (C) - (Dawid Maciejewski, Kacper Opas, Sebastian Kasiński, Wojciech Krzos; 2023) All Rights Reserved.
+Copyright (C) - (Kacper Błoniarz, Dawid Maciejewski, Sebastian Kasiński, Wojciech Krzos, Kacper Opas, Patrycja Sadowska; 2023) All Rights Reserved.
 
 THE CONTENTS OF THIS PROJECT ARE PROPRIETARY AND CONFIDENTIAL. UNAUTHORIZED COPYING, TRANSFERRING OR REPRODUCTION OF THE CONTENTS OF THIS PROJECT, VIA ANY MEDIUM IS STRICTLY PROHIBITED.
 

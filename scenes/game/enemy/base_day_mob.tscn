@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxadyfsqp1cyb"]
+
+[ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="1_exi3o"]
+[ext_resource type="Script" path="res://scripts/base_day_mob.gd" id="2_bmb0v"]
+
+[node name="BaseDayMob" instance=ExtResource("1_exi3o")]
+script = ExtResource("2_bmb0v")
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]
