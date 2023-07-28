@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfpix5alqg44d"]
+[gd_scene load_steps=6 format=3 uid="uid://cfpix5alqg44d"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0pa0k"]
 [ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
 [ext_resource type="Script" path="res://rooms.gd" id="2_3l2o2"]
-[ext_resource type="Texture2D" uid="uid://dbiivq34r677c" path="res://sprites/doors.png" id="2_u7o5p"]
 [ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="4_anuqr"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/hud.tscn" id="4_vorx7"]
 
@@ -13,11 +12,6 @@ script = ExtResource("1_0pa0k")
 
 [node name="Rooms" type="Node2D" parent="."]
 script = ExtResource("2_3l2o2")
-
-[node name="Doors" type="Sprite2D" parent="."]
-position = Vector2(1554, 1930.5)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_u7o5p")
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(304, 274)

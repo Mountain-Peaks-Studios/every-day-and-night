@@ -27,5 +27,5 @@ position = Vector2(112, 0)
 scale = Vector2(1, 1)
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
-position = Vector2(800, 520)
+position = Vector2(560, 119)
 shape = SubResource("RectangleShape2D_puvnt")

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dd1yk8n5s4n22" path="res://door.tscn" id="2_rd6e4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6t3q"]
-size = Vector2(160, 64)
+size = Vector2(160, 72)
 
 [node name="StartRoom0" instance=ExtResource("1_biur6")]
 
@@ -17,7 +17,7 @@ layer_2/tile_data = PackedInt32Array(393217, 131072, 6, 393218, 131072, 6, 39321
 position = Vector2(560, 0)
 
 [node name="CollisionShape2D" parent="PlayerDetector" index="0"]
-position = Vector2(560, 112)
+position = Vector2(560, 116)
 shape = SubResource("RectangleShape2D_b6t3q")
 
 [node name="PlayerSpawnPos" type="Marker2D" parent="." index="4"]
