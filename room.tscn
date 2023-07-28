@@ -195,6 +195,21 @@ script = ExtResource("1_3y3by")
 scale = Vector2(5, 5)
 tile_set = SubResource("TileSet_c2nqg")
 format = 2
+layer_0/name = "Floor"
+layer_1/name = "Walls"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "BottomWalls"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 1
+layer_2/tile_data = PackedInt32Array()
 
 [node name="Entrance" type="Node2D" parent="."]
 
