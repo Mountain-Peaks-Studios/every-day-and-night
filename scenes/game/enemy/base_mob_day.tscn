@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxadyfsqp1cyb"]
 
-[ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="1_exi3o"]
-[ext_resource type="Script" path="res://scripts/base_day_mob.gd" id="2_bmb0v"]
+[ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="1_rtpnn"]
+[ext_resource type="Script" path="res://scripts/game/enemy/base_mob_day.gd" id="2_tbiuh"]
 
-[node name="BaseDayMob" instance=ExtResource("1_exi3o")]
-script = ExtResource("2_bmb0v")
+[node name="BaseMobDay" instance=ExtResource("1_rtpnn")]
+script = ExtResource("2_tbiuh")
 
 [editable path="Hurtbox"]
 [editable path="Hitbox"]

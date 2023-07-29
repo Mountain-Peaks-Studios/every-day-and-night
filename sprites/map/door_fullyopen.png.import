@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dww1by3t86xtf"
-path="res://.godot/imported/atlasTest.png-383a2249afc5fba1e89e1ecd59f3048e.ctex"
+uid="uid://brabo58x68vv6"
+path="res://.godot/imported/door_fullyopen.png-749fd007a6fe0128fbc2ec3ad639071a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://atlasTest.png"
-dest_files=["res://.godot/imported/atlasTest.png-383a2249afc5fba1e89e1ecd59f3048e.ctex"]
+source_file="res://sprites/map/door_fullyopen.png"
+dest_files=["res://.godot/imported/door_fullyopen.png-749fd007a6fe0128fbc2ec3ad639071a.ctex"]
 
 [params]
 
