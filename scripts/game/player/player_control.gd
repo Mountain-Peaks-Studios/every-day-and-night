@@ -9,6 +9,7 @@ signal dead
 @export var shoot_cooldown: float = 0.2
 @export var invincibility_time: float = 2.0
 @export var base_projectile : PackedScene
+@export var number_of_coins: int = 0
 
 # Private variable related to movement, shooting, health, and invincibility.
 var custom_velocity: Vector2 = Vector2.ZERO # Not used
