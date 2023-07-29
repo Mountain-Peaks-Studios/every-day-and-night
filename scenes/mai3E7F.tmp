@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfpix5alqg44d"]
+
+[ext_resource type="Script" path="res://scripts/game/util/game_controller.gd" id="1_0pa0k"]
+[ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
+[ext_resource type="PackedScene" uid="uid://d03g04kaja30u" path="res://scenes/game/util/mob_spawner.tscn" id="2_2exrq"]
+[ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/ui/hud.tscn" id="4_vorx7"]
+[ext_resource type="PackedScene" uid="uid://cxadyfsqp1cyb" path="res://scenes/game/enemy/base_mob_day.tscn" id="9_iakgs"]
+
+[node name="Main" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_0pa0k")
+
+[node name="MobSpawner" parent="." instance=ExtResource("2_2exrq")]
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(304, 274)
+
+[node name="Player" parent="." instance=ExtResource("1_3kmbf")]
+position = Vector2(1200, 1200)
+
+[node name="PlayerCamera" parent="Player" index="4"]
+zoom = Vector2(1, 1)
+
+[node name="HUD" parent="." instance=ExtResource("4_vorx7")]
+offset = Vector2(176.89, 0)
+scale = Vector2(0.65, 0.65)
+transform = Transform2D(0.65, 0, 0, 0.65, 176.89, 0)
+
+[node name="BaseDayMob" parent="." instance=ExtResource("9_iakgs")]
+position = Vector2(307, 441)
+
+[connection signal="dead" from="Player" to="." method="_on_player_dead"]
+
+[editable path="Player"]
+[editable path="Player/Hurtbox"]
+[editable path="Player/Hitbox"]

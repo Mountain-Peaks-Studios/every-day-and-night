@@ -1,13 +1,8 @@
 extends BaseMob
 
 var day_speed = 250
-var day_isNight = 0
+var day_is_night = 0
 
-func _ready():
+func _ready() -> void:
 	self.speed = day_speed
-	self.isNight = day_isNight
-
-func _physics_process(delta):
-	update_target()
-	update_health()
-	move_towards_target()
+	self.is_night = day_is_night
