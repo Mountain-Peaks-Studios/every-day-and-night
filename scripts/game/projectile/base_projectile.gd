@@ -1,30 +1,25 @@
 extends Hitbox
 
-@export var SPEED: int = 100
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@export var speed: int = 100
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
-	global_position += SPEED * direction * delta
+	global_position += speed * direction * delta
 
 
-func _on_area_entered(area):
+func _on_area_entered() -> void:
 	destroy()
 
 
-func _on_body_entered(body):
+func _on_body_entered() -> void:
 	destroy()
 
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	destroy()
 
 
-func destroy():
+func destroy() -> void:
 	queue_free()
-

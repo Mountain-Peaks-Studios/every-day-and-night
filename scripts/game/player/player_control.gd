@@ -1,16 +1,12 @@
 extends CharacterBody2D
 
+# Signals
 signal dead
-# Onready
-@onready var hurtbox = $Hurtbox
 
 # Public variable related to movement, shooting, health, and invincibility
-# TODO: The InputMap action for shooting must be set up in the project settings.
-#@export var speed: float = 200 # Moved to the autoload
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
-#@export var max_health: int = 100 # Moved to the autoload
 @export var invincibility_time: float = 2.0
 @export var base_projectile : PackedScene
 
@@ -32,13 +28,14 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 
-
-# Variables for bullet spawning
-@export var PROJECTILE: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
+# Children
+@onready var hurtbox = $Hurtbox
+@onready var projectile_scene: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
 @onready var shoot_timer = $ShootTimer
 
+
 # Called when the node enters the scene tree.
-func _ready():
+func _ready() -> void:
 	# Enable physics processing.
 	set_physics_process(true)
 	
@@ -46,7 +43,7 @@ func _ready():
 	current_health = VariablesToKeep.player_max_health
 
 # Update every frame
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Temporary death
 	if Input.is_action_pressed("temp_die_button"): #on "M"
 		die()
@@ -62,7 +59,7 @@ func _physics_process(delta):
 
 
 # Handles player input to set the character's velocity.
-func handle_input():
+func handle_input() -> void:
 	# Reset the velocity to zero.
 	velocity = Vector2.ZERO
 
@@ -81,7 +78,7 @@ func handle_input():
 
 
 # Handles dashing mechanic, restricting the dash rate with cooldown.
-func handle_dash(delta):
+func handle_dash(delta: float) -> void:
 	# Check if dashing is allowed and the "dash" action is pressed.
 	if can_dash and Input.is_action_just_pressed("dash") and not is_dashing:
 		# Get the dash direction based on player input.
@@ -121,12 +118,12 @@ func handle_dash(delta):
 
 
 # Timer callback to reset the can_dash variable after the cooldown has passed.
-func _on_dash_timer_timeout():
+func _on_dash_timer_timeout() -> void:
 	can_dash = true
 
 
 # Handles shooting mechanic, restricting the shooting rate with cooldown.
-func handle_shooting(delta):
+func handle_shooting(delta) -> void:
 	# Check if shooting is allowed and the "shoot" action is pressed.
 	if can_shoot and Input.is_action_pressed("shoot"):
 		# Call the shoot function and start the shooting cooldown.
@@ -136,15 +133,14 @@ func handle_shooting(delta):
 
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
-func _on_shoot_timer_timeout():
+func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
 
 
 # Shoots a bullet instance from the character.
-func shoot():
-	
-	if PROJECTILE:
-		var projectile = PROJECTILE.instantiate()
+func shoot() -> void:
+	if projectile_scene:
+		var projectile = projectile_scene.instantiate()
 		self.get_parent().add_child(projectile)
 		projectile.global_position = self.global_position
 		
@@ -154,7 +150,7 @@ func shoot():
 
 
 # Function to handle enemy attacks (triggered by the "take_damage" signal).
-func _on_enemy_attack(damage):
+func _on_enemy_attack(damage: int) -> void:
 	# Check if the character is invincible and return if it is.
 	if invincible:
 		return
@@ -172,7 +168,7 @@ func _on_enemy_attack(damage):
 
 
 # Handles the invincibility mechanic, disabling it after a certain time.
-func handle_invincibility(delta):
+func handle_invincibility(delta: float) -> void:
 	if invincible:
 		# Reduce the invincibility timer.
 		invincibility_timer -= delta
@@ -181,23 +177,23 @@ func handle_invincibility(delta):
 			invincible = false
 
 
-func update_health():
+func update_health() -> void:
 	var healthbar = $HealthBar
 	healthbar.value = current_health
 
 
 # Handles the character's death logic.
-func die():
+func die() -> void:
 	dead.emit()
+	
 
 # Method for receiving damage
-func _on_hurtbox_area_entered(hitbox):
+func _on_hurtbox_area_entered(hitbox: Node) -> void:
 	receive_damage(hitbox.damage)
 	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
 
 
 # Method for additional damage calculations
-func receive_damage(base_damage: int):
+func receive_damage(base_damage: int) -> void:
 	var actual_damage = base_damage
-	
 	current_health -= actual_damage

@@ -23,12 +23,12 @@ func _init() -> void:
 
 
 # Called when the node enters the scene tree.
-func _ready():
+func _ready() -> void:
 	level = 1
 
 
 # Update every frame
-func _process(delta):
+func _process(delta: float) -> void:
 	# Level up once current_tick (EXP) exceeds tick_to_level (EXP needed to level up)
 	if ticks_total >= ticks_to_level:
 		handle_level_up()
@@ -39,7 +39,7 @@ func _process(delta):
 
 
 # Move time forward by one tick
-func time_tick():
+func time_tick() -> void:
 	# Increase ticks_total (only if current_tick isn't 60)
 	if current_tick < 60:
 		ticks_total += 1
@@ -54,13 +54,13 @@ func time_tick():
 
 
 # Performed after player dies and emits the signal
-func _on_player_dead():
+func _on_player_dead() -> void:
 	get_tree().paused = true
 	hud.on_death_UI()
 
 
 # Handles levelling up
-func handle_level_up():
+func handle_level_up() -> void:
 	# Increase the level and make next level more difficult to reach
 	level += 1
 	ticks_to_level += 30 + 30 * level # TODO: balace the values

@@ -1,17 +1,13 @@
 extends Node2D
 
-# The scenes to be spawned during day and night
-@export var day_mob_scene = preload("res://scenes/game/enemy/base_mob_day.tscn")
-@export var night_mob_scene = preload("res://scenes/game/enemy/base_mob_night.tscn")
+# Signal emitted when it's time to spawn a new enemy, can be used for on-screen-warnings
+signal spawn
 
 # The currently selected mob scene to spawn
 var mob_to_spawn: PackedScene
 
 # Flag to determine whether it's day or night
 var is_day: bool
-
-# Timer to regulate mob spawning
-@onready var spawn_timer = $SpawnTimer
 
 # Flag to control mob spawning
 var can_spawn: bool = true
@@ -20,17 +16,16 @@ var can_spawn: bool = true
 var outer_radius: float = 1000
 var inner_radius: float = 1000
 
-# Signal emitted when it's time to spawn a new enemy, can be used for on-screen-warnings
-signal spawn
+# Timer to regulate mob spawning
+@onready var spawn_timer = $SpawnTimer
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+# Preloaded scenes
+@onready var day_mob_scene: PackedScene = preload("res://scenes/game/enemy/base_mob_day.tscn")
+@onready var night_mob_scene: PackedScene = preload("res://scenes/game/enemy/base_mob_night.tscn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	handle_input()
 	#change_position(get_player_position())
 
@@ -44,7 +39,7 @@ func get_player_position() -> Vector2:
 	return player_position
 
 
-func handle_input():
+func handle_input() -> void:
 	if can_spawn and Input.is_action_pressed("temporary_action"):
 		can_spawn = false
 		var horde = generate_horde()
@@ -64,13 +59,13 @@ func generate_horde() -> Array:
 	return test_horde
 
 
-func spawn_horde(input_array: Array):
+func spawn_horde(input_array: Array) -> void:
 	for enemy in input_array:
 		spawn_enemy(enemy)
 		print("Horde spawned!")
 
 
-func spawn_enemy(enemy: PackedScene):
+func spawn_enemy(enemy: PackedScene) -> void:
 	var spawn_enemy = enemy.instantiate()
 	self.get_parent().add_child(spawn_enemy)
 	spawn_enemy.global_position = get_random_pos_in_ring(outer_radius, inner_radius) + get_player_position()
@@ -108,5 +103,5 @@ func get_random_pos_in_circle(radius: float) -> Vector2:
 	return random_pos_on_unit_circle * randf_range(0, radius)
 
 
-func _on_spawn_timer_timeout():
+func _on_spawn_timer_timeout() -> void:
 	can_spawn = true
