@@ -7,7 +7,7 @@ signal spawn
 var mob_to_spawn: PackedScene
 
 # Flag to determine whether it's day or night
-var is_day: bool
+var is_day: bool = true
 
 # Flag to control mob spawning
 var can_spawn: bool = true
@@ -26,6 +26,7 @@ var inner_radius: float = 1000
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	update_day_time()
 	handle_input()
 	#change_position(get_player_position())
 
@@ -46,10 +47,20 @@ func handle_input() -> void:
 		spawn_horde(horde)
 
 
+func update_day_time() -> void:
+	is_day = get_parent().get("is_day")
+
+
 func generate_horde() -> Array:
 	# Generate an array containing different enemy scenes randomly
-	var possible_enemies = [day_mob_scene, night_mob_scene]
+	var possible_enemies = []
 	var test_horde = []
+	
+	# later to be changed for day_mob_scene_1 etc.
+	if is_day == true:
+		possible_enemies = [day_mob_scene, day_mob_scene, day_mob_scene]
+	elif is_day == false:
+		possible_enemies = [night_mob_scene, night_mob_scene, night_mob_scene]
 	
 	for number in range(50):  # You can modify the number of enemies in the horde here
 		var random_index = randi() % possible_enemies.size()
