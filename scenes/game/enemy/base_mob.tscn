@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bwids1vi7ockq"]
 
-[ext_resource type="Script" path="res://scripts/base_mob_behaviour.gd" id="1_misbq"]
+[ext_resource type="Script" path="res://scripts/game/enemy/base_mob_behaviour.gd" id="1_misbq"]
 [ext_resource type="Texture2D" uid="uid://dvutupadmq3sd" path="res://sprites/enemy/Margaret_Enemy.png" id="2_8jixs"]
 [ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="3_qn8xm"]
 [ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="4_2k7jf"]

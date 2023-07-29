@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d03g04kaja30u"]
+[gd_scene load_steps=3 format=3 uid="uid://d03g04kaja30u"]
 
-[ext_resource type="Script" path="res://scripts/mob_spawner.gd" id="1_5yvou"]
+[ext_resource type="Script" path="res://scripts/game/util/mob_spawner.gd" id="1_5yvou"]
 [ext_resource type="Script" path="res://scripts/structures_and_algorithms/stack.gd" id="2_5ngpe"]
-[ext_resource type="Texture2D" uid="uid://0oovlm3nda2h" path="res://sprites/test.png" id="3_tspe4"]
 
 [node name="MobSpawner" type="Node2D"]
 script = ExtResource("1_5yvou")
@@ -12,9 +11,5 @@ script = ExtResource("2_5ngpe")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.198242, 0.198242)
-texture = ExtResource("3_tspe4")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

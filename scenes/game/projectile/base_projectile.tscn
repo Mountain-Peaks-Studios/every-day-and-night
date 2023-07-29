@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dxx06iovc8md3"]
 
 [ext_resource type="PackedScene" uid="uid://4ernb2dgnc11" path="res://scenes/game/util/hitbox.tscn" id="1_vfaj0"]
-[ext_resource type="Script" path="res://scripts/base_projectile.gd" id="2_jykuv"]
+[ext_resource type="Script" path="res://scripts/game/projectile/base_projectile.gd" id="2_jykuv"]
 [ext_resource type="Texture2D" uid="uid://bmj648mcnnw4m" path="res://sprites/projectile/fire_projectile/flame_horizontal.png" id="3_vpb0u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqtmn"]
