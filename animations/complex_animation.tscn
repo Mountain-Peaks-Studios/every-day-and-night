@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bda6tqt18q476"]
+
+[node name="ComplexAnimation" type="Node2D"]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+anim_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationTree"]
