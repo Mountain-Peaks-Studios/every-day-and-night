@@ -1,4 +1,4 @@
-extends "res://scripts/base_mob_behaviour.gd"
+extends BaseMob
 
 var night_speed = 100
 var night_isNight = 1

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name BaseMob extends CharacterBody2D
 
 # Public variables visible in the editor
 @export var speed: float = 100

@@ -1,8 +1,8 @@
 extends Node2D
 
 # The scenes to be spawned during day and night
-@export var day_mob_scene = preload("res://scenes/game/enemy/base_day_mob.tscn")
-@export var night_mob_scene = preload("res://scenes/game/enemy/base_night_mob.tscn")
+@export var day_mob_scene = preload("res://scenes/game/enemy/base_mob_day.tscn")
+@export var night_mob_scene = preload("res://scenes/game/enemy/base_mob_night.tscn")
 
 # The currently selected mob scene to spawn
 var mob_to_spawn: PackedScene

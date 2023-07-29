@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://x6e0f8cpjob3"]
 
-[ext_resource type="Script" path="res://scripts/hud.gd" id="1_twkdk"]
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_bbfuq"]
 [ext_resource type="Texture2D" uid="uid://bbj8evi2o2p7h" path="res://sprites/UI/clock.png" id="2_nlf6r"]
 [ext_resource type="Texture2D" uid="uid://qq0ucbsrdobn" path="res://sprites/UI/hand.png" id="3_fdy4e"]
-[ext_resource type="Script" path="res://scripts/death_panel.gd" id="4_3ufxm"]
+[ext_resource type="Script" path="res://scripts/ui/death_panel.gd" id="4_txy4p"]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_twkdk")
+script = ExtResource("1_bbfuq")
 
 [node name="Clock" type="TextureRect" parent="."]
 anchors_preset = 5
@@ -64,11 +64,12 @@ text = "0
 "
 
 [node name="DeathPanel" type="Panel" parent="."]
+visible = false
 offset_left = 10.0
 offset_top = 7.0
 offset_right = 303.0
 offset_bottom = 300.0
-script = ExtResource("4_3ufxm")
+script = ExtResource("4_txy4p")
 
 [node name="DeathPanelText" type="TextEdit" parent="DeathPanel"]
 layout_mode = 0
@@ -101,6 +102,7 @@ offset_bottom = 133.0
 text = "60"
 
 [node name="LevelUpPanel" type="Panel" parent="."]
+visible = false
 offset_left = 595.0
 offset_top = 8.0
 offset_right = 1142.0

@@ -1,4 +1,4 @@
-extends "res://scripts/hitbox.gd"
+extends Hitbox
 
 @export var SPEED: int = 400
 

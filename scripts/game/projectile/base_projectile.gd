@@ -1,4 +1,4 @@
-extends "res://scripts/hitbox.gd"
+extends Hitbox
 
 @export var SPEED: int = 100
 
@@ -27,6 +27,4 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func destroy():
 	queue_free()
-
-
 
