@@ -55,6 +55,7 @@ func _on_player_dead():
 	get_tree().paused = true
 	hud.on_death_UI()
 
+
 # Handles levelling up
 func handle_level_up():
 	# Increase the level and make next level more difficult to reach

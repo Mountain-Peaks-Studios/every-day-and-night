@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://cfpix5alqg44d"]
+[gd_scene load_steps=14 format=3 uid="uid://cfpix5alqg44d"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0pa0k"]
-[ext_resource type="PackedScene" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
+[ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
+[ext_resource type="PackedScene" uid="uid://d03g04kaja30u" path="res://scenes/game/util/mob_spawner.tscn" id="2_2exrq"]
 [ext_resource type="Texture2D" uid="uid://dbiivq34r677c" path="res://sprites/doors.png" id="2_u7o5p"]
 [ext_resource type="PackedScene" uid="uid://bwids1vi7ockq" path="res://scenes/game/enemy/base_mob.tscn" id="4_anuqr"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/hud.tscn" id="4_vorx7"]
 [ext_resource type="Texture2D" uid="uid://0oovlm3nda2h" path="res://sprites/test.png" id="5_68gun"]
 [ext_resource type="Script" path="res://scripts/TileMapGenerator.gd" id="6_1nqhg"]
 [ext_resource type="Texture2D" uid="uid://b7feea3plmlnp" path="res://icon.svg" id="6_l8icy"]
+[ext_resource type="PackedScene" uid="uid://cxadyfsqp1cyb" path="res://scenes/game/enemy/base_day_mob.tscn" id="9_iakgs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ntwge"]
 texture = ExtResource("5_68gun")
@@ -3289,6 +3291,8 @@ sources/1 = SubResource("TileSetAtlasSource_cixep")
 process_mode = 3
 script = ExtResource("1_0pa0k")
 
+[node name="MobSpawner" parent="." instance=ExtResource("2_2exrq")]
+
 [node name="Doors" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_u7o5p")
@@ -3339,6 +3343,12 @@ position = Vector2(377, 207)
 
 [node name="BaseMob4" parent="." instance=ExtResource("4_anuqr")]
 position = Vector2(32, 435)
+
+[node name="BaseDayMob" parent="." instance=ExtResource("9_iakgs")]
+position = Vector2(441, 518)
+
+[node name="BaseDayMob2" parent="." instance=ExtResource("9_iakgs")]
+position = Vector2(707, 461)
 
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 
