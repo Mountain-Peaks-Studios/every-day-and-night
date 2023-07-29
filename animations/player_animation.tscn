@@ -176,7 +176,7 @@ libraries = {
 position = Vector2(-225, -624)
 texture = ExtResource("2_wsv6i")
 centered = false
-offset = Vector2(0, 4.43648)
+offset = Vector2(0, -1.92378)
 
 [node name="RightLeg2" type="Sprite2D" parent="." index="2"]
 position = Vector2(640, 1612)
@@ -197,44 +197,44 @@ texture = ExtResource("6_mrh3v")
 [node name="Skirt" type="Sprite2D" parent="." index="6"]
 position = Vector2(249, 1229)
 texture = ExtResource("7_5ld80")
-offset = Vector2(0, 4.43648)
+offset = Vector2(0, -3.84756)
 
 [node name="RightArm1" type="Sprite2D" parent="." index="7"]
 position = Vector2(497, 1012)
 texture = ExtResource("8_i3jh7")
-offset = Vector2(0, 13.3173)
+offset = Vector2(0, -5.77133)
 
 [node name="RightArm2" type="Sprite2D" parent="." index="8"]
 position = Vector2(636, 1249)
 texture = ExtResource("9_v74ww")
-offset = Vector2(0, 13.3173)
+offset = Vector2(0, -5.77133)
 
 [node name="LeftArm1" type="Sprite2D" parent="." index="9"]
 position = Vector2(148, 1008)
 texture = ExtResource("10_wlcfa")
-offset = Vector2(0, 13.3795)
+offset = Vector2(0, -5.77133)
 
 [node name="LeftArm2" type="Sprite2D" parent="." index="10"]
 position = Vector2(-33, 1216)
 texture = ExtResource("11_t2lox")
-offset = Vector2(0, 13.3795)
+offset = Vector2(0, -5.77133)
 
 [node name="Torso" type="Sprite2D" parent="." index="11"]
 position = Vector2(189, 925)
 texture = ExtResource("12_yncf5")
-offset = Vector2(0, 13.3094)
+offset = Vector2(0, -5.77133)
 
 [node name="Head" type="Sprite2D" parent="." index="12"]
 position = Vector2(212, 396)
 texture = ExtResource("13_nnq73")
-offset = Vector2(0, 8.87296)
+offset = Vector2(0, -3.84756)
 
 [node name="Eyes" type="Sprite2D" parent="." index="13"]
 position = Vector2(212, 716)
 texture = ExtResource("14_h8ub6")
-offset = Vector2(0, 4.43648)
+offset = Vector2(0, -1.92378)
 
 [node name="Hair2" type="Sprite2D" parent="." index="14"]
 position = Vector2(44, 352)
 texture = ExtResource("15_8g542")
-offset = Vector2(0, 4.43117)
+offset = Vector2(0, -1.89894)

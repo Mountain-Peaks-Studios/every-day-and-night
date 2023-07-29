@@ -18,6 +18,9 @@ var level: int = 0
 @onready var hud = $HUD
 @onready var player_spawn: Vector2 = $PlayerSpawn.position
 
+func _init() -> void:
+	randomize()
+
 
 # Called when the node enters the scene tree.
 func _ready():
