@@ -1,12 +1,12 @@
 extends Hitbox
 
-@export var speed: int = 100
+@export var SPEED: int = 100
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
-	global_position += speed * direction * delta
+	global_position += SPEED * direction * delta
 
 
 func _on_area_entered() -> void:
