@@ -1,3 +1,5 @@
+extends Node2D
+
 # Create an empty stack
 var myStack = []
 
