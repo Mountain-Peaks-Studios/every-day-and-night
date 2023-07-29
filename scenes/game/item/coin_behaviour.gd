@@ -9,3 +9,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_collider_area_entered(area):
+	if area.is_in_group("Player"):
+		self.get_parent().get_node("Player").get("number_of_coins") + 1
