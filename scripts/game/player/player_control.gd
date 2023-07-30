@@ -47,6 +47,9 @@ func _ready() -> void:
 # Update every frame
 func _physics_process(delta: float) -> void:
 	
+	# Make the player follow the cursor direction
+	follow_cursor()
+	
 	# Handle player input, shooting, dashing, and invincibility.
 	handle_input()
 	handle_dash(delta)
@@ -68,6 +71,15 @@ func _physics_process(delta: float) -> void:
 	
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
+
+# Handles the player following the direction of the mouse cursor
+func follow_cursor() -> void:
+	if get_global_mouse_position().x >= position.x:
+		# Left
+		$PlayerAnimation.scale = Vector2(-0.08,0.08)
+	else:
+		# Right
+		$PlayerAnimation.scale = Vector2(0.08,0.08)
 
 
 # Handles player input to set the character's velocity.
@@ -167,6 +179,7 @@ func shoot() -> void:
 		# This must be changed to rotation of the player
 		var projectile_rotation = self.global_position.direction_to(get_global_mouse_position()).angle()
 		projectile.rotation = projectile_rotation
+
 
 func melee() -> void:
 	pass

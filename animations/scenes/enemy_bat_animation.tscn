@@ -33,25 +33,25 @@ libraries = {
 [node name="Ears" type="Sprite2D" parent="." index="1"]
 position = Vector2(10, -325)
 texture = ExtResource("1_5ft15")
-offset = Vector2(0, -23.1479)
+offset = Vector2(0, 34.4574)
 
 [node name="WingLeft" type="Sprite2D" parent="." index="2"]
 position = Vector2(-343, -2)
-rotation = -0.808014
+rotation = 0.328034
 texture = ExtResource("2_kpyt3")
 offset = Vector2(-304.129, -150.53)
 
 [node name="WingRight" type="Sprite2D" parent="." index="3"]
 position = Vector2(210, 0.000488281)
-rotation = 0.808014
+rotation = -0.328034
 texture = ExtResource("3_vyih7")
 offset = Vector2(286, -147)
 
 [node name="Body" type="Sprite2D" parent="." index="4"]
 texture = ExtResource("4_yc4ct")
-offset = Vector2(0, -15.4319)
+offset = Vector2(0, 31.3249)
 
 [node name="Face" type="Sprite2D" parent="." index="5"]
 position = Vector2(0, 3.31337)
 texture = ExtResource("5_kalmy")
-offset = Vector2(0, -30.8638)
+offset = Vector2(0, 37.5899)
