@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://d0xe6yesapn2m"]
 
 [ext_resource type="Texture2D" uid="uid://gf7ncqwtk5i0" path="res://sprites/enemy/bat/bat_ears_sprite.png" id="1_5ft15"]
-[ext_resource type="AnimationLibrary" uid="uid://b4idq8a2k0kq2" path="res://animations/EnemyAnim.res" id="1_dpyt7"]
-[ext_resource type="PackedScene" uid="uid://bda6tqt18q476" path="res://animations/complex_animation.tscn" id="1_lyjla"]
+[ext_resource type="AnimationLibrary" uid="uid://b4idq8a2k0kq2" path="res://animations/libraries/EnemyAnim.res" id="1_dpyt7"]
+[ext_resource type="PackedScene" uid="uid://bda6tqt18q476" path="res://animations/scenes/complex_animation.tscn" id="1_lyjla"]
 [ext_resource type="Texture2D" uid="uid://rloty52bx80y" path="res://sprites/enemy/bat/bat_left_wing_sprite.png" id="2_kpyt3"]
 [ext_resource type="Texture2D" uid="uid://b4rme7nrknrv3" path="res://sprites/enemy/bat/bat_right_wing_sprite.png" id="3_vyih7"]
 [ext_resource type="Texture2D" uid="uid://b4kjwl3wowqtb" path="res://sprites/enemy/bat/bat_body_sprite.png" id="4_yc4ct"]
@@ -33,25 +33,25 @@ libraries = {
 [node name="Ears" type="Sprite2D" parent="." index="1"]
 position = Vector2(10, -325)
 texture = ExtResource("1_5ft15")
-offset = Vector2(0, 19.3109)
+offset = Vector2(0, -23.1479)
 
 [node name="WingLeft" type="Sprite2D" parent="." index="2"]
 position = Vector2(-343, -2)
-rotation = 0.183839
+rotation = -0.808014
 texture = ExtResource("2_kpyt3")
 offset = Vector2(-304.129, -150.53)
 
 [node name="WingRight" type="Sprite2D" parent="." index="3"]
 position = Vector2(210, 0.000488281)
-rotation = -0.183839
+rotation = 0.808014
 texture = ExtResource("3_vyih7")
 offset = Vector2(286, -147)
 
 [node name="Body" type="Sprite2D" parent="." index="4"]
 texture = ExtResource("4_yc4ct")
-offset = Vector2(0, 17.5554)
+offset = Vector2(0, -15.4319)
 
 [node name="Face" type="Sprite2D" parent="." index="5"]
 position = Vector2(0, 3.31337)
 texture = ExtResource("5_kalmy")
-offset = Vector2(0, 21.0664)
+offset = Vector2(0, -30.8638)

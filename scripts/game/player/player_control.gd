@@ -11,9 +11,9 @@ signal dead
 @export var base_projectile : PackedScene
 @export var number_of_coins: int = 0
 
-# Private variable related to movement, shooting, health, and invincibility.
+# Private variable related to movement, basic attack, health, and invincibility.
 var custom_velocity: Vector2 = Vector2.ZERO # Not used
-var can_shoot: bool = true
+var can_attack: bool = true
 var current_health: int = VariablesToKeep.player_max_health
 var invincible: bool = false
 var invincibility_timer: float = 0.0
@@ -33,6 +33,7 @@ var dash_direction: Vector2 = Vector2.ZERO
 @onready var hurtbox = $Hurtbox
 @onready var projectile_scene: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
 @onready var shoot_timer = $ShootTimer
+@onready var animation = $PlayerAnimation
 
 
 # Called when the node enters the scene tree.
@@ -45,16 +46,26 @@ func _ready() -> void:
 
 # Update every frame
 func _physics_process(delta: float) -> void:
-	# Temporary death
-	if Input.is_action_pressed("temp_die_button"): #on "M"
-		die()
 	
 	# Handle player input, shooting, dashing, and invincibility.
 	handle_input()
 	handle_dash(delta)
-	handle_shooting(delta)
 	handle_invincibility(delta)
 	update_health()
+	
+	# Handle attacks
+	# Draw correct weapon
+	if get_parent().is_day:
+		pass
+	else:
+		pass
+	# Check if shooting is allowed and the "shoot" action is pressed.
+	if can_attack and Input.is_action_pressed("attack"):
+		if get_parent().is_day:
+			handle_melee(delta)
+		else:
+			handle_shooting(delta)
+	
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
 
@@ -124,18 +135,26 @@ func _on_dash_timer_timeout() -> void:
 
 
 # Handles shooting mechanic, restricting the shooting rate with cooldown.
-func handle_shooting(delta) -> void:
-	# Check if shooting is allowed and the "shoot" action is pressed.
-	if can_shoot and Input.is_action_pressed("shoot"):
-		# Call the shoot function and start the shooting cooldown.
-		shoot()
-		can_shoot = false
-		shoot_timer.start(shoot_cooldown)
+func handle_shooting(delta: float) -> void:
+	# Call the shoot function and start the shooting cooldown.
+	shoot()
+	can_attack = false
+	shoot_timer.start(shoot_cooldown)
+	animation.get_node("AnimationTree").set("parameters/sword-idle-attack/blend_amount",0.0)
+	animation.get_node("AnimationTree").set("parameters/idle-blend/blend_amount",1.0)
+	
+
+
+# Handles basic melee attack
+func handle_melee(delta: float) -> void:
+	melee()
+	can_attack = false
+	animation.get_node("AnimationTree").set("parameters/sword-idle-attack/blend_amount",1.0)
 
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
 func _on_shoot_timer_timeout() -> void:
-	can_shoot = true
+	can_attack = true
 
 
 # Shoots a bullet instance from the character.
@@ -148,6 +167,9 @@ func shoot() -> void:
 		# This must be changed to rotation of the player
 		var projectile_rotation = self.global_position.direction_to(get_global_mouse_position()).angle()
 		projectile.rotation = projectile_rotation
+
+func melee() -> void:
+	pass
 
 
 # Function to handle enemy attacks (triggered by the "take_damage" signal).
