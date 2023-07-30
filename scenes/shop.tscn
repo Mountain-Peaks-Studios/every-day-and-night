@@ -1,0 +1,195 @@
+[gd_scene load_steps=13 format=3 uid="uid://7q1l3rbfm0xg"]
+
+[ext_resource type="Script" path="res://scenes/shop.gd" id="1_dv2sh"]
+[ext_resource type="Texture2D" uid="uid://dshmose30y452" path="res://scripts/game/Items/CrabAxe.png" id="2_fnilp"]
+[ext_resource type="Texture2D" uid="uid://cvquhvkf77atk" path="res://scripts/game/Items/CraBow.png" id="3_8bj4v"]
+[ext_resource type="Texture2D" uid="uid://dpcpx7oa5ouvy" path="res://scripts/game/Items/CrabSword0.png" id="4_mxkc1"]
+[ext_resource type="Texture2D" uid="uid://ddkui3y4b1rws" path="res://scripts/game/Items/H1.png" id="5_c84mr"]
+[ext_resource type="Texture2D" uid="uid://rk0wcinwh7ih" path="res://scripts/game/Items/H2.png" id="6_pce3s"]
+[ext_resource type="Texture2D" uid="uid://b30l07tx8fwmu" path="res://scripts/game/Items/H3.png" id="7_d3pwp"]
+
+[sub_resource type="Animation" id="Animation_q1o5y"]
+resource_name = "TransIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1250, 250), Vector2(1250, 1250)]
+}
+
+[sub_resource type="Animation" id="Animation_eavrw"]
+resource_name = "TransOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1250, 1250), Vector2(1250, 250)]
+}
+
+[sub_resource type="Animation" id="Animation_y6ley"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -500)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lnniu"]
+_data = {
+"RESET": SubResource("Animation_y6ley"),
+"TransIn": SubResource("Animation_q1o5y"),
+"TransOut": SubResource("Animation_eavrw")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s0rs4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8bj4v")
+}],
+"loop": true,
+"name": &"CraBOW",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fnilp")
+}],
+"loop": true,
+"name": &"CrabAxe",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mxkc1")
+}],
+"loop": true,
+"name": &"CrabSword",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_c84mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pce3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d3pwp")
+}],
+"loop": true,
+"name": &"Heart",
+"speed": 5.0
+}]
+
+[node name="Shop" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+offset = Vector2(0, -500)
+transform = Transform2D(1, 0, 0, 1, 0, -500)
+script = ExtResource("1_dv2sh")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 1160.0
+offset_bottom = 651.0
+
+[node name="Shop Anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lnniu")
+}
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 964.0
+offset_top = 59.0
+offset_right = 1020.0
+offset_bottom = 100.0
+text = "EXIT"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.005
+anchor_bottom = 0.009
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 1081.24
+offset_bottom = 572.168
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Item" type="AnimatedSprite2D" parent="Control"]
+position = Vector2(565, 267)
+scale = Vector2(11.1563, 10.6563)
+sprite_frames = SubResource("SpriteFrames_s0rs4")
+animation = &"CraBOW"
+
+[node name="Name" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 118.0
+offset_right = 613.0
+offset_bottom = 163.0
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Descripton" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 371.0
+offset_right = 727.0
+offset_bottom = 463.0
+text = "SOME TEXT THAT TELLS YOU THINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Next" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 707.0
+offset_top = 242.0
+offset_right = 757.0
+offset_bottom = 284.0
+text = "==>"
+
+[node name="Previous" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 244.0
+offset_right = 417.0
+offset_bottom = 287.0
+text = "<=="
+
+[node name="Buy" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 454.0
+offset_right = 609.0
+offset_bottom = 505.0
+text = "Purcharse"
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Control/Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Control/Buy" to="." method="_on_buy_pressed"]

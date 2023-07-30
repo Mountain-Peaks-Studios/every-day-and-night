@@ -189,8 +189,11 @@ func die() -> void:
 
 # Method for receiving damage
 func _on_hurtbox_area_entered(hitbox: Node) -> void:
-	receive_damage(hitbox.damage)
-	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
+	if hitbox.name == "Merchant":
+		pass
+	else:
+		receive_damage(hitbox.damage)
+		print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
 
 
 # Method for additional damage calculations
