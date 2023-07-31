@@ -183,6 +183,11 @@ func update_health() -> void:
 	healthbar.value = current_health
 
 
+func add_coins(amount: int):
+	VariablesToKeep.player_coins += amount
+	print(VariablesToKeep.player_coins)
+
+
 # Handles the character's death logic.
 func die() -> void:
 	dead.emit()
