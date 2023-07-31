@@ -5,6 +5,7 @@ class_name BaseMob extends CharacterBody2D
 @export var max_health: int = 30
 @export var attack_cooldown: float = 2.0
 @export var detection_radius: float = 50.0
+@export var min_distance: float = 45.0 # Define a minimum distance to stop approaching the target
 @export var is_night: bool = 0 # Day mob 0, night mob 1
 @export var coin_amount: int = 1
 @export var coin_drop_chance: float = 0.20 # Given in decimal
@@ -38,13 +39,18 @@ func update_target() -> void:
 # Move to the chosen target
 func move_towards_target() -> void:
 	if target:
-		# Calculate the direction of target
+		# Calculate the direction and distance to the target
 		var direction = target.global_position - global_position
-		direction = direction.normalized()
+		var distance_to_target = direction.length()
 		
-		# Move to the target
-		velocity = direction * speed 
-		move_and_slide()
+		if distance_to_target > min_distance:
+			# Move to the target
+			direction = direction.normalized()
+			velocity = direction * speed 
+			move_and_slide()
+		else:
+			# Stop moving
+			velocity = Vector2(0, 0)
 
 
 # Update the healthbar's value
