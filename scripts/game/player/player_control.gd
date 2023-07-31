@@ -30,7 +30,7 @@ var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 
 # Children
-@onready var hurtbox = $Hurtbox
+@onready var hurtbox = $PlayerHurtbox
 @onready var projectile_scene: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
 @onready var shoot_timer = $ShootTimer
 @onready var melee_timer = $MeleeTimer
