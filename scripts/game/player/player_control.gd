@@ -182,7 +182,7 @@ func update_health() -> void:
 	healthbar.value = current_health
 
 
-func add_coins(amount: int):
+func add_coins(amount: int) -> void:
 	VariablesToKeep.player_coins += amount
 	print(VariablesToKeep.player_coins)
 
