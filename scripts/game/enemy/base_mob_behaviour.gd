@@ -54,7 +54,7 @@ func update_healthbar() -> void:
 
 
 # Method for receiving damage
-func _on_hurtbox_area_entered(hitbox: Node) -> void:
+func _on_hurtbox_area_entered(hitbox: Hitbox) -> void:
 	receive_damage(hitbox.damage)
 	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
 	

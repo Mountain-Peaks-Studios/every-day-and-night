@@ -51,6 +51,9 @@ func time_tick() -> void:
 	
 	# Modify UI
 	hud.on_clock_tick_UI(current_tick, TICKS_IN_CYCLE, ticks_total, is_day)
+	
+	# Chage player sprite/animation
+	player.animation_check(is_day)
 
 
 # Performed after player dies and emits the signal
