@@ -18,13 +18,6 @@ position = Vector2(304, 274)
 
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
 position = Vector2(1200, 1200)
-bullet_layer = 1
-shoot_cooldown = 0.2
-invincibility_time = 2.0
-number_of_coins = 0
-dash_speed = 350.0
-dash_duration = 1.0
-dash_cooldown = 1.0
 
 [node name="PlayerCamera" parent="Player" index="4"]
 zoom = Vector2(1, 1)
@@ -52,5 +45,5 @@ position = Vector2(1341, 1298)
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 
 [editable path="Player"]
-[editable path="Player/Hurtbox"]
-[editable path="Player/Hitbox"]
+[editable path="Player/PlayerHurtbox"]
+[editable path="Player/PlayerHitbox"]
