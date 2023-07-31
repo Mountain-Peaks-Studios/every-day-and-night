@@ -2,6 +2,7 @@ extends Resource
 
 var items = Array()
 
+# Called when the node enters the scene tree.
 func _ready() -> void:
 	# Create directory of all items in game
 	var directory = DirAccess.open("res://items/directory/")
@@ -17,4 +18,11 @@ func _ready() -> void:
 			items.append(load("res://Items/%s" % filename))
 		
 		filename = directory.get_next() # Next item
-	
+
+
+# Get item of specific name from 'items' array
+func get_item(item_name) -> Item:
+	for i in items:
+		if i.name == item_name:
+			return i
+	return null
