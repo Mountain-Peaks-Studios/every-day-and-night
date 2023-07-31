@@ -59,9 +59,23 @@ transform = Transform2D(0.65, 0, 0, 0.65, 176.89, 0)
 
 [node name="BaseDayMob" parent="." instance=ExtResource("9_iakgs")]
 position = Vector2(307, 441)
+speed = 100.0
+max_health = 30
+attack_cooldown = 2.0
+detection_radius = 50.0
+is_night = false
 
 [node name="coin" parent="." instance=ExtResource("6_dylmm")]
 position = Vector2(1510, 1306)
+
+[node name="Coin" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(1143, 1378)
+
+[node name="Coin2" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(881, 1300)
+
+[node name="Coin3" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(1341, 1298)
 
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 

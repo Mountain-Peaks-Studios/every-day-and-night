@@ -10,7 +10,6 @@ signal dead
 @export var melee_cooldown: float = 1
 @export var invincibility_time: float = 2.0
 @export var base_projectile : PackedScene
-@export var number_of_coins: int = 0
 
 # Private variable related to movement, basic attack, health, and invincibility.
 var custom_velocity: Vector2 = Vector2.ZERO # Not used
@@ -231,6 +230,11 @@ func handle_invincibility(delta: float) -> void:
 func update_health() -> void:
 	var healthbar = $HealthBar
 	healthbar.value = current_health
+
+
+func add_coins(amount: int) -> void:
+	VariablesToKeep.player_coins += amount
+	print(VariablesToKeep.player_coins)
 
 
 # Handles the character's death logic.
