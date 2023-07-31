@@ -20,34 +20,34 @@ position = Vector2(304, 274)
 position = Vector2(1200, 1200)
 
 [node name="Hair1" parent="Player/PlayerAnimation" index="1"]
-offset = Vector2(0, -5)
+offset = Vector2(0, -0.151671)
 
 [node name="Skirt" parent="Player/PlayerAnimation" index="6"]
-offset = Vector2(0, -10)
+offset = Vector2(0, -0.303342)
 
 [node name="RightArm1" parent="Player/PlayerAnimation" index="7"]
-offset = Vector2(0, -16.6065)
+offset = Vector2(0, -0.455013)
 
 [node name="RightArm2" parent="Player/PlayerAnimation" index="8"]
-offset = Vector2(0, -16.6065)
+offset = Vector2(0, -0.455013)
 
 [node name="LeftArm1" parent="Player/PlayerAnimation" index="10"]
-offset = Vector2(0, -16.6065)
+offset = Vector2(0, -0.455013)
 
 [node name="LeftArm2" parent="Player/PlayerAnimation" index="11"]
-offset = Vector2(0, -16.6065)
+offset = Vector2(0, -0.455013)
 
 [node name="Torso" parent="Player/PlayerAnimation" index="12"]
-offset = Vector2(0, -16.6065)
+offset = Vector2(0, -0.455013)
 
 [node name="Head" parent="Player/PlayerAnimation" index="13"]
-offset = Vector2(0, -10)
+offset = Vector2(0, -0.303342)
 
 [node name="Eyes" parent="Player/PlayerAnimation" index="14"]
-offset = Vector2(0, -5)
+offset = Vector2(0, -0.151671)
 
 [node name="Hair2" parent="Player/PlayerAnimation" index="15"]
-offset = Vector2(0, -5)
+offset = Vector2(0, -0.149713)
 
 [node name="PlayerCamera" parent="Player" index="4"]
 zoom = Vector2(1, 1)
@@ -67,5 +67,6 @@ position = Vector2(1510, 1306)
 
 [editable path="Player"]
 [editable path="Player/PlayerAnimation"]
+[editable path="Player/PlayerAnimation/Weapon/Sword/SwordSprite/Hitbox"]
 [editable path="Player/Hurtbox"]
 [editable path="Player/Hitbox"]

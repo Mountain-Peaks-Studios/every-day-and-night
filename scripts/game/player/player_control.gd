@@ -7,6 +7,7 @@ signal dead
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
+@export var melee_cooldown: float = 1
 @export var invincibility_time: float = 2.0
 @export var base_projectile : PackedScene
 @export var number_of_coins: int = 0
@@ -33,6 +34,7 @@ var dash_direction: Vector2 = Vector2.ZERO
 @onready var hurtbox = $Hurtbox
 @onready var projectile_scene: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
 @onready var shoot_timer = $ShootTimer
+@onready var melee_timer = $MeleeTimer
 @onready var animation = $PlayerAnimation
 
 
@@ -43,27 +45,26 @@ func _ready() -> void:
 	
 	# Initialize the character's health to its maximum value.
 	current_health = VariablesToKeep.player_max_health
+	
+	if get_parent().is_day:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
+	else:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
+
 
 # Update every frame
 func _physics_process(delta: float) -> void:
-	
 	# Make the player follow the cursor direction
 	follow_cursor()
 	
-	# Handle player input, shooting, dashing, and invincibility.
+	# Handle player input, dashing, health and invincibility.
 	handle_input()
 	handle_dash(delta)
 	handle_invincibility(delta)
 	update_health()
 	
-	# Handle attacks
-	# Draw correct weapon
-	if get_parent().is_day:
-		pass
-	else:
-		pass
-	# Check if shooting is allowed and the "shoot" action is pressed.
-	if can_attack and Input.is_action_pressed("attack"):
+	# Check if attack is allowed and the "shoot" action is pressed.
+	if can_attack and Input.is_action_just_pressed("attack"):
 		if get_parent().is_day:
 			handle_melee(delta)
 		else:
@@ -71,6 +72,13 @@ func _physics_process(delta: float) -> void:
 	
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
+
+# Chooses animation based on the time of day
+func animation_check(is_day) -> void:
+	if is_day: 
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
+	else:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
 
 # Handles the player following the direction of the mouse cursor
 func follow_cursor() -> void:
@@ -152,25 +160,30 @@ func handle_shooting(delta: float) -> void:
 	shoot()
 	can_attack = false
 	shoot_timer.start(shoot_cooldown)
-	animation.get_node("AnimationTree").set("parameters/sword-idle-attack/blend_amount",0.0)
-	animation.get_node("AnimationTree").set("parameters/idle-blend/blend_amount",1.0)
-	
 
 
 # Handles basic melee attack
 func handle_melee(delta: float) -> void:
 	melee()
 	can_attack = false
-	animation.get_node("AnimationTree").set("parameters/sword-idle-attack/blend_amount",1.0)
+	melee_timer.start(melee_cooldown)
+	
 
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
 func _on_shoot_timer_timeout() -> void:
 	can_attack = true
+	# Placeholder
+	if get_parent().is_day:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
+	else:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
 
 
 # Shoots a bullet instance from the character.
 func shoot() -> void:
+	# Placeholder
+	animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
 	if projectile_scene:
 		var projectile = projectile_scene.instantiate()
 		self.get_parent().add_child(projectile)
@@ -182,6 +195,8 @@ func shoot() -> void:
 
 
 func melee() -> void:
+	# Placeholder
+	animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_attack_sword")
 	pass
 
 
