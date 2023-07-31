@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HealthPotionItem" load_steps=3 format=3 uid="uid://dybanwjy6r4md"]
+
+[ext_resource type="Script" path="res://items/resources/health_potion_item.gd" id="1_pdam5"]
+[ext_resource type="Texture2D" uid="uid://bv28heue4qfda" path="res://items/healing_potion.png" id="2_nuco8"]
+
+[resource]
+script = ExtResource("1_pdam5")
+health_restored = 5
+cost = 5
+name = "Health Potion"
+stackable = true
+max_stack_size = 3
+type = 1
+sprite = ExtResource("2_nuco8")

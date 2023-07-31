@@ -6,4 +6,4 @@ class_name Item extends Resource
 
 enum ItemType { COIN, POTION, TRINKET }
 @export var type: ItemType
-@export var sprite: Sprite2D
+@export var sprite: Texture
