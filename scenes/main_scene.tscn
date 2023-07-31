@@ -33,6 +33,15 @@ position = Vector2(307, 441)
 [node name="coin" parent="." instance=ExtResource("6_dylmm")]
 position = Vector2(1510, 1306)
 
+[node name="Coin" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(1143, 1378)
+
+[node name="Coin2" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(881, 1300)
+
+[node name="Coin3" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(1341, 1298)
+
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 
 [editable path="Player"]
