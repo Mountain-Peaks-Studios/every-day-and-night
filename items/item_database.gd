@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 # Get item of specific name from 'items' array
-func get_item(item_name) -> Item:
+func get_item(item_name: String) -> Item:
 	for i in items:
 		if i.name == item_name:
 			return i
