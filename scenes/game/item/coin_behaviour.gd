@@ -1,5 +1,6 @@
 extends Node2D
 
+var amount = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,5 +13,6 @@ func _process(delta):
 
 
 func _on_collider_area_entered(area):
-	if area.is_in_group("Player"):
-		self.get_parent().get_node("Player").get("number_of_coins") + 1
+		if area.get_name() == "Player":
+			if area.add_coins(amount):
+				queue_free()
