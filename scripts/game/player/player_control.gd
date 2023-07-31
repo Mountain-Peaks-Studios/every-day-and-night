@@ -3,13 +3,14 @@ extends CharacterBody2D
 # Signals
 signal dead
 
-# Public variable related to movement, shooting, health, and invincibility
+# Public variable related to movement, shooting, health, invincibility, and money
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
 @export var melee_cooldown: float = 1
 @export var invincibility_time: float = 2.0
 @export var base_projectile : PackedScene
+@export var coins_amount: int = 0
 
 # Private variable related to movement, basic attack, health, and invincibility.
 var custom_velocity: Vector2 = Vector2.ZERO # Not used
@@ -233,8 +234,8 @@ func update_health() -> void:
 
 
 func add_coins(amount: int) -> void:
-	VariablesToKeep.player_coins += amount
-	print(VariablesToKeep.player_coins)
+	coins_amount += amount
+	print(coins_amount)
 
 
 # Handles the character's death logic.
