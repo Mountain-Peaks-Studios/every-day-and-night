@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://7q1l3rbfm0xg" path="res://scenes/shop.tscn" id="6_lwbcr"]
 [ext_resource type="Script" path="res://scenes/Merchant.gd" id="6_op8cq"]
 [ext_resource type="Texture2D" uid="uid://d1cg7m4cn627h" path="res://scenes/Merch_0.png" id="7_1n7wu"]
+[ext_resource type="PackedScene" uid="uid://bkuoecflbq18c" path="res://scenes/game/item/coin.tscn" id="6_dylmm"]
 [ext_resource type="PackedScene" uid="uid://cxadyfsqp1cyb" path="res://scenes/game/enemy/base_mob_day.tscn" id="9_iakgs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrhlv"]
@@ -27,6 +28,36 @@ position = Vector2(1200, 1200)
 [node name="CollisionShape2D" parent="Player/Hitbox" index="0"]
 position = Vector2(-1, 6)
 
+[node name="Hair1" parent="Player/PlayerAnimation" index="1"]
+offset = Vector2(0, -0.151671)
+
+[node name="Skirt" parent="Player/PlayerAnimation" index="6"]
+offset = Vector2(0, -0.303342)
+
+[node name="RightArm1" parent="Player/PlayerAnimation" index="7"]
+offset = Vector2(0, -0.455013)
+
+[node name="RightArm2" parent="Player/PlayerAnimation" index="8"]
+offset = Vector2(0, -0.455013)
+
+[node name="LeftArm1" parent="Player/PlayerAnimation" index="10"]
+offset = Vector2(0, -0.455013)
+
+[node name="LeftArm2" parent="Player/PlayerAnimation" index="11"]
+offset = Vector2(0, -0.455013)
+
+[node name="Torso" parent="Player/PlayerAnimation" index="12"]
+offset = Vector2(0, -0.455013)
+
+[node name="Head" parent="Player/PlayerAnimation" index="13"]
+offset = Vector2(0, -0.303342)
+
+[node name="Eyes" parent="Player/PlayerAnimation" index="14"]
+offset = Vector2(0, -0.151671)
+
+[node name="Hair2" parent="Player/PlayerAnimation" index="15"]
+offset = Vector2(0, -0.149713)
+
 [node name="PlayerCamera" parent="Player" index="4"]
 position = Vector2(1, 5)
 zoom = Vector2(1, 1)
@@ -41,6 +72,23 @@ transform = Transform2D(0.65, 0, 0, 0.65, 176.89, 0)
 
 [node name="BaseDayMob" parent="." instance=ExtResource("9_iakgs")]
 position = Vector2(307, 441)
+speed = 100.0
+max_health = 30
+attack_cooldown = 2.0
+detection_radius = 50.0
+is_night = false
+
+[node name="coin" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(1510, 1306)
+
+[node name="Coin" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(1143, 1378)
+
+[node name="Coin2" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(881, 1300)
+
+[node name="Coin3" parent="." instance=ExtResource("6_dylmm")]
+position = Vector2(1341, 1298)
 
 [node name="Merchant" type="Area2D" parent="."]
 collision_layer = 255
@@ -61,5 +109,7 @@ shape = SubResource("RectangleShape2D_hrhlv")
 [connection signal="body_entered" from="Merchant" to="Merchant" method="_on_body_entered"]
 
 [editable path="Player"]
+[editable path="Player/PlayerAnimation"]
+[editable path="Player/PlayerAnimation/Weapon/Sword/SwordSprite/Hitbox"]
 [editable path="Player/Hurtbox"]
 [editable path="Player/Hitbox"]

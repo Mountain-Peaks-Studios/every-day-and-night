@@ -3,16 +3,18 @@ extends CharacterBody2D
 # Signals
 signal dead
 
-# Public variable related to movement, shooting, health, and invincibility
+# Public variable related to movement, shooting, health, invincibility, and money
 @export var bullet_scene: PackedScene
 @export var bullet_layer: int = 1 # Not used
 @export var shoot_cooldown: float = 0.2
+@export var melee_cooldown: float = 1
 @export var invincibility_time: float = 2.0
 @export var base_projectile : PackedScene
+@export var coins_amount: int = 0
 
-# Private variable related to movement, shooting, health, and invincibility.
+# Private variable related to movement, basic attack, health, and invincibility.
 var custom_velocity: Vector2 = Vector2.ZERO # Not used
-var can_shoot: bool = true
+var can_attack: bool = true
 var current_health: int = VariablesToKeep.player_max_health
 var invincible: bool = false
 var invincibility_timer: float = 0.0
@@ -29,9 +31,11 @@ var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 
 # Children
-@onready var hurtbox = $Hurtbox
+@onready var hurtbox = $PlayerHurtbox
 @onready var projectile_scene: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
 @onready var shoot_timer = $ShootTimer
+@onready var melee_timer = $MeleeTimer
+@onready var animation = $PlayerAnimation
 
 
 # Called when the node enters the scene tree.
@@ -41,21 +45,49 @@ func _ready() -> void:
 	
 	# Initialize the character's health to its maximum value.
 	current_health = VariablesToKeep.player_max_health
+	
+	if get_parent().is_day:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
+	else:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
+
 
 # Update every frame
 func _physics_process(delta: float) -> void:
-	# Temporary death
-	if Input.is_action_pressed("temp_die_button"): #on "M"
-		die()
+	# Make the player follow the cursor direction
+	follow_cursor()
 	
-	# Handle player input, shooting, dashing, and invincibility.
+	# Handle player input, dashing, health and invincibility.
 	handle_input()
 	handle_dash(delta)
-	handle_shooting(delta)
 	handle_invincibility(delta)
 	update_health()
+	
+	# Check if attack is allowed and the "shoot" action is pressed.
+	if can_attack and Input.is_action_just_pressed("attack"):
+		if get_parent().is_day:
+			handle_melee(delta)
+		else:
+			handle_shooting(delta)
+	
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
+
+# Chooses animation based on the time of day
+func animation_check(is_day) -> void:
+	if is_day: 
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
+	else:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
+
+# Handles the player following the direction of the mouse cursor
+func follow_cursor() -> void:
+	if get_global_mouse_position().x >= position.x:
+		# Left
+		$PlayerAnimation.scale = Vector2(-0.08,0.08)
+	else:
+		# Right
+		$PlayerAnimation.scale = Vector2(0.08,0.08)
 
 
 # Handles player input to set the character's velocity.
@@ -123,22 +155,35 @@ func _on_dash_timer_timeout() -> void:
 
 
 # Handles shooting mechanic, restricting the shooting rate with cooldown.
-func handle_shooting(delta) -> void:
-	# Check if shooting is allowed and the "shoot" action is pressed.
-	if can_shoot and Input.is_action_pressed("shoot"):
-		# Call the shoot function and start the shooting cooldown.
-		shoot()
-		can_shoot = false
-		shoot_timer.start(shoot_cooldown)
+func handle_shooting(delta: float) -> void:
+	# Call the shoot function and start the shooting cooldown.
+	shoot()
+	can_attack = false
+	shoot_timer.start(shoot_cooldown)
+
+
+# Handles basic melee attack
+func handle_melee(delta: float) -> void:
+	melee()
+	can_attack = false
+	melee_timer.start(melee_cooldown)
+	
 
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
 func _on_shoot_timer_timeout() -> void:
-	can_shoot = true
+	can_attack = true
+	# Placeholder
+	if get_parent().is_day:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
+	else:
+		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
 
 
 # Shoots a bullet instance from the character.
 func shoot() -> void:
+	# Placeholder
+	animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
 	if projectile_scene:
 		var projectile = projectile_scene.instantiate()
 		self.get_parent().add_child(projectile)
@@ -147,6 +192,12 @@ func shoot() -> void:
 		# This must be changed to rotation of the player
 		var projectile_rotation = self.global_position.direction_to(get_global_mouse_position()).angle()
 		projectile.rotation = projectile_rotation
+
+
+func melee() -> void:
+	# Placeholder
+	animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_attack_sword")
+	pass
 
 
 # Function to handle enemy attacks (triggered by the "take_damage" signal).
@@ -180,6 +231,11 @@ func handle_invincibility(delta: float) -> void:
 func update_health() -> void:
 	var healthbar = $HealthBar
 	healthbar.value = current_health
+
+
+func add_coins(amount: int) -> void:
+	coins_amount += amount
+	print(coins_amount)
 
 
 # Handles the character's death logic.

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkuoecflbq18c"]
+
+[ext_resource type="Texture2D" uid="uid://d1xpdgyvsmrfr" path="res://sprites/item/coin/Bronze/Bronze_1.png" id="1_0t8n6"]
+[ext_resource type="Script" path="res://scripts/game/item/coin_behaviour.gd" id="1_38b6c"]
+[ext_resource type="Script" path="res://scripts/game/item/coin_collider.gd" id="3_7dc0v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvyvn"]
+radius = 26.0
+
+[node name="Coin" type="Node2D"]
+script = ExtResource("1_38b6c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0903399, 0.0903399)
+texture = ExtResource("1_0t8n6")
+
+[node name="Collider" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("3_7dc0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
+shape = SubResource("CircleShape2D_nvyvn")
+
+[connection signal="area_entered" from="Collider" to="." method="_on_collider_area_entered"]

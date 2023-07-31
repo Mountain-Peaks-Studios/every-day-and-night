@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://vkxykqtkeua7"]
 
 [ext_resource type="Script" path="res://scripts/game/player/player_control.gd" id="1_xwpq4"]
-[ext_resource type="Texture2D" uid="uid://cr0rljr03iis0" path="res://sprites/player/Margaret_Player.png" id="2_ipbmd"]
+[ext_resource type="PackedScene" uid="uid://bkoarlwuenbi7" path="res://animations/scenes/player_animation.tscn" id="2_56qox"]
 [ext_resource type="PackedScene" uid="uid://dtuxjo5c17mqt" path="res://scenes/game/util/health_bar.tscn" id="3_s2r63"]
 [ext_resource type="Script" path="res://scripts/game/player/player_camera_controller.gd" id="4_orgc8"]
 [ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="5_rubkf"]
@@ -24,29 +24,30 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_xwpq4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(5, 5)
-texture = ExtResource("2_ipbmd")
+[node name="PlayerAnimation" parent="." instance=ExtResource("2_56qox")]
+position = Vector2(-10, -26)
 
-[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+[node name="PlayerCollision" type="CollisionShape2D" parent="." groups=["Player"]]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_rs3du")
 
-[node name="Hurtbox" parent="." instance=ExtResource("5_rubkf")]
+[node name="PlayerHurtbox" parent="." groups=["Player"] instance=ExtResource("5_rubkf")]
 collision_layer = 2
-collision_mask = 12
+collision_mask = 44
+monitorable = true
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+[node name="CollisionShape2D" parent="PlayerHurtbox" index="0" groups=["Player"]]
 position = Vector2(-0.5, 5)
 shape = SubResource("RectangleShape2D_a3mm2")
 
-[node name="Hitbox" parent="." instance=ExtResource("6_hoflt")]
+[node name="PlayerHitbox" parent="." groups=["Player"] instance=ExtResource("6_hoflt")]
 collision_layer = 2
 collision_mask = 12
 
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
+[node name="CollisionShape2D" parent="PlayerHitbox" index="0" groups=["Player"]]
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_ayywa")
+disabled = true
 debug_color = Color(0.996078, 0, 0.156863, 0.152941)
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
@@ -72,9 +73,13 @@ wait_time = 5.0
 wait_time = 0.6
 one_shot = true
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[node name="MeleeTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="MeleeTimer" to="." method="_on_shoot_timer_timeout"]
 
-[editable path="Hurtbox"]
-[editable path="Hitbox"]
+[editable path="PlayerHurtbox"]
+[editable path="PlayerHitbox"]

@@ -6,11 +6,16 @@ class_name BaseMob extends CharacterBody2D
 @export var attack_cooldown: float = 2.0
 @export var detection_radius: float = 50.0
 @export var is_night: bool = 0 # Day mob 0, night mob 1
+@export var coin_amount: int = 1
+@export var coin_drop_chance: float = 0.20 # Given in decimal
 
 # Private variables
 var target: Node2D = null
 var attack_timer: float = 0.0
 var current_health: int = 0
+
+# Packed scenes
+@onready var coin: PackedScene = preload("res://scenes/game/item/coin.tscn")
 
 
 # Called when the node enters the scene tree.
@@ -68,6 +73,22 @@ func receive_damage(base_damage: int) -> void:
 	if current_health <= 0:
 		death()
 
+
+func calculate_if_coin_dropped(chance: float) -> void:
+	var random_number = randf_range(0, 1)
+	if random_number <= chance:
+		drop_coin(coin_amount)
+		print("Debug: coin dropped")
+
+
+func drop_coin(amount: int) -> void:
+	var temp_coin = coin.instantiate()
+	self.get_parent().add_child(temp_coin)
+	temp_coin.position = self.position
+	temp_coin.amount = amount
+
+
 # Remove from scene on death
 func death() -> void:
+	calculate_if_coin_dropped(coin_drop_chance)
 	queue_free()
