@@ -20,7 +20,7 @@ func initialise_player() -> void:
 	emit_signal("player_initialised", player)
 	
 	# Connect to inventory_changed signal
-	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
+	player.inventory.connect("inventory_changed", _on_player_inventory_changed)
 	
 	# Load inventory from the disc
 #	var existing_inventory = load("user://inventory.tres")
