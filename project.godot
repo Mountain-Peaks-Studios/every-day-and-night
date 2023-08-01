@@ -19,6 +19,7 @@ config/icon="res://sprites/icon.svg"
 
 VariablesToKeep="*res://scripts/singletons/variables_to_keep.gd"
 ItemDatabase="*res://items/item_database.gd"
+GameManager="*res://scripts/game/util/game_manager.gd"
 
 [display]
 
