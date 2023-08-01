@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 # Signal emitted when it's time to spawn a new enemy, can be used for on-screen-warnings
 signal spawn

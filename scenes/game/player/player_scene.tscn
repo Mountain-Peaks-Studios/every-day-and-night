@@ -1,7 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://vkxykqtkeua7"]
 
-[ext_resource type="Script" path="res://scripts/game/player/player_control.gd" id="1_xwpq4"]
+[ext_resource type="Script" path="res://scripts/game/player/player_controller.gd" id="1_v5r6w"]
 [ext_resource type="PackedScene" uid="uid://bkoarlwuenbi7" path="res://animations/scenes/player_animation.tscn" id="2_56qox"]
+
 [ext_resource type="PackedScene" uid="uid://dtuxjo5c17mqt" path="res://scenes/game/util/health_bar.tscn" id="3_s2r63"]
 [ext_resource type="Script" path="res://scripts/game/player/player_camera_controller.gd" id="4_orgc8"]
 [ext_resource type="PackedScene" uid="uid://6p8wrb8x8t2m" path="res://scenes/game/util/hurtbox.tscn" id="5_rubkf"]
@@ -22,7 +23,7 @@ light_mask = 2
 visibility_layer = 5
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("1_xwpq4")
+script = ExtResource("1_v5r6w")
 
 [node name="PlayerAnimation" parent="." instance=ExtResource("2_56qox")]
 position = Vector2(-10, -26)
