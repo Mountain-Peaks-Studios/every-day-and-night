@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfpix5alqg44d"]
 
-[ext_resource type="Script" path="res://scripts/game/util/game_controller.gd" id="1_0pa0k"]
 [ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
+[ext_resource type="Script" path="res://scripts/game/util/main_scene_controller.gd" id="1_4xdsb"]
 [ext_resource type="PackedScene" uid="uid://d03g04kaja30u" path="res://scenes/game/util/mob_spawner.tscn" id="2_2exrq"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/ui/hud.tscn" id="4_vorx7"]
 [ext_resource type="PackedScene" uid="uid://bkuoecflbq18c" path="res://scenes/game/item/coin.tscn" id="6_dylmm"]
@@ -9,7 +9,7 @@
 
 [node name="Main" type="Node2D"]
 process_mode = 3
-script = ExtResource("1_0pa0k")
+script = ExtResource("1_4xdsb")
 
 [node name="MobSpawner" parent="." instance=ExtResource("2_2exrq")]
 
@@ -59,11 +59,6 @@ transform = Transform2D(0.65, 0, 0, 0.65, 176.89, 0)
 
 [node name="BaseDayMob" parent="." instance=ExtResource("9_iakgs")]
 position = Vector2(307, 441)
-speed = 100.0
-max_health = 30
-attack_cooldown = 2.0
-detection_radius = 50.0
-is_night = false
 
 [node name="coin" parent="." instance=ExtResource("6_dylmm")]
 position = Vector2(1510, 1306)

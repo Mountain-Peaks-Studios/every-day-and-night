@@ -30,6 +30,10 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 
+# Private variables related to the inventory
+var inventory_resource: Resource = load("res://items/inventory.gd")
+var inventory: Resource = inventory_resource.new()
+
 # Children
 @onready var hurtbox = $PlayerHurtbox
 @onready var projectile_scene: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
@@ -50,6 +54,7 @@ func _ready() -> void:
 		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
 	else:
 		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
+
 
 
 # Update every frame

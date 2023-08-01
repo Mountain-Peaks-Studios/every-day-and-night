@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/game/util/mob_spawner.gd" id="1_5yvou"]
 [ext_resource type="Script" path="res://scripts/structures_and_algorithms/stack.gd" id="2_5ngpe"]
 
-[node name="MobSpawner" type="Node2D"]
+[node name="MobSpawner" type="Node"]
 script = ExtResource("1_5yvou")
 
-[node name="StackContainer" type="Node2D" parent="."]
+[node name="StackContainer" type="Node" parent="."]
 script = ExtResource("2_5ngpe")
 
 [node name="SpawnTimer" type="Timer" parent="."]
