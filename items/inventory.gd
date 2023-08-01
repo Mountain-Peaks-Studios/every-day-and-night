@@ -48,6 +48,7 @@ func add_item(item_name: String, quantity: int) -> void:
 				var original_quantity = inventory_item.quantity
 				inventory_item.quantity = min(original_quantity + remaining_quantity, max_stack_size)
 				remaining_quantity -= inventory_item.quantity - original_quantity
+				
 		
 		# Add new item stack
 		while remaining_quantity > 0:
@@ -60,3 +61,15 @@ func add_item(item_name: String, quantity: int) -> void:
 			
 		# Emit the signal that the inventory has changed
 		emit_signal("inventory_changed", self)
+
+
+# Remove items from the inventory
+func remove_item(item_name: String, quantity_to_remove: int) -> void:
+	if quantity_to_remove <= 0: # Check if the given quantity of items to remove is positive
+		return
+	
+	var item_to_find = ItemDatabase.get_item(item_name)
+	var item_in_inventory = _items.find(item_to_find)
+	
+	if item_in_inventory.quantity <= 0: # Check if there are any items to remove
+		return
