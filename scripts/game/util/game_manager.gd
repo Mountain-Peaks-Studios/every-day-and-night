@@ -26,7 +26,6 @@ func initialise_player() -> void:
 #	var existing_inventory = load("user://inventory.tres")
 #	if existing_inventory:
 #		player.inventory.set_items(existing_inventory.get_items())
-	player.inventory.add_item("Health Potion", 3)
 
 
 # Perform after player's inventory changes

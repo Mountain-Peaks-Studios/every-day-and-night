@@ -77,6 +77,14 @@ func _physics_process(delta: float) -> void:
 	
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
+	
+	# DEBUG: adding and removing item
+	if Input.is_action_just_pressed("temp_add_potion"):
+		inventory.add_item("Health Potion", 3)
+		print(inventory._items)
+	elif Input.is_action_just_pressed("temp_remove_potion"):
+		inventory.remove_item("Health Potion", 1)
+		print(inventory._items)
 
 # Chooses animation based on the time of day
 func animation_check(is_day) -> void:

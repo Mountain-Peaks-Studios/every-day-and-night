@@ -26,12 +26,12 @@ func add_item(item_name: String, quantity: int) -> void:
 	if quantity <= 0: # Check if the given quantity is positive
 		return
 	
-	var item = ItemDatabase.get_item(item_name)
+	var item: Item = ItemDatabase.get_item(item_name)
 	if not item: # Check if the item being added is present in the database
 		return
 	
-	var remaining_quantity = quantity
-	var max_stack_size = item.max_stack_size if item.stackable else 1
+	var remaining_quantity: int = quantity
+	var max_stack_size: int = item.max_stack_size if item.stackable else 1
 	
 	if item.stackable: # Check if the item is stackable
 		for i in range(_items.size()):
@@ -45,14 +45,14 @@ func add_item(item_name: String, quantity: int) -> void:
 			
 			if inventory_item.quantity < max_stack_size: # Check if enough space in the stack
 				# Add item to the inventory and determine how many are left (not added to a stack)
-				var original_quantity = inventory_item.quantity
+				var original_quantity: int = inventory_item.quantity
 				inventory_item.quantity = min(original_quantity + remaining_quantity, max_stack_size)
 				remaining_quantity -= inventory_item.quantity - original_quantity
 				
 		
 		# Add new item stack
 		while remaining_quantity > 0:
-			var new_item = {
+			var new_item: Dictionary = {
 				item_reference = item,
 				quantity = min(remaining_quantity, max_stack_size)
 			}
@@ -68,8 +68,18 @@ func remove_item(item_name: String, quantity_to_remove: int) -> void:
 	if quantity_to_remove <= 0: # Check if the given quantity of items to remove is positive
 		return
 	
-	var item_to_find = ItemDatabase.get_item(item_name)
-	var item_in_inventory = _items.find(item_to_find)
+	var item_to_find: Item = ItemDatabase.get_item(item_name)
 	
-	if item_in_inventory.quantity <= 0: # Check if there are any items to remove
+	if not item_to_find: # Check if the item is present in the database
 		return
+	
+	# Find the item in the _items array
+	for i in range(_items.size()):
+		var inventory_item = _items[i]
+		if  inventory_item.item_reference.name != item_name: # Check if items match
+			continue
+		# If found, decrease the quantity
+		inventory_item.quantity -= quantity_to_remove
+		
+		if inventory_item.quantity <= 0: # Check if there are any items left
+			_items.erase(inventory_item)
