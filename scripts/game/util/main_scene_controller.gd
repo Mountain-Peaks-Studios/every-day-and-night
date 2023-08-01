@@ -9,15 +9,15 @@ var current_tick = 0
 var ticks_total = 0
 var is_day = true
 
+
 # Private variables related to levelling up
 var ticks_to_level: int = 60 # PLACEHOLDER VALUE
 var level: int = 0
 
 # Children
-@onready var player = $Player
-@onready var hud = $HUD
+@onready var player: Node = $Player
+@onready var hud: Node = $HUD
 @onready var player_spawn: Vector2 = $PlayerSpawn.position
-
 
 # Called when the node enters the scene tree.
 func _ready() -> void:
