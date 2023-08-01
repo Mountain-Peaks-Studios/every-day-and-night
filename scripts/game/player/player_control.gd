@@ -28,6 +28,10 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 
+# Private variables related to the inventory
+var inventory_resource = load("res://items/inventory.gd")
+var inventory = inventory_resource.new()
+
 # Children
 @onready var hurtbox = $Hurtbox
 @onready var projectile_scene: PackedScene = preload("res://scenes/game/projectile/player_projectile.tscn")
@@ -41,6 +45,7 @@ func _ready() -> void:
 	
 	# Initialize the character's health to its maximum value.
 	current_health = VariablesToKeep.player_max_health
+
 
 # Update every frame
 func _physics_process(delta: float) -> void:
