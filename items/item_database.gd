@@ -1,4 +1,4 @@
-extends Resource
+extends Node
 
 var items = Array()
 
@@ -15,7 +15,7 @@ func _ready() -> void:
 	while(filename):
 		# Check if a file is being checked (and not a directory itself) 
 		if not directory.current_is_dir(): 
-			items.append(load("res://Items/%s" % filename))
+			items.append(load("res://items/directory/%s" % filename))
 		
 		filename = directory.get_next() # Next item
 
