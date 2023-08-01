@@ -80,10 +80,11 @@ func _physics_process(delta: float) -> void:
 	
 	# DEBUG: adding and removing item
 	if Input.is_action_just_pressed("temp_add_potion"):
-		inventory.add_item("Health Potion", 3)
+		inventory.add_item("Speed Potion", 3)
+		inventory.add_item("Power Potion", 3)
 		print(inventory._items)
 	elif Input.is_action_just_pressed("temp_remove_potion"):
-		inventory.remove_item("Health Potion", 1)
+		inventory.remove_item("Speed Potion", 1)
 		print(inventory._items)
 
 # Chooses animation based on the time of day
@@ -218,14 +219,14 @@ func _on_enemy_attack(damage: int) -> void:
 	# Check if the character is invincible and return if it is.
 	if invincible:
 		return
-
+	
 	# Reduce the current health by the damage amount.
 	current_health -= damage
 
 	# Check if the character's health has dropped to or below zero, call the die function if true.
 	if current_health <= 0:
 		die()
-
+	
 	# Activate invincibility and set the invincibility timer.
 	invincible = true
 	invincibility_timer = invincibility_time
