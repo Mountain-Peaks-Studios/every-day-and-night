@@ -207,10 +207,10 @@ func shoot() -> void:
 		projectile.rotation = projectile_rotation
 
 
+# Turns on melee animation
 func melee() -> void:
 	# Placeholder
 	animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_attack_sword")
-	pass
 
 
 # Function to handle enemy attacks (triggered by the "take_damage" signal).
