@@ -8,6 +8,21 @@
 [ext_resource type="Texture2D" uid="uid://rk0wcinwh7ih" path="res://scripts/game/Items/H2.png" id="6_pce3s"]
 [ext_resource type="Texture2D" uid="uid://b30l07tx8fwmu" path="res://scripts/game/Items/H3.png" id="7_d3pwp"]
 
+[sub_resource type="Animation" id="Animation_y6ley"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -500)]
+}
+
 [sub_resource type="Animation" id="Animation_q1o5y"]
 resource_name = "TransIn"
 tracks/0/type = "value"
@@ -36,21 +51,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1250, 1250), Vector2(1250, 250)]
-}
-
-[sub_resource type="Animation" id="Animation_y6ley"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -500)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lnniu"]
@@ -109,10 +109,10 @@ transform = Transform2D(1, 0, 0, 1, 0, -500)
 script = ExtResource("1_dv2sh")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 1160.0
-offset_bottom = 651.0
+offset_left = -8.0
+offset_top = 496.0
+offset_right = 1150.0
+offset_bottom = 1145.0
 
 [node name="Shop Anim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -120,20 +120,20 @@ libraries = {
 }
 
 [node name="Exit" type="Button" parent="."]
-offset_left = 964.0
-offset_top = 59.0
-offset_right = 1020.0
-offset_bottom = 100.0
+offset_left = 954.0
+offset_top = 553.0
+offset_right = 1010.0
+offset_bottom = 594.0
 text = "EXIT"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchor_right = 0.005
 anchor_bottom = 0.009
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 1081.24
-offset_bottom = 572.168
+offset_left = -4.0
+offset_top = 500.0
+offset_right = 1071.24
+offset_bottom = 1066.17
 grow_horizontal = 2
 grow_vertical = 2
 
