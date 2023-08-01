@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemPotionSpeed" load_steps=2 format=3 uid="uid://ckvs7gl5jmo7q"]
+
+[ext_resource type="Script" path="res://items/classes/item_potion_speed.gd" id="1_lm6vu"]
+
+[resource]
+script = ExtResource("1_lm6vu")
+speed_boost = 5
+duration = 5.0
+name = "Speed Potion"
+stackable = true
+max_stack_size = 3
+type = 1
+cost = 5

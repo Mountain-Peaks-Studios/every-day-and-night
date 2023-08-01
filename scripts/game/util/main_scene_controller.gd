@@ -9,7 +9,6 @@ var current_tick = 0
 var ticks_total = 0
 var is_day = true
 
-
 # Private variables related to levelling up
 var ticks_to_level: int = 60 # PLACEHOLDER VALUE
 var level: int = 0

@@ -8,3 +8,5 @@ extends Resource
 enum ItemType { COIN, POTION, TRINKET }
 @export var type: ItemType
 @export var sprite: Texture
+
+@export var cost: int
