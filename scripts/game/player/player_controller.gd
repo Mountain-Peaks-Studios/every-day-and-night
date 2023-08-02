@@ -56,7 +56,6 @@ func _ready() -> void:
 		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
 
 
-
 # Update every frame
 func _physics_process(delta: float) -> void:
 	# Make the player follow the cursor direction
@@ -87,12 +86,14 @@ func _physics_process(delta: float) -> void:
 		inventory.remove_item("Speed Potion", 1)
 		print(inventory._items)
 
+
 # Chooses animation based on the time of day
 func animation_check(is_day) -> void:
 	if is_day: 
 		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
 	else:
 		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
+
 
 # Handles the player following the direction of the mouse cursor
 func follow_cursor() -> void:
@@ -137,11 +138,11 @@ func handle_dash(delta: float) -> void:
 			dash_direction.y += 1
 		if Input.is_action_pressed("ui_up"):
 			dash_direction.y -= 1
-
+		
 		# Normalize the dash direction and multiply it by the dash speed to control dash movement speed.
 		if dash_direction != Vector2.ZERO:
 			dash_direction = dash_direction.normalized() * dash_speed
-
+		
 		# Start dashing if the dash direction is valid.
 		if dash_direction != Vector2.ZERO:
 			is_dashing = true
@@ -181,7 +182,6 @@ func handle_melee(delta: float) -> void:
 	melee()
 	can_attack = false
 	melee_timer.start(melee_cooldown)
-	
 
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
@@ -256,6 +256,7 @@ func add_coins(amount: int) -> void:
 func die() -> void:
 	dead.emit()
 	
+
 
 # Method for receiving damage
 func _on_hurtbox_area_entered(hitbox: Node) -> void:
