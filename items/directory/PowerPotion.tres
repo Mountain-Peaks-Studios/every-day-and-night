@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemPotion" load_steps=2 format=3 uid="uid://cbo2afoy28tp2"]
+
+[ext_resource type="Script" path="res://items/classes/item_potion.gd" id="1_gsg6y"]
+
+[resource]
+script = ExtResource("1_gsg6y")
+boost = 0
+duration = 0.0
+name = "Power Potion"
+stackable = true
+max_stack_size = 60
+type = 2
+cost = 0

@@ -56,7 +56,6 @@ func _ready() -> void:
 		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
 
 
-
 # Update every frame
 func _physics_process(delta: float) -> void:
 	# Make the player follow the cursor direction
@@ -77,6 +76,16 @@ func _physics_process(delta: float) -> void:
 	
 	# Move the character using Godot's built-in move_and_slide function.
 	move_and_slide()
+	
+	# DEBUG: adding and removing item
+	if Input.is_action_just_pressed("temp_add_potion"):
+		inventory.add_item("Speed Potion", 3)
+		inventory.add_item("Power Potion", 3)
+		print(inventory._items)
+	elif Input.is_action_just_pressed("temp_remove_potion"):
+		inventory.remove_item("Speed Potion", 1)
+		print(inventory._items)
+
 
 # Chooses animation based on the time of day
 func animation_check(is_day) -> void:
@@ -84,6 +93,7 @@ func animation_check(is_day) -> void:
 		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_sword")
 	else:
 		animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_idle_gun")
+
 
 # Handles the player following the direction of the mouse cursor
 func follow_cursor() -> void:
@@ -128,11 +138,11 @@ func handle_dash(delta: float) -> void:
 			dash_direction.y += 1
 		if Input.is_action_pressed("ui_up"):
 			dash_direction.y -= 1
-
+		
 		# Normalize the dash direction and multiply it by the dash speed to control dash movement speed.
 		if dash_direction != Vector2.ZERO:
 			dash_direction = dash_direction.normalized() * dash_speed
-
+		
 		# Start dashing if the dash direction is valid.
 		if dash_direction != Vector2.ZERO:
 			is_dashing = true
@@ -172,7 +182,6 @@ func handle_melee(delta: float) -> void:
 	melee()
 	can_attack = false
 	melee_timer.start(melee_cooldown)
-	
 
 
 # Timer callback to reset the canShoot variable after the cooldown has passed.
@@ -199,10 +208,10 @@ func shoot() -> void:
 		projectile.rotation = projectile_rotation
 
 
+# Turns on melee animation
 func melee() -> void:
 	# Placeholder
 	animation.get_node("AnimationTree").get_node("AnimationPlayer").play("PlayerAnim/player_attack_sword")
-	pass
 
 
 # Function to handle enemy attacks (triggered by the "take_damage" signal).
@@ -210,14 +219,14 @@ func _on_enemy_attack(damage: int) -> void:
 	# Check if the character is invincible and return if it is.
 	if invincible:
 		return
-
+	
 	# Reduce the current health by the damage amount.
 	current_health -= damage
 
 	# Check if the character's health has dropped to or below zero, call the die function if true.
 	if current_health <= 0:
 		die()
-
+	
 	# Activate invincibility and set the invincibility timer.
 	invincible = true
 	invincibility_timer = invincibility_time
@@ -247,6 +256,7 @@ func add_coins(amount: int) -> void:
 func die() -> void:
 	dead.emit()
 	
+
 
 # Method for receiving damage
 func _on_hurtbox_area_entered(hitbox: Node) -> void:

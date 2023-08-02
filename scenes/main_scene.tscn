@@ -77,5 +77,5 @@ position = Vector2(1341, 1298)
 [editable path="Player"]
 [editable path="Player/PlayerAnimation"]
 [editable path="Player/PlayerAnimation/Weapon/Sword/SwordSprite/Hitbox"]
-[editable path="Player/Hurtbox"]
-[editable path="Player/Hitbox"]
+[editable path="Player/PlayerHurtbox"]
+[editable path="Player/PlayerHitbox"]
