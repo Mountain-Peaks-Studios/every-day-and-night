@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw44cxjfm1sk"]
+[gd_scene load_steps=3 format=3 uid="uid://bw44cxjfm1sk"]
 
 [ext_resource type="Script" path="res://scenes/game_character.gd" id="1_vx8lu"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="2_7twjq"]
 
 [node name="GameCharacter" type="CharacterBody2D"]
 script = ExtResource("1_vx8lu")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_7twjq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

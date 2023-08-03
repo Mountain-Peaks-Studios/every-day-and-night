@@ -8,6 +8,8 @@ const FRICTION: float = 0.15
 
 var movement_direction: Vector2 = Vector2.ZERO
 
+@onready var animated_sprite: AnimatedSprite2D = get_node("AnimatedSprite2D")
+
 
 # Update every frame
 func _physics_process(_delta: float) -> void:
