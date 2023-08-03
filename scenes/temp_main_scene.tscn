@@ -6,6 +6,8 @@
 
 [node name="Player" parent="." instance=ExtResource("1_a106o")]
 position = Vector2(129.479, 85.4297)
+acceleration = 10
+max_speed = 40
 metadata/_edit_group_ = true
 
 [editable path="Player"]

@@ -9,8 +9,8 @@ script = ExtResource("1_vx8lu")
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_7twjq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
