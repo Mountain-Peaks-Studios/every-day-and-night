@@ -83,6 +83,7 @@ position = Vector2(881, 1300)
 position = Vector2(1341, 1298)
 
 [node name="Merchant" type="Area2D" parent="."]
+visible = false
 collision_layer = 255
 script = ExtResource("6_op8cq")
 
@@ -96,6 +97,7 @@ position = Vector2(1031, 1213)
 shape = SubResource("RectangleShape2D_hrhlv")
 
 [node name="Shop" parent="Merchant" instance=ExtResource("6_lwbcr")]
+visible = false
 
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
 [connection signal="body_entered" from="Merchant" to="Merchant" method="_on_body_entered"]
