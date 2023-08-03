@@ -60,12 +60,15 @@ func update_healthbar() -> void:
 
 
 # Method for receiving damage
-func _on_hurtbox_area_entered(hitbox: Hitbox) -> void:
-	receive_damage(hitbox.damage)
-	print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
+func _on_hurtbox_area_entered(hitbox: Node) -> void:
+	if hitbox.name == "Merchant":
+		pass
+	else:
+		receive_damage(hitbox.damage)
+		print(hitbox.get_parent().name + "'s hitbox touched " + name + "'s hurtbox and dealt " + str(hitbox.damage))
 	
-	if hitbox.is_in_group("player_projectile"):
-		hitbox.destroy()
+		if hitbox.is_in_group("player_projectile"):
+			hitbox.destroy()
 
 # Method for additional damage calculations
 func receive_damage(base_damage: int) -> void:

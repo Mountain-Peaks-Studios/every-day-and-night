@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfpix5alqg44d"]
+[gd_scene load_steps=11 format=3 uid="uid://cfpix5alqg44d"]
 
 [ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/player_scene.tscn" id="1_3kmbf"]
 [ext_resource type="Script" path="res://scripts/game/util/main_scene_controller.gd" id="1_4xdsb"]
 [ext_resource type="PackedScene" uid="uid://d03g04kaja30u" path="res://scenes/game/util/mob_spawner.tscn" id="2_2exrq"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/ui/hud.tscn" id="4_vorx7"]
 [ext_resource type="PackedScene" uid="uid://bkuoecflbq18c" path="res://scenes/game/item/coin.tscn" id="6_dylmm"]
+[ext_resource type="PackedScene" uid="uid://7q1l3rbfm0xg" path="res://scenes/shop.tscn" id="6_lwbcr"]
+[ext_resource type="Script" path="res://scenes/Merchant.gd" id="6_op8cq"]
+[ext_resource type="Texture2D" uid="uid://d1cg7m4cn627h" path="res://scenes/Merch_0.png" id="7_1n7wu"]
 [ext_resource type="PackedScene" uid="uid://cxadyfsqp1cyb" path="res://scenes/game/enemy/base_mob_day.tscn" id="9_iakgs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrhlv"]
+size = Vector2(105, 108)
 
 [node name="Main" type="Node2D"]
 process_mode = 3
@@ -14,7 +20,7 @@ script = ExtResource("1_4xdsb")
 [node name="MobSpawner" parent="." instance=ExtResource("2_2exrq")]
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(304, 274)
+position = Vector2(311, 272)
 
 [node name="Player" parent="." instance=ExtResource("1_3kmbf")]
 position = Vector2(1200, 1200)
@@ -50,7 +56,11 @@ offset = Vector2(0, -0.151671)
 offset = Vector2(0, -0.149713)
 
 [node name="PlayerCamera" parent="Player" index="4"]
+position = Vector2(1, 5)
 zoom = Vector2(1, 1)
+
+[node name="HealthBar" parent="Player" index="5"]
+metadata/_edit_use_anchors_ = true
 
 [node name="HUD" parent="." instance=ExtResource("4_vorx7")]
 offset = Vector2(176.89, 0)
@@ -72,7 +82,25 @@ position = Vector2(881, 1300)
 [node name="Coin3" parent="." instance=ExtResource("6_dylmm")]
 position = Vector2(1341, 1298)
 
+[node name="Merchant" type="Area2D" parent="."]
+visible = false
+collision_layer = 255
+script = ExtResource("6_op8cq")
+
+[node name="Merch0" type="Sprite2D" parent="Merchant"]
+position = Vector2(1031, 1212.75)
+scale = Vector2(6.5, 6.71875)
+texture = ExtResource("7_1n7wu")
+
+[node name="CollisionShapeMerch" type="CollisionShape2D" parent="Merchant"]
+position = Vector2(1031, 1213)
+shape = SubResource("RectangleShape2D_hrhlv")
+
+[node name="Shop" parent="Merchant" instance=ExtResource("6_lwbcr")]
+visible = false
+
 [connection signal="dead" from="Player" to="." method="_on_player_dead"]
+[connection signal="body_entered" from="Merchant" to="Merchant" method="_on_body_entered"]
 
 [editable path="Player"]
 [editable path="Player/PlayerAnimation"]
