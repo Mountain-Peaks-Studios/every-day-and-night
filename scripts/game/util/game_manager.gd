@@ -7,7 +7,7 @@ var player
 # Update every frame
 func _process(delta: float) -> void:
 	if not player:
-		initialise_player()
+		#initialise_player()
 		return
 
 

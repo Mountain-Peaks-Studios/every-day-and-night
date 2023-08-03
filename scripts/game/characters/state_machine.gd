@@ -3,8 +3,7 @@ extends Node
 
 var states: Dictionary = {}
 var previous_state: int = -1
-var state: int = -1: 
-	set = _set_state
+var state: int = -1: set = set_state
 
 @onready var parent: GameCharacter = get_parent()
 @onready var animation_player: AnimationPlayer = parent.get_node("AnimationPlayer")
@@ -17,7 +16,7 @@ func _physics_process(delta: float) -> void:
 		_state_logic(delta)
 		var transition: int = _get_transition()
 		if transition != -1:
-			_set_state(transition)
+			set_state(transition)
 
 
 # Add a new state to the dictionary
@@ -26,9 +25,11 @@ func _add_state(new_state: String) -> void:
 
 
 # Set the state to the given one (getter of 'state' variable)
-func _set_state(new_state: int) -> void: 
-	_on_exit_state(state)
+func set_state(new_state: int) -> void: 
+	_exit_state(state)
 	previous_state = state
+	state = new_state
+	_enter_state(previous_state, state)
 
 
 # Performed as long as the state is set
@@ -42,10 +43,10 @@ func _get_transition() -> int:
 
 
 # Performed on a new state enter
-func _on_enter_state(_previous_state: int, _new_state: int) -> void:
+func _enter_state(_previous_state: int, _new_state: int) -> void:
 	pass
 
 
 # Performed on the state exit
-func _on_exit_state(_state_exited: int) -> void:
+func _exit_state(_state_exited: int) -> void:
 	pass

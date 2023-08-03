@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://cfpix5alqg44d"]
 
-[ext_resource type="PackedScene" uid="uid://vkxykqtkeua7" path="res://scenes/game/player/old_player_scene.tscn" id="1_3kmbf"]
 [ext_resource type="Script" path="res://scripts/game/util/main_scene_controller.gd" id="1_4xdsb"]
 [ext_resource type="PackedScene" uid="uid://d03g04kaja30u" path="res://scenes/game/util/mob_spawner.tscn" id="2_2exrq"]
+[ext_resource type="PackedScene" uid="uid://dox26d3cekugj" path="res://scenes/game/player/player.tscn" id="4_s4pn6"]
 [ext_resource type="PackedScene" uid="uid://x6e0f8cpjob3" path="res://scenes/ui/hud.tscn" id="4_vorx7"]
 [ext_resource type="PackedScene" uid="uid://bkuoecflbq18c" path="res://scenes/game/item/coin.tscn" id="6_dylmm"]
 [ext_resource type="PackedScene" uid="uid://7q1l3rbfm0xg" path="res://scenes/shop.tscn" id="6_lwbcr"]
@@ -22,50 +22,13 @@ script = ExtResource("1_4xdsb")
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(311, 272)
 
-[node name="Player" parent="." instance=ExtResource("1_3kmbf")]
-position = Vector2(1200, 1200)
-
-[node name="Hair1" parent="Player/PlayerAnimation" index="1"]
-offset = Vector2(0, -0.151671)
-
-[node name="Skirt" parent="Player/PlayerAnimation" index="6"]
-offset = Vector2(0, -0.303342)
-
-[node name="RightArm1" parent="Player/PlayerAnimation" index="7"]
-offset = Vector2(0, -0.455013)
-
-[node name="RightArm2" parent="Player/PlayerAnimation" index="8"]
-offset = Vector2(0, -0.455013)
-
-[node name="LeftArm1" parent="Player/PlayerAnimation" index="10"]
-offset = Vector2(0, -0.455013)
-
-[node name="LeftArm2" parent="Player/PlayerAnimation" index="11"]
-offset = Vector2(0, -0.455013)
-
-[node name="Torso" parent="Player/PlayerAnimation" index="12"]
-offset = Vector2(0, -0.455013)
-
-[node name="Head" parent="Player/PlayerAnimation" index="13"]
-offset = Vector2(0, -0.303342)
-
-[node name="Eyes" parent="Player/PlayerAnimation" index="14"]
-offset = Vector2(0, -0.151671)
-
-[node name="Hair2" parent="Player/PlayerAnimation" index="15"]
-offset = Vector2(0, -0.149713)
-
-[node name="PlayerCamera" parent="Player" index="4"]
-position = Vector2(1, 5)
-zoom = Vector2(1, 1)
-
-[node name="HealthBar" parent="Player" index="5"]
-metadata/_edit_use_anchors_ = true
-
 [node name="HUD" parent="." instance=ExtResource("4_vorx7")]
 offset = Vector2(176.89, 0)
 scale = Vector2(0.65, 0.65)
 transform = Transform2D(0.65, 0, 0, 0.65, 176.89, 0)
+
+[node name="Player" parent="." instance=ExtResource("4_s4pn6")]
+scale = Vector2(5, 5)
 
 [node name="BaseDayMob" parent="." instance=ExtResource("9_iakgs")]
 position = Vector2(307, 441)
@@ -99,11 +62,4 @@ shape = SubResource("RectangleShape2D_hrhlv")
 [node name="Shop" parent="Merchant" instance=ExtResource("6_lwbcr")]
 visible = false
 
-[connection signal="dead" from="Player" to="." method="_on_player_dead"]
 [connection signal="body_entered" from="Merchant" to="Merchant" method="_on_body_entered"]
-
-[editable path="Player"]
-[editable path="Player/PlayerAnimation"]
-[editable path="Player/PlayerAnimation/Weapon/Sword/SwordSprite/Hitbox"]
-[editable path="Player/PlayerHurtbox"]
-[editable path="Player/PlayerHitbox"]

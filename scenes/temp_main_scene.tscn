@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfd7lk05vq6yb"]
+
+[ext_resource type="PackedScene" uid="uid://dox26d3cekugj" path="res://scenes/game/player/player.tscn" id="1_a106o"]
+
+[node name="TempMainScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_a106o")]
+position = Vector2(129.479, 85.4297)
+metadata/_edit_group_ = true
+
+[editable path="Player"]
