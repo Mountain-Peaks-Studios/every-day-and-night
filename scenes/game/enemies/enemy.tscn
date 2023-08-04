@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct7q61s5kmekp"]
+
+[ext_resource type="PackedScene" uid="uid://bw44cxjfm1sk" path="res://scenes/game/characters/game_character.tscn" id="1_llw4r"]
+[ext_resource type="Script" path="res://scenes/game/enemies/enemy.gd" id="2_eas2p"]
+[ext_resource type="Texture2D" uid="uid://d1cg7m4cn627h" path="res://scenes/Merch_0.png" id="3_yw00j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6luq"]
+size = Vector2(12, 14)
+
+[node name="Enemy" instance=ExtResource("1_llw4r")]
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("2_eas2p")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+visible = false
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_a6luq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="4"]
+texture = ExtResource("3_yw00j")
+
+[node name="EnemyNavigationAgent2D" type="NavigationAgent2D" parent="." index="5"]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="." index="6"]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
