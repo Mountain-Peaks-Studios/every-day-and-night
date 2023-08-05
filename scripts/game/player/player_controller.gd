@@ -9,6 +9,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and not sword_animation_player.is_playing():
 		handle_melee() # Perform melee attack
 
+
 # Makes the player follow the direction of the mouse cursor
 func follow_cursor() -> void:
 	# Flip character's sprite
@@ -25,6 +26,7 @@ func follow_cursor() -> void:
 	elif sword.scale.y == -1 and mouse_direction.x > 0:
 		sword.scale.y = 1
 
+
 # Handles player input to set the character's velocity.
 func handle_input() -> void:
 	# Reset the velocity to zero.
@@ -39,6 +41,7 @@ func handle_input() -> void:
 		movement_direction += Vector2.DOWN
 	if Input.is_action_pressed("ui_up"):
 		movement_direction += Vector2.UP
+
 
 # Handles player's melee attacks
 func handle_melee() -> void:

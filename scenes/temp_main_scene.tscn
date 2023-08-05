@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfd7lk05vq6yb"]
+[gd_scene load_steps=7 format=3 uid="uid://cfd7lk05vq6yb"]
 
 [ext_resource type="PackedScene" uid="uid://dox26d3cekugj" path="res://scenes/game/players/player.tscn" id="1_a106o"]
 [ext_resource type="Texture2D" uid="uid://l6sjvhnf8wco" path="res://placeholder/full tilemap.png" id="1_yonfp"]
-[ext_resource type="PackedScene" uid="uid://ct7q61s5kmekp" path="res://scenes/game/enemies/enemy.tscn" id="3_llbvb"]
-[ext_resource type="Script" path="res://scenes/pathfinding_controller.gd" id="4_ww5pp"]
+[ext_resource type="PackedScene" uid="uid://b3nvpv04edo7o" path="res://scenes/game/enemies/enemy_day.tscn" id="3_yt28v"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tkujs"]
 vertices = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
@@ -201,12 +200,7 @@ layer_1/tile_data = PackedInt32Array()
 position = Vector2(129.479, 85.4297)
 metadata/_edit_group_ = true
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_llbvb")]
-position = Vector2(65.4072, 78.4218)
-collision_layer = 2
-collision_mask = 5
-player = NodePath("../Player")
+[node name="EnemyDay" parent="." instance=ExtResource("3_yt28v")]
+position = Vector2(65.6867, 43.438)
+collision_mask = 3
 metadata/_edit_group_ = true
-
-[node name="PathfindingController" type="Node" parent="."]
-script = ExtResource("4_ww5pp")

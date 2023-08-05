@@ -13,6 +13,7 @@ var movement_direction: Vector2 = Vector2.ZERO
 
 # Update every frame
 func _physics_process(_delta: float) -> void:
+	print(position)
 	move_and_slide()
 	velocity = lerp(velocity, Vector2.ZERO, FRICTION)
 

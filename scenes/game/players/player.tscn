@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bw44cxjfm1sk" path="res://scenes/game/characters/game_character.tscn" id="1_y6wa7"]
 [ext_resource type="Script" path="res://scripts/game/player/player_controller.gd" id="2_wfeko"]
-[ext_resource type="Script" path="res://scripts/game/player/player_state_machine.gd" id="3_b3cm6"]
+[ext_resource type="Script" path="res://scripts/game/player/player_SM.gd" id="3_67dkn"]
 [ext_resource type="Texture2D" uid="uid://c4wl4l1cmqwkx" path="res://placeholder/heroes/knight/knight_idle_spritesheet.png" id="4_qhago"]
 [ext_resource type="Texture2D" uid="uid://dth4cp3e7b8eu" path="res://placeholder/heroes/knight/knight_run_spritesheet.png" id="5_5id77"]
 [ext_resource type="Texture2D" uid="uid://cdh7evmk2bo71" path="res://placeholder/heroes/knight/weapon_sword_1.png" id="6_0e771"]
@@ -148,7 +148,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("2_wfeko")
 
 [node name="StateMachine" parent="." index="0"]
-script = ExtResource("3_b3cm6")
+script = ExtResource("3_67dkn")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_5ql8d")
