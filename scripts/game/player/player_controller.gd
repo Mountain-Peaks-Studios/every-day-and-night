@@ -1,6 +1,7 @@
 extends GameCharacter
 
 @onready var sword: Node2D = get_node("Sword")
+@onready var sword_hitbox: Area2D = get_node("Sword/Node2D/SwordSprite/Hitbox")
 @onready var sword_animation_player: AnimationPlayer = sword.get_node("SwordAnimationPlayer")
 
 # Update every frame
@@ -21,6 +22,7 @@ func follow_cursor() -> void:
 	
 	# Rotate the sword
 	sword.rotation = mouse_direction.angle()
+	sword_hitbox.knockback_direction = mouse_direction
 	if sword.scale.y == 1 and mouse_direction.x < 0:
 		sword.scale.y = -1
 	elif sword.scale.y == -1 and mouse_direction.x > 0:

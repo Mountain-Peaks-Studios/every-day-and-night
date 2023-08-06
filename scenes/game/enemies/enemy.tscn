@@ -11,8 +11,6 @@ wall_min_slide_angle = 0.0
 script = ExtResource("2_eas2p")
 
 [node name="EnemyNavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
-avoidance_enabled = true
-debug_enabled = true
 
 [node name="PathTimer" type="Timer" parent="." index="5"]
 wait_time = 0.5
