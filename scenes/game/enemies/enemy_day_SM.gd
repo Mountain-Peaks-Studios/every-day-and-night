@@ -16,12 +16,13 @@ func _ready() -> void:
 func _state_logic(_delta: float) -> void:
 	if state == states.chase:
 		parent.handle_movement()
+		parent.handle_chase()
 
 
 # Change the state
 func _get_transition() -> int:
 	match state:
-		states.hurt:
+		states.hurt: # hurt -> chase
 			if not animation_player.is_playing():
 				return states.chase
 	return -1

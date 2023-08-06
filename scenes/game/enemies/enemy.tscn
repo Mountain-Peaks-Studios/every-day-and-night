@@ -16,4 +16,4 @@ script = ExtResource("2_eas2p")
 wait_time = 0.5
 autostart = true
 
-[connection signal="timeout" from="PathTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PathTimer" to="." method="_on_path_timer_timeout"]
