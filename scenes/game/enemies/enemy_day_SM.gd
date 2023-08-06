@@ -4,6 +4,7 @@ extends StateMachine
 func _init() -> void:
 	_add_state("chase")
 	_add_state("hurt")
+	_add_state("dead")
 
 
 # Called when the node enters the scene tree.
@@ -33,3 +34,5 @@ func _enter_state(_previous_state: int, _new_state: int) -> void:
 			animation_player.play("EnemyAnim/fly")
 		states.hurt:
 			animation_player.play("EnemyAnim/hurt")
+		states.dead:
+			animation_player.play("EnemyAnim/dead")

@@ -28,6 +28,12 @@ func handle_movement() -> void:
 
 # Handles receiving damage
 func handle_damage(dam: int, dir: Vector2, force: int) -> void:
-	health -= dam
-	state_machine.set_state(state_machine.states.hurt)
-	velocity += dir * force
+	health -= dam # Reduce health by damage taken
+	
+	# Check if alive or dead
+	if health > 0:
+		state_machine.set_state(state_machine.states.hurt)
+		velocity += dir * force
+	else:
+		state_machine.set_state(state_machine.states.dead)
+		velocity += 2 * dir * force
