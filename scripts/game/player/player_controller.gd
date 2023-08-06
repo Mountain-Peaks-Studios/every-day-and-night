@@ -4,12 +4,6 @@ extends GameCharacter
 @onready var sword_hitbox: Area2D = get_node("Sword/Node2D/SwordSprite/Hitbox")
 @onready var sword_animation_player: AnimationPlayer = sword.get_node("SwordAnimationPlayer")
 
-# Update every frame
-func _process(_delta: float) -> void:
-	follow_cursor() # Make the player follow the cursor direction
-	if Input.is_action_just_pressed("attack") and not sword_animation_player.is_playing():
-		handle_melee() # Perform melee attack
-
 
 # Makes the player follow the direction of the mouse cursor
 func follow_cursor() -> void:
@@ -43,6 +37,10 @@ func handle_input() -> void:
 		movement_direction += Vector2.DOWN
 	if Input.is_action_pressed("ui_up"):
 		movement_direction += Vector2.UP
+		
+	follow_cursor() # Make the player follow the cursor direction
+	if Input.is_action_just_pressed("attack") and not sword_animation_player.is_playing():
+		handle_melee() # Perform melee attack
 
 
 # Handles player's melee attacks

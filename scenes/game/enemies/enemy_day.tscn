@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://b3nvpv04edo7o"]
+[gd_scene load_steps=19 format=3 uid="uid://b3nvpv04edo7o"]
 
 [ext_resource type="PackedScene" uid="uid://ct7q61s5kmekp" path="res://scenes/game/enemies/enemy.tscn" id="1_3gu82"]
+[ext_resource type="Script" path="res://scenes/game/enemies/enemy_day.gd" id="2_4cvh3"]
 [ext_resource type="Script" path="res://scenes/game/enemies/enemy_day_SM.gd" id="2_d8spr"]
 [ext_resource type="Texture2D" uid="uid://bwg4wjdr13mf6" path="res://placeholder/enemies/flying creature/fly_anim_spritesheet.png" id="2_lqa6r"]
 [ext_resource type="Texture2D" uid="uid://clft5gwueyucg" path="res://placeholder/effects (new)/enemy_afterdead_explosion_anim_spritesheet.png" id="3_tlyer"]
 [ext_resource type="AnimationLibrary" uid="uid://b4idq8a2k0kq2" path="res://animations/libraries/EnemyAnim.res" id="4_7nu7t"]
+[ext_resource type="Script" path="res://scripts/game/util/hitbox.gd" id="6_a3s2x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_12g5i"]
 atlas = ExtResource("3_tlyer")
@@ -78,8 +80,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_twlum"]
 radius = 3.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ntko"]
+radius = 5.0
+
 [node name="EnemyDay" instance=ExtResource("1_3gu82")]
 collision_mask = 5
+script = ExtResource("2_4cvh3")
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource("2_d8spr")
@@ -91,7 +97,15 @@ frame = 3
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_twlum")
 
-[node name="AnimationPlayer" parent="." index="3"]
+[node name="Hitbox" type="Area2D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_a3s2x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_3ntko")
+
+[node name="AnimationPlayer" parent="." index="4"]
 libraries = {
 "EnemyAnim": ExtResource("4_7nu7t")
 }
