@@ -1,9 +1,12 @@
 class_name GameCharacter
 extends CharacterBody2D
 
+signal health_changed(new_hp)
+
 const FRICTION: float = 0.15
 
-@export var health: int = 2
+@export var health: int = 2: 
+			set = set_health
 @export var acceleration: int = 10
 @export var max_speed: int = 40 # REQUIRED IN VARIABLES TO KEEP SINGLETON
 
@@ -28,7 +31,7 @@ func handle_movement() -> void:
 
 # Handles receiving damage
 func handle_damage(dam: int, dir: Vector2, force: int) -> void:
-	health -= dam # Reduce health by damage taken
+	self.health -= dam # Reduce health by damage taken
 	
 	# Check if alive or dead
 	if health > 0:
@@ -37,3 +40,8 @@ func handle_damage(dam: int, dir: Vector2, force: int) -> void:
 	else:
 		state_machine.set_state(state_machine.states.dead)
 		velocity += 2 * dir * force
+
+# Set 'health' variable 
+func set_health(new_hp: int) -> void:
+	health = new_hp
+	emit_signal("health_changed", new_hp)

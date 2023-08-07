@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://x6e0f8cpjob3"]
 
-[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_bbfuq"]
+[ext_resource type="Script" path="res://scripts/ui/hud_old.gd" id="1_bbfuq"]
 [ext_resource type="Texture2D" uid="uid://bbj8evi2o2p7h" path="res://sprites/UI/clock.png" id="2_nlf6r"]
 [ext_resource type="Texture2D" uid="uid://qq0ucbsrdobn" path="res://sprites/UI/hand.png" id="3_fdy4e"]
 [ext_resource type="Script" path="res://scripts/ui/death_panel.gd" id="4_txy4p"]
